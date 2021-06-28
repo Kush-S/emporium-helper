@@ -19,8 +19,8 @@ Route::get('/', function () {
 });
 
 Route::prefix('files')->group(function () {
-  Route::get('/', [FileController::class, 'index']);
-  Route::post('/upload', [FileController::class, 'uploadFile'])->name('uploadFile');
+  Route::get('/', [FileController::class, 'index'])->name('files_index');
+  Route::post('/upload', [FileController::class, 'uploadFile'])->name('files_upload');
 });
 
 Route::view('/welcome', 'welcome');

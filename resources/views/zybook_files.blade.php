@@ -11,7 +11,7 @@
     {{-- File download here --}}
   </div>
   <div>
-    <form method="POST" enctype="multipart/form-data" action="{{ route('uploadFile') }}">
+    <form method="POST" enctype="multipart/form-data" action="{{ route('files_upload') }}">
       @csrf
       <label>Select Week</label>
       <select name="file_name">
@@ -19,6 +19,7 @@
           <option value="week{{$i}}">Week {{$i}}</option>
         @endfor
       </select>
+      <input type="file" name="zybooks_file" required>
       <input type="submit">
     </form>
   </div>
