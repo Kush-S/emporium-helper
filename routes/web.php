@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\FileController;
+use App\Http\Controllers\ZybooksFileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,13 +14,12 @@ use App\Http\Controllers\FileController;
 |
 */
 
-Route::get('/', function () {
-    return view('zybook_files');
-});
+Route::get('/', [ZybooksFileController::class, 'index']);
 
 Route::prefix('files')->group(function () {
-  Route::get('/', [FileController::class, 'index'])->name('files_index');
-  Route::post('/upload', [FileController::class, 'uploadFile'])->name('files_upload');
+  Route::get('/', [ZybooksFileController::class, 'index'])->name('files_index');
+  Route::post('/upload', [ZybooksFileController::class, 'uploadFile'])->name('files_upload');
+  Route::get('/download/{file}', [ZybooksFileController::class, 'downloadFile'])->name('files_download');
 });
 
 Route::view('/welcome', 'welcome');
