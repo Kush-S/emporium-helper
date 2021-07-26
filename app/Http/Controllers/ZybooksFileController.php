@@ -21,7 +21,9 @@ class ZybooksFileController extends Controller
     $file->name = $request->file_name;
     $file->save();
 
-    $path = $request->file('zybooks_file')->storeAs('zybooks_files', $request->file_name);
+    $zybooks_directory = 'zybooks_files';
+
+    $path = $request->file('zybooks_file_input')->storeAs($zybooks_directory, $request->file_name);
 
     return redirect()->route('files_index');
   }
@@ -29,5 +31,15 @@ class ZybooksFileController extends Controller
   public function downloadFile($file)
   {
     return Storage::download('zybooks_files/' . $file);
+  }
+
+  public function deleteFile($file)
+  {
+    Storage::delete('zybooks_files/' . $file);
+
+    $database_file = ZybooksFile::where('name', $file)->first();
+    $database_file->delete();
+
+    return redirect()->route('files_index');
   }
 }

@@ -20,6 +20,7 @@ Route::prefix('files')->group(function () {
   Route::get('/', [ZybooksFileController::class, 'index'])->name('files_index');
   Route::post('/upload', [ZybooksFileController::class, 'uploadFile'])->name('files_upload');
   Route::get('/download/{file}', [ZybooksFileController::class, 'downloadFile'])->name('files_download');
+  Route::get('/delete/{file}', [ZybooksFileController::class, 'deleteFile'])->name('files_delete');
 });
 
 Route::view('/welcome', 'welcome');
