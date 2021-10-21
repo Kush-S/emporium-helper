@@ -23,4 +23,8 @@ Route::prefix('files')->group(function () {
   Route::get('/delete/{file}', [ZybooksFileController::class, 'deleteFile'])->name('files_delete');
 });
 
+Route::prefix('settings')->group(function () {
+  Route::view('/', 'settings')->name('settings_index');
+});
+
 Route::view('/welcome', 'welcome');

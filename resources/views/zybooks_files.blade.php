@@ -1,6 +1,6 @@
 <x-headers/>
 
-<div class="container mx-auto h-screen bg-gray-50 p-5">
+<div class="container bg-light">
   <div class="w-max p-5 mx-auto text-lg">
     <h>Upload zyBooks files here. One file for each week.</p>
   </div>
