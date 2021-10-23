@@ -11,7 +11,7 @@
       <div class="form-group pb-3">
         <label for="file_name">File Name:</label>
         <input type="text" class="form-control" name="file_name" placeholder="Example: zyBooks week 1" required></input>
-        <small id="fileNameHelp" class="form-text text-muted">This file name will be displayed below.</small>
+        <small id="fileNameHelp" class="form-text text-muted">".csv" will be added to file name automatically.</small>
       </div>
       <div class="form-group pb-3">
         <input type="file" class="form-control-file" name="zybooks_file_input" required>

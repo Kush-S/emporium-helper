@@ -12,18 +12,20 @@ class ZybooksFileController extends Controller
   {
     $files = ZybooksFile::select('name')->get();
     return view('zybooks_files')->with('files', $files);
-
   }
 
   public function uploadFile(Request $request)
   {
+    // Save file name in database
     $file = new ZybooksFile;;
-    $file->name = $request->file_name;
+    $file->name = $request->file_name . '.csv';
     $file->save();
 
+    // Save file to project directory
     $zybooks_directory = 'zybooks_files';
+    $path = $request->file('zybooks_file_input')->storeAs($zybooks_directory, $request->file_name . '.csv');
 
-    $path = $request->file('zybooks_file_input')->storeAs($zybooks_directory, $request->file_name);
+    $this->parseFile($request);
 
     return redirect()->route('files_index');
   }
@@ -41,5 +43,11 @@ class ZybooksFileController extends Controller
     $database_file->delete();
 
     return redirect()->route('files_index');
+  }
+
+  public function parseFile()
+  {
+    $output = shell_exec('python parseZybooks.py zybooks1.csv');
+    error_log($output);
   }
 }
