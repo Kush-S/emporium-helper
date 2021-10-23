@@ -10,6 +10,7 @@ class ZybooksFileController extends Controller
 {
   public function index()
   {
+    $this->parseFile();
     $files = ZybooksFile::select('name')->get();
     return view('zybooks_files')->with('files', $files);
   }
@@ -47,7 +48,12 @@ class ZybooksFileController extends Controller
 
   public function parseFile()
   {
-    $output = shell_exec('python parseZybooks.py zybooks1.csv');
-    error_log($output);
+    $output = shell_exec('python python_scripts/parseZybooks.py python_scripts/zybooks1.csv');
+    $output_json = json_decode($output, true);
+
+    foreach ($output_json as $info)
+    {
+      error_log($info['Last name'] . ' ' . $info['First name'] . ' ' . $info['School email']);
+    }
   }
 }
