@@ -20,12 +20,14 @@
     </form>
   </div>
 
-  <div class="">
+  <div class="py-5">
     @foreach ($files->chunk(5) as $chunk)
-      <div class="py-5 d-flex justify-content-center">
+      <div class="d-flex justify-content-center">
           @foreach ($chunk as $file)
-            <a href="{{route('files_download', $file->name)}}">{{$file->name}}</a>
-            <a href="{{route('files_delete', $file->name)}}" type="button" class="btn btn-danger">Delete</a>
+            <div class="p-2">
+              <a class="p-1 border" href="{{route('files_download', $file->name)}}">{{$file->name}}</a>
+              <a href="{{route('files_delete', $file->name)}}" type="button" class="btn btn-danger">Delete</a>
+            </div>
           @endforeach
         </div>
     @endforeach
