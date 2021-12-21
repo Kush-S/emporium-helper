@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\ZybooksFile;
+use App\Models\Student;
 use Illuminate\Support\Facades\Storage;
 
 class ZybooksFileController extends Controller
@@ -18,7 +19,7 @@ class ZybooksFileController extends Controller
   public function uploadFile(Request $request)
   {
     // Save file name in database
-    $file = new ZybooksFile;;
+    $file = new ZybooksFile;
     $file->name = $request->file_name . '.csv';
     $file->save();
 
@@ -53,7 +54,11 @@ class ZybooksFileController extends Controller
 
     foreach ($output_json as $info)
     {
-      error_log($info['Last name'] . ' ' . $info['First name'] . ' ' . $info['School email']);
+      $student = new Student;
+      $student->first_name = $info['First name'];
+      $student->last_name = $info['Last name'];
+      $student->email = $info['School email'];
+      $student->save();
     }
   }
 }
