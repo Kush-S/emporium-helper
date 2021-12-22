@@ -11,7 +11,6 @@ class ZybooksFileController extends Controller
 {
   public function index()
   {
-    $this->parseFile();
     $files = ZybooksFile::select('name')->get();
     return view('zybooks_files')->with('files', $files);
   }
@@ -54,11 +53,11 @@ class ZybooksFileController extends Controller
 
     foreach ($output_json as $info)
     {
-      $student = new Student;
-      $student->first_name = $info['First name'];
-      $student->last_name = $info['Last name'];
-      $student->email = $info['School email'];
-      $student->save();
+      $student = Student::firstOrCreate([
+        'first_name' => $info['First name'],
+        'last_name' => $info['Last name'],
+        'email' => $info['School email']
+      ]);
     }
   }
 }
