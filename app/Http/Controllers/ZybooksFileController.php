@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ZybooksFile;
 use App\Models\Student;
+use Config;
 use Illuminate\Support\Facades\Storage;
 
 class ZybooksFileController extends Controller
@@ -23,10 +24,11 @@ class ZybooksFileController extends Controller
     $file->save();
 
     // Save file to project directory
-    $zybooks_directory = 'zybooks_files';
-    $path = $request->file('zybooks_file_input')->storeAs($zybooks_directory, $request->file_name . '.csv');
+    $path = $request->file('zybooks_file_input')
+            ->storeAs(Config::get('emporium_variables.storage_directory'), $request->file_name . '.csv');
 
-    $this->parseFile($request);
+    // call parseFile() on uploaded file
+    $this->parseFile($request->file_name);
 
     return redirect()->route('files_index');
   }
@@ -46,17 +48,25 @@ class ZybooksFileController extends Controller
     return redirect()->route('files_index');
   }
 
-  public function parseFile()
+  public function parseFile($file_name)
   {
-    $output = shell_exec('python python_scripts/parseZybooks.py python_scripts/zybooks1.csv');
+    // clean file_name in case of spaces, etc.
+    $file_name = escapeshellarg($file_name);
+
+    // build and run python command
+    $shell_command = "python python_scripts/parseZybooks.py ../storage/app/zybooks_files/" . $file_name . ".csv";
+    $output = shell_exec($shell_command);
+
+    // decode output from python to JSON
     $output_json = json_decode($output, true);
 
+    // store each student, if already not stored
     foreach ($output_json as $info)
     {
       $student = Student::firstOrCreate([
         'first_name' => $info['First name'],
         'last_name' => $info['Last name'],
-        'email' => $info['School email']
+        'email' => $info['Primary email']
       ]);
     }
   }
