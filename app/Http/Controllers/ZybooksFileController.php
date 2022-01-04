@@ -24,12 +24,12 @@ class ZybooksFileController extends Controller
     $file->save();
 
     // Save file to project directory
-    $path = $request->file('zybooks_file_input')
+    $path = $request
+            ->file('zybooks_file_input')
             ->storeAs(Config::get('emporium_variables.storage_directory'), $request->file_name . '.csv');
 
     // call parseFile() on uploaded file
-    $this->parseFile($request->file_name);
-
+    $this->parseFile($request);
     return redirect()->route('files_index');
   }
 
@@ -40,18 +40,20 @@ class ZybooksFileController extends Controller
 
   public function deleteFile($file)
   {
+    // delete from storage
     Storage::delete('zybooks_files/' . $file);
 
+    // delete from database
     $database_file = ZybooksFile::where('name', $file)->first();
     $database_file->delete();
 
     return redirect()->route('files_index');
   }
 
-  public function parseFile($file_name)
+  public function parseFile(Request $request)
   {
     // clean file_name in case of spaces, etc.
-    $file_name = escapeshellarg($file_name);
+    $file_name = escapeshellarg($request->file_name);
 
     // build and run python command
     $shell_command = "python python_scripts/parseZybooks.py ../storage/app/zybooks_files/" . $file_name . ".csv";
@@ -60,7 +62,7 @@ class ZybooksFileController extends Controller
     // decode output from python to JSON
     $output_json = json_decode($output, true);
 
-    // store each student, if already not stored
+    # store each student, if already not stored
     foreach ($output_json as $info)
     {
       $student = Student::firstOrCreate([
