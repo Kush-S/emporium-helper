@@ -50,20 +50,23 @@ class ZybooksFileController extends Controller
     return redirect()->route('files_index');
   }
 
-  public function parseFile(Request $request)
+  private function parseFile(Request $request)
   {
     // clean file_name in case of spaces, etc.
     $file_name = escapeshellarg($request->file_name);
 
-    // build and run python command
-    $shell_command = "python python_scripts/parseZybooks.py ../storage/app/zybooks_files/" . $file_name . ".csv";
+    // student info - build and run python command
+    $shell_command = "python python_scripts/parseStudents.py ../storage/app/zybooks_files/" . $file_name . ".csv";
     $output = shell_exec($shell_command);
 
     // decode output from python to JSON
     $output_json = json_decode($output, true);
+    $this->parseStudentInfo($output_json);
+  }
 
+  private function parseStudentInfo($student_info){
     # store each student, if already not stored
-    foreach ($output_json as $info)
+    foreach ($student_info as $info)
     {
       $student = Student::firstOrCreate([
         'first_name' => $info['First name'],
