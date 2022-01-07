@@ -15,6 +15,7 @@ class CreateRisksTable extends Migration
     {
         Schema::create('risks', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('student_email')->constrained('students');
             $table->timestamps();
         });
     }
