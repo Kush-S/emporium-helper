@@ -7,12 +7,14 @@ use App\Models\ZybooksFile;
 use App\Models\Student;
 use Config;
 use Illuminate\Support\Facades\Storage;
+use App\Jobs\ProcessStudentGeneralInfo;
 
 class ZybooksFileController extends Controller
 {
   public function index()
   {
     $files = ZybooksFile::select('name')->get();
+
     return view('zybooks_files')->with('files', $files);
   }
 
@@ -21,6 +23,12 @@ class ZybooksFileController extends Controller
     // Save file name in database
     $file = new ZybooksFile;
     $file->name = $request->file_name . '.csv';
+    $file->parsed = [
+      "student_info" => false,
+      "participation_total" => false,
+      "challenge_total" => false,
+      "lab_total" => false,
+      "total" => false];
     $file->save();
 
     // Save file to project directory
@@ -61,18 +69,8 @@ class ZybooksFileController extends Controller
 
     // decode output from python to JSON
     $output_json = json_decode($output, true);
-    $this->parseStudentInfo($output_json);
-  }
+    // $this->parseStudentInfo($output_json);
 
-  private function parseStudentInfo($student_info){
-    # store each student, if already not stored
-    foreach ($student_info as $info)
-    {
-      $student = Student::firstOrCreate([
-        'first_name' => $info['First name'],
-        'last_name' => $info['Last name'],
-        'email' => $info['Primary email']
-      ]);
-    }
+    ProcessStudentGeneralInfo::dispatch($output_json);
   }
 }
