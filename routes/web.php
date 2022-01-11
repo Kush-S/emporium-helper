@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ZybooksFileController;
+use App\Http\Controllers\RiskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,10 @@ Route::prefix('files')->group(function () {
   Route::post('/upload', [ZybooksFileController::class, 'uploadFile'])->name('files_upload');
   Route::get('/download/{file}', [ZybooksFileController::class, 'downloadFile'])->name('files_download');
   Route::get('/delete/{file}', [ZybooksFileController::class, 'deleteFile'])->name('files_delete');
+});
+
+Route::prefix('statistics')->group(function () {
+  Route::get('/', [RiskController::class, 'index'])->name('statistics_index');
 });
 
 Route::prefix('settings')->group(function () {

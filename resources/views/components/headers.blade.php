@@ -8,6 +8,9 @@
   <div class="row">
     <ul class="nav justify-content-center">
       <li class="nav-item">
+        <a class="btn {{ Request::path() === 'statistics' || Request::path() === '/' ? 'btn-dark' : 'btn-secondary'}}" href="{{ route('statistics_index') }}">Statistics</a>
+      </li>
+      <li class="nav-item">
         <a class="btn {{ Request::path() === 'files' || Request::path() === '/' ? 'btn-dark' : 'btn-secondary'}}" href="{{ route('files_index') }}">Files</a>
       </li>
       <li class="nav-item">
