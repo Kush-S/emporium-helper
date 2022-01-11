@@ -37,7 +37,7 @@ class ZybooksFileController extends Controller
             ->storeAs(Config::get('emporium_variables.storage_directory'), $request->file_name . '.csv');
 
     // call parseFile() on uploaded file
-    $this->parseFile();
+    $this->parseStudentInfo($file);
     return redirect()->route('files_index');
   }
 
@@ -58,35 +58,33 @@ class ZybooksFileController extends Controller
     return redirect()->route('files_index');
   }
 
-  private function parseFile()
+  private function parseStudentInfo($file)
   {
-    foreach(ZybooksFile::all() as $file){
-      if ($file->parsed["student_info"] == false){
-        $file_name = escapeshellarg($file->name);
+    // clean file name in case of spaces
+    $file_name = escapeshellarg($file->name);
 
-        // student info - build and run python command
-        $shell_command = "python python_scripts/parseStudents.py ../storage/app/zybooks_files/" . $file_name;
-        error_log($shell_command);
-        $output_json = shell_exec($shell_command);
+    // build and run python command to get student info (first name, last name, email)
+    $shell_command = "python python_scripts/parseStudents.py ../storage/app/zybooks_files/" . $file_name;
+    $output_json = shell_exec($shell_command);
 
-        // decode output from python to JSON
-        $output_json = json_decode($output_json, true);
-        
-        // store each student, if already not stored
-        foreach ($output_json as $info)
-        {
-          $student = Student::firstOrCreate([
-            'first_name' => $info['First name'],
-            'last_name' => $info['Last name'],
-            'email' => $info['Primary email']
-          ]);
-        }
+    // decode output from python to JSON
+    $output_json = json_decode($output_json, true);
 
-        $temp = $file->parsed;
-        $temp["student_info"] = true;
-        $file->parsed = $temp;
-        $file->save();
-      }
+    // store each student, if already not stored
+    foreach ($output_json as $info)
+    {
+      error_log("student");
+      $student = Student::firstOrCreate([
+        'first_name' => $info['First name'],
+        'last_name' => $info['Last name'],
+        'email' => $info['Primary email']
+      ]);
     }
+
+    // update parsed['student_info'] on $file to true
+    $temp = $file->parsed;
+    $temp["student_info"] = true;
+    $file->parsed = $temp;
+    $file->save();
   }
 }
