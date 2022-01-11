@@ -3,7 +3,7 @@
 <div class="container bg-light">
   <div class="row">
     <div class="pt-2">
-      <button class="btn btn-danger float-end">Recalculate risk</button>
+      <a href="{{ route("statistics_calculate") }}" class="btn btn-danger float-end">Recalculate risk</a>
     </div>
   </div>
 

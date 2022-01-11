@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ZybooksFileController;
-use App\Http\Controllers\RiskController;
+use App\Http\Controllers\StatisticsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +25,8 @@ Route::prefix('files')->group(function () {
 });
 
 Route::prefix('statistics')->group(function () {
-  Route::get('/', [RiskController::class, 'index'])->name('statistics_index');
+  Route::get('/', [StatisticsController::class, 'index'])->name('statistics_index');
+  Route::get('/calculate_risk', [StatisticsController::class, 'recalculateRisk'])->name('statistics_calculate');
 });
 
 Route::prefix('settings')->group(function () {
