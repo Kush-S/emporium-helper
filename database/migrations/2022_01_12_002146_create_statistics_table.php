@@ -16,6 +16,8 @@ class CreateStatisticsTable extends Migration
         Schema::create('statistics', function (Blueprint $table) {
             $table->id();
             $table->foreignId('student_email')->constrained('students');
+            $table->json('scores');
+            $table->json('risk');
             $table->timestamps();
         });
     }
