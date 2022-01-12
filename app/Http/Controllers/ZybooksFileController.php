@@ -87,4 +87,8 @@ class ZybooksFileController extends Controller
     $file->parsed = $temp;
     $file->save();
   }
+
+  public function parseStudentGrades(){
+    
+  }
 }
