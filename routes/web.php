@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ZybooksFileController;
-use App\Http\Controllers\StatisticsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,22 +13,12 @@ use App\Http\Controllers\StatisticsController;
 |
 */
 
-Route::get('/', [ZybooksFileController::class, 'index']);
-
-Route::prefix('files')->group(function () {
-  Route::get('/', [ZybooksFileController::class, 'index'])->name('files_index');
-  Route::post('/upload', [ZybooksFileController::class, 'uploadFile'])->name('files_upload');
-  Route::get('/download/{file}', [ZybooksFileController::class, 'downloadFile'])->name('files_download');
-  Route::get('/delete/{file}', [ZybooksFileController::class, 'deleteFile'])->name('files_delete');
+Route::get('/', function () {
+    return view('welcome');
 });
 
-Route::prefix('statistics')->group(function () {
-  Route::get('/', [StatisticsController::class, 'index'])->name('statistics_index');
-  Route::get('/calculate_risk', [StatisticsController::class, 'recalculateRisk'])->name('statistics_calculate');
-});
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-Route::prefix('settings')->group(function () {
-  Route::view('/', 'settings')->name('settings_index');
-});
-
-Route::view('/welcome', 'welcome');
+require __DIR__.'/auth.php';
