@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ZybooksFileController;
 use App\Http\Controllers\StatisticsController;
+use App\Http\Controllers\ClassroomController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,10 @@ require __DIR__.'/auth.php';
 
 
 // Route::get('/', [ZybooksFileController::class, 'index']);
+
+Route::prefix('classroom')->group(function () {
+    Route::get('/', [ClassroomController::class, 'index'])->name('classroom_index');
+});
 
 Route::prefix('files')->group(function () {
   Route::get('/', [ZybooksFileController::class, 'index'])->name('files_index');

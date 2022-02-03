@@ -11,8 +11,8 @@
                     You are logged in! This will be the welcome page with some helpful information.
                 </div>
             </div>
+            <a href="{{ route("classroom_index") }}" class="btn btn-primary">View Classrooms</a>
             <button class="btn btn-primary">Create  class</button>
-            <button class="btn btn-primary">View classes</button>
         </div>
     </div>
 </div>
