@@ -1,5 +1,7 @@
-<x-headers/>
+@extends('layouts.app')
 
+@section('content')
+<x-headers/>
 <div class="container bg-light">
   <div class="p-5 d-flex justify-content-center">
     <h4>Upload zyBooks files here. One file for each week.</h4>
@@ -32,5 +34,5 @@
         </div>
     @endforeach
   </div>
-
 </div>
+@endsection
