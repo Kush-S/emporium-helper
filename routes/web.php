@@ -31,6 +31,8 @@ require __DIR__.'/auth.php';
 
 Route::prefix('classroom')->group(function () {
     Route::get('/', [ClassroomController::class, 'index'])->name('classroom_index');
+    Route::get('/create', [ClassroomController::class, 'create'])->name('classroom_create');
+    Route::post('/save', [ClassroomController::class, 'saveClassroom'])->name('classroom_save');
 });
 
 Route::prefix('files')->group(function () {

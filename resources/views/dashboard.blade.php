@@ -12,7 +12,7 @@
                 </div>
             </div>
             <a href="{{ route("classroom_index") }}" class="btn btn-primary">View Classrooms</a>
-            <button class="btn btn-primary">Create  class</button>
+            <a href="{{ route("classroom_create") }}" class="btn btn-primary">Create Classroom</a>
         </div>
     </div>
 </div>
