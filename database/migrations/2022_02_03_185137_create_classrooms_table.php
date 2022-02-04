@@ -18,6 +18,7 @@ class CreateClassroomsTable extends Migration
             $table->string('term');
             $table->string('number');
             $table->string('section');
+            $table->integer('year');
             $table->timestamps();
         });
     }
