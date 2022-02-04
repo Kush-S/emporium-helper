@@ -32,7 +32,7 @@ class ClassroomController extends Controller
     $classroom->year = $request->class_year;
     $classroom->save();
 
-    return redirect()->route('classroom_create');
+    return redirect()->route('classroom_enter', $classroom->id);
   }
 
   public function enterClassroom(Request $request)
