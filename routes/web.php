@@ -29,10 +29,11 @@ require __DIR__.'/auth.php';
 
 // Route::get('/', [ZybooksFileController::class, 'index']);
 
-Route::prefix('classroom')->group(function () {
+Route::middleware(['auth'])->prefix('classroom')->group(function () {
     Route::get('/', [ClassroomController::class, 'index'])->name('classroom_index');
     Route::get('/create', [ClassroomController::class, 'create'])->name('classroom_create');
     Route::post('/save', [ClassroomController::class, 'saveClassroom'])->name('classroom_save');
+    Route::get('/{id}', [ClassroomController::class, 'enterClassroom'])->name('classroom_enter');
 });
 
 Route::prefix('files')->group(function () {
