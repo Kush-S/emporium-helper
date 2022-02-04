@@ -11,7 +11,7 @@ class ClassroomController extends Controller
   {
     $classrooms = Classroom::all();
 
-    return view('classrooms')->with('classrooms', $classrooms);
+    return view('classrooms_list')->with('classrooms', $classrooms);
   }
 
   public function create()
@@ -29,8 +29,16 @@ class ClassroomController extends Controller
     $classroom->term = $request->class_term;
     $classroom->number = $request->class_number;
     $classroom->section = $request->class_section;
+    $classroom->year = $request->class_year;
     $classroom->save();
 
     return redirect()->route('classroom_create');
+  }
+
+  public function enterClassroom(Request $request)
+  {
+    $classroom = Classroom::where('id', $request->id)->first();
+
+    return view('classroom')->with('classroom', $classroom);
   }
 }
