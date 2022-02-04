@@ -8,8 +8,14 @@
                 <div class="card-header">Classes</div>
 
                 <div class="card-body">
+                  <table class="table table-striped table-hover">
+                    <thead>
+
+                    </thead>
+                  </table>
+
                   @foreach ($classrooms as $classroom)
-                    <p>This is the class {{ $classroom }}</p>
+                    <p>List of classes: {{ $classroom }}</p>
                   @endforeach
                 </div>
             </div>
