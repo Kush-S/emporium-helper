@@ -18,6 +18,8 @@ class CreateZybooksFilesTable extends Migration
             $table->string('name');
             $table->json('parsed');
             $table->timestamps();
+            $table->unsignedBigInteger('classroom_id');
+            $table->foreign('classroom_id')->references('id')->on('classrooms');
         });
     }
 
