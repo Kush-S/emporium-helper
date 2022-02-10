@@ -21,17 +21,20 @@
                 </div>
                 <div class="form-group pb-3">
                   <label for="file_name">Class Year</label>
-                  <input type="number" class="form-control" name="class_year" placeholder="Example: 2022" required></input>
+                  <input type="number" class="form-control" name="class_year" value="{{ now()->year }}" required></input>
                 </div>
                 <div class="form-group pb-3">
-                  <label for="file_name">Class Number</label>
+                  <label for="file_name">Course Number</label>
                   <input type="text" class="form-control" name="class_number" placeholder="Example: CS 2010" required></input>
                 </div>
                 <div class="form-group pb-3">
                   <label for="file_name">Class Section</label>
-                  <input type="text" class="form-control" name="class_section" placeholder="Example: 1 1003 LEC 13187 GC" required></input>
+                  <input type="text" class="form-control" name="class_section" placeholder="Example: 1001" required></input>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="float-end">
+                  <a href="{{route("dashboard")}}" class="btn btn-danger">Cancel</a>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
               </div>
             </form>
           </div>
