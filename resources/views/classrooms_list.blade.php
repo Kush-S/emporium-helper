@@ -5,7 +5,10 @@
     <div class="row">
         <div class="col-md-10 offset-md-1">
             <div class="card">
-                <div class="card-header">Classes</div>
+                <div class="card-header">
+                  <div class="float-start">Classes</div>
+                  <a href="{{ route("classroom_search_index") }}" class="float-end">Search <i class="bi bi-search fas fa-2x"></i></a>
+                </div>
                 <div class="card-body">
                   <table class="table table-striped table-hover">
                     <thead>

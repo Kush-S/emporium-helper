@@ -33,7 +33,8 @@ Route::middleware(['auth'])->prefix('classroom')->group(function () {
     Route::get('/', [ClassroomController::class, 'index'])->name('classroom_index');
     Route::get('/create', [ClassroomController::class, 'create'])->name('classroom_create');
     Route::post('/save', [ClassroomController::class, 'saveClassroom'])->name('classroom_save');
-    Route::get('/{id}', [ClassroomController::class, 'enterClassroom'])->name('classroom_enter');
+    Route::get('/view/{id}', [ClassroomController::class, 'enterClassroom'])->name('classroom_enter');
+    Route::get('/search', [ClassroomController::class, 'searchIndex'])->name('classroom_search_index');
 });
 
 Route::prefix('files')->group(function () {

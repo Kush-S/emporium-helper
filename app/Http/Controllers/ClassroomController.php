@@ -41,4 +41,21 @@ class ClassroomController extends Controller
 
     return view('classroom')->with('classroom', $classroom);
   }
+
+  public function searchIndex(Request $request)
+  {
+    $searchdata['term'] = $request->term;
+    $searchdata['year'] = $request->year;
+    $searchdata['number'] = $request->number;
+    $searchdata['section'] = $request->section;
+    error_log($searchdata['term']);
+
+    $classrooms = Classroom::
+    where('year', 'LIKE', '%' . $request->year . '%')
+    ->where('term', 'LIKE', '%' . $request->term . '%')
+    ->where('number', 'LIKE', '%' . $request->number . '%')
+    ->where('section', 'LIKE', '%' . $request->section . '%')
+    ->get();
+    return view('classroom_search')->with('classrooms', $classrooms)->with('searchdata', $searchdata);
+  }
 }
