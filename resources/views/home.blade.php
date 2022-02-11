@@ -25,7 +25,7 @@
                   <br>
                   To get started, create a classroom by clicking the "Create Classroom" button at the top of this page.
                   A classroom is a separate space for each instructor to upload their own class's grade files and view the statistics of those files.
-                  A new classroom is required to be created for each class an instructor may have, and for each new semester as well.
+                  A new classroom is required to be created for each class an instructor may have, and for each new semester as well. Although multiple sections of the same class in the same semester can be combined into one classroom.
                   If you have already created a classroom before, you may enter it by clicking the "View Classrooms" button above and clicking the "Visit" button beside it.
                   Within a classroom space, you will have navigation buttons near the top of the screen to view class statistics, manage files, and edit settings for that classroom.
 
