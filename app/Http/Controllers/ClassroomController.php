@@ -9,7 +9,7 @@ class ClassroomController extends Controller
 {
   public function index()
   {
-    $classrooms = Classroom::all();
+    $classrooms = Classroom::all()->sortByDesc('year')->sortByDesc('number');
 
     return view('classrooms_list')->with('classrooms', $classrooms);
   }
