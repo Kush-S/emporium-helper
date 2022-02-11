@@ -11,13 +11,13 @@
   <div class="row">
     <ul class="nav justify-content-center">
       <li class="nav-item">
-        <a class="btn {{ Request::path() === 'statistics' || Request::path() === '/' ? 'btn-dark' : 'btn-secondary'}}" href="{{route('statistics_index', Request()->id)}}">Statistics</a>
+        <a class="btn {{ Request::path() === 'classroom/' . Request()->id . '/statistics' ? 'btn-dark' : 'btn-secondary'}}" href="{{route('statistics_index', Request()->id)}}">Statistics</a>
       </li>
       <li class="nav-item">
-        <a class="btn {{ Request::path() === 'files' ? 'btn-dark' : 'btn-secondary'}}" href="{{ route('files_index', Request()->id) }}">Files</a>
+        <a class="btn {{ Request::path() === 'classroom/' . Request()->id . '/files' ? 'btn-dark' : 'btn-secondary'}}" href="{{ route('files_index', Request()->id) }}">Files</a>
       </li>
       <li class="nav-item">
-        <a class="btn {{ Request::path() === 'settings' ? 'btn-dark' : 'btn-secondary'}}" href="{{ route('settings_index', Request()->id) }}">Settings</a>
+        <a class="btn {{ Request::path() === 'classroom/' . Request()->id . '/settings' ? 'btn-dark' : 'btn-secondary'}}" href="{{ route('settings_index', Request()->id) }}">Settings</a>
       </li>
     </ul>
   </div>
