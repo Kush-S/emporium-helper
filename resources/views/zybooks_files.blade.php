@@ -8,7 +8,7 @@
   </div>
 
   <div class="pt-3 d-flex justify-content-center">
-    <form method="POST" enctype="multipart/form-data" action="{{ route('files_upload') }}">
+    <form method="POST" enctype="multipart/form-data" action="{{ route('files_upload', Request()->id) }}">
       @csrf
       <div class="form-group pb-3">
         <label for="file_name">File Name:</label>
@@ -27,7 +27,7 @@
       <div class="d-flex justify-content-center">
           @foreach ($chunk as $file)
             <div class="p-2">
-              <a class="p-1 border" href="{{route('files_download', $file->name)}}">{{$file->name}}</a>
+              <a class="p-1 border" href="{{route('files_download', $file->name, Request()->id)}}">{{$file->name}}</a>
               <a href="{{route('files_delete', $file->name)}}" type="button" class="btn btn-danger">Delete</a>
             </div>
           @endforeach

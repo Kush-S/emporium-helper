@@ -9,7 +9,9 @@
 
     Created in {{$classroom->term}} {{$classroom->year}}
     <div class="row">
+      <a href="{{route('statistics_index', Request()->id)}}">test</a>
       Future site of features such as your files and student risk statistics.
+
     </div>
 
     <div class="row col-md-2">

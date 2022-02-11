@@ -3,7 +3,7 @@
 <div class="container bg-light">
   <div class="row">
     <div class="pt-2">
-      <a href="{{ route("statistics_calculate") }}" class="btn btn-danger float-end">Import grades</a>
+      {{-- <a href="{{ route("statistics_calculate") }}" class="btn btn-danger float-end">Import grades</a> --}}
     </div>
     <div class="p-5 d-flex justify-content-center">
       <h4>Student Risk Statistics</h4>
@@ -33,6 +33,8 @@
         </tbody>
 
       </table>
+      {{Request()->id}}
+      Future site
     </div>
   </div>
 
