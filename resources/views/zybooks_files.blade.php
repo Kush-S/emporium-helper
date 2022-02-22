@@ -1,6 +1,3 @@
-@extends('layouts.app')
-
-@section('content')
 <x-headers/>
 <div class="container bg-light">
   <div class="p-5 d-flex justify-content-center">
@@ -35,4 +32,3 @@
     @endforeach
   </div>
 </div>
-@endsection
