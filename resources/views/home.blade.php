@@ -13,10 +13,10 @@
               <div class="card-body">
                 <div class="row justify-content-center pb-2">
                   <div class="col-md-2 m-3 text-center">
-                    <a href="{{ route("classroom_index") }}" class="btn btn-primary p-4 border border-success">View Classrooms</a>
+                    <a href="{{ route("classroom_index") }}" class="btn btn-primary p-4 border border-success shadow-md">View Classrooms</a>
                   </div>
                   <div class="col-md-2 m-3 text-center">
-                    <a href="{{ route("classroom_create") }}" class="btn btn-primary p-4 border border-success">Create Classroom</a>
+                    <a href="{{ route("classroom_create") }}" class="btn btn-primary p-4 border border-success shadow-lg">Create Classroom</a>
                   </div>
                 </div>
 

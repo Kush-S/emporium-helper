@@ -9,8 +9,29 @@
                   <div class="float-start">Classes</div>
                   <a href="{{ route("classroom_search_index") }}" class="float-end">Search <i class="bi bi-search fas fa-2x"></i></a>
                 </div>
+
                 <div class="card-body">
-                  <table class="table table-striped table-hover">
+                  @foreach ($classrooms->chunk(6) as $chunk)
+                    <div class="row pb-4">
+                      @foreach ($chunk as $classroom)
+                        <div class="col-sm-2">
+                          <a style="text-decoration:none;" href="{{ route("classroom_enter", $classroom->id) }}">
+                          <div class="card text-white bg-secondary">
+                            <div class="card-header text-white bg-dark mb-3">
+                              {{ $classroom->number }}
+                            </div>
+                            <div class="card-body">
+                              {{ $classroom->term }}
+                              {{ $classroom->year }}
+                              {{ $classroom->section }}
+                            </div>
+                          </div>
+                          </a>
+                        </div>
+                      @endforeach
+                    </div>
+                  @endforeach
+                  {{-- <table class="table table-striped table-hover">
                     <thead>
                       <tr>
                         <th scope="col">Term</th>
@@ -30,7 +51,7 @@
                           </tr>
                       @endforeach
                     </tbody>
-                  </table>
+                  </table> --}}
                 </div>
             </div>
         </div>
