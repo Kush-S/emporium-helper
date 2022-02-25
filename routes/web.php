@@ -35,7 +35,6 @@ Route::middleware(['auth'])->prefix('classroom')->group(function () {
     Route::post('/save', [ClassroomController::class, 'saveClassroom'])->name('classroom_save');
     Route::get('/search', [ClassroomController::class, 'searchIndex'])->name('classroom_search_index');
     Route::group(['prefix' => '/{id}'], function($id){
-      Route::get('/', [ClassroomController::class, 'enterClassroom'])->name('classroom_enter');
       Route::group(['prefix' => '/statistics'], function(){
         Route::get('/', [StatisticsController::class, 'index'])->name('statistics_index');
       });
