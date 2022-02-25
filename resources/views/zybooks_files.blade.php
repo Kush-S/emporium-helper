@@ -1,5 +1,5 @@
 <x-headers/>
-<div class="container bg-light">
+<div class="container bg-light border rounded">
   <div class="p-5 d-flex justify-content-center">
     <h4>Upload zyBooks files here. One file for each week.</h4>
   </div>

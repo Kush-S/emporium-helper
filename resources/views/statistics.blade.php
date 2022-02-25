@@ -1,6 +1,6 @@
 <x-headers/>
 
-<div class="container bg-light">
+<div class="container bg-light border rounded">
   <div class="row">
     <div class="pt-2">
       {{-- <a href="{{ route("statistics_calculate") }}" class="btn btn-danger float-end">Import grades</a> --}}
@@ -31,18 +31,7 @@
             </tr>
           @endfor
         </tbody>
-
       </table>
-      {{Request()->id}}
-      Future site
     </div>
-  </div>
-
-
-  <div class="row">
-
-
-
-
   </div>
 </div>
