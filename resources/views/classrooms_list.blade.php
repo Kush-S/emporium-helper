@@ -22,8 +22,10 @@
                             </div>
                             <div class="card-body">
                               {{ $classroom->term }}
-                              {{ $classroom->year }}
-                              {{ $classroom->section }}
+                              {{ $classroom->year }}<br>
+                              Section: {{ $classroom->section }}<br>
+                              Files: {{ rand(0,10) }}<br>
+                              Students at risk: {{rand(0,5)}}
                             </div>
                           </div>
                           </a>

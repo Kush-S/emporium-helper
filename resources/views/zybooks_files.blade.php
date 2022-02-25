@@ -1,25 +1,32 @@
 <x-headers/>
 <div class="container bg-light border rounded">
   <div class="p-5 d-flex justify-content-center">
-    <h4>Upload zyBooks files here. One file for each week.</h4>
+      <h4>Upload zyBooks and Canvas grade files here</h4>
   </div>
 
-  <div class="pt-3 d-flex justify-content-center">
+  <div class="pt-2 d-flex justify-content-center">
     <form method="POST" enctype="multipart/form-data" action="{{ route('files_upload', Request()->id) }}">
       @csrf
       <div class="form-group pb-3">
-        <label for="file_name">File Name:</label>
-        <input type="text" class="form-control" name="file_name" placeholder="Example: zyBooks week 1" required></input>
-        <small id="fileNameHelp" class="form-text text-muted">".csv" will be added to file name automatically.</small>
-      </div>
-      <div class="form-group pb-3">
         <input type="file" class="form-control-file" name="zybooks_file_input" required>
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+        <label class="form-check-label" for="exampleRadios1">
+          zyBooks file
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+        <label class="form-check-label" for="exampleRadios2">
+          Canvas grade file
+        </label>
+      </div>
+      <button type="submit" class="btn btn-primary mt-2">Upload</button>
     </form>
   </div>
 
-  <div class="py-5">
+  {{-- <div class="py-5">
     @foreach ($files->chunk(5) as $chunk)
       <div class="d-flex justify-content-center">
           @foreach ($chunk as $file)
@@ -30,5 +37,8 @@
           @endforeach
         </div>
     @endforeach
+  </div> --}}
+  <div class="pt-5 d-flex justify-content-center">
+    zyBooks files | Canvas files
   </div>
 </div>
