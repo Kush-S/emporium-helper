@@ -16,7 +16,7 @@
                       @foreach ($chunk as $classroom)
                         <div class="col-sm-2">
                           <a style="text-decoration:none;" href="{{ route("classroom_enter", $classroom->id) }}">
-                          <div class="card text-white bg-secondary">
+                          <div class="card text-white bg-secondary cards">
                             <div class="card-header text-white bg-dark mb-3">
                               {{ $classroom->number }}
                             </div>
