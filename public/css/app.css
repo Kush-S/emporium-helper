@@ -18042,3 +18042,11 @@ textarea.form-control-lg {
   transform: scale(1.1);
 }
 
+.navbar-border-top {
+  border-top: 10px solid #4f2c01;
+}
+
+.navbar-orange {
+  background-color: #ff5900;
+}
+

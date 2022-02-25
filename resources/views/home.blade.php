@@ -16,7 +16,7 @@
                     <a href="{{ route("classroom_index") }}" class="btn btn-primary p-4 border border-success shadow-md">View Classrooms</a>
                   </div>
                   <div class="col-md-2 m-3 text-center">
-                    <a href="{{ route("classroom_create") }}" class="btn btn-primary p-4 border border-success shadow-lg">Create Classroom</a>
+                    <a href="{{ route("classroom_create") }}" class="btn btn-primary p-4 border border-success shadow-md">Create Classroom</a>
                   </div>
                 </div>
 
