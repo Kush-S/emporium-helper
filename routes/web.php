@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ZybooksFileController;
 use App\Http\Controllers\StatisticsController;
 use App\Http\Controllers\ClassroomController;
+use App\Http\Controllers\SettingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,7 +46,8 @@ Route::middleware(['auth'])->prefix('classroom')->group(function () {
         Route::get('/delete/{file}', [ZybooksFileController::class, 'deleteFile'])->name('files_delete');
       });
       Route::group(['prefix' => '/settings'], function(){
-        Route::view('/', 'settings')->name('settings_index');
+        Route::get('/', [SettingsController::class, 'index'])->name('settings_index');
+        Route::get('/add_member', [SettingsController::class, 'add_member'])->name('settings_add_member');
       });
     });
     // Route::get('/{id}', [ClassroomController::class, 'enterClassroom'])->name('classroom_enter');

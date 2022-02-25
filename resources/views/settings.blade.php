@@ -63,7 +63,7 @@ You are at risk...more words...</textarea>
           </tr>
         </tbody>
       </table>
-      <button type="submit" class="btn btn-primary">Add new member</button>
+      <a href="{{ route('settings_add_member', Request()->id) }}" class="btn btn-primary">Add new member</a>
     </div>
   </div>
 </div>
