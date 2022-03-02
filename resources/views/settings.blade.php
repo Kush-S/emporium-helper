@@ -17,8 +17,9 @@
           <input type="text" class="form-control" value="124.03443">
         </div>
         <div class="">
-          <button type="submit" class="btn btn-danger">Reset</button>
+          <button type="submit" class="btn btn-danger">Cancel</button>
           <button type="submit" class="btn btn-primary">Save</button>
+          <a href="#">reset to default</a>
         </div>
       </form>
     </div>
@@ -38,13 +39,14 @@
 You are at risk...more words...</textarea>
         </div>
         <div class="">
-          <button type="submit" class="btn btn-danger">Reset</button>
+          <button type="submit" class="btn btn-danger">Cancel</button>
           <button type="submit" class="btn btn-primary">Save</button>
+          <a href="#">reset to default</a>
         </div>
       </form>
     </div>
     <div class="offset-md-2 col-lg-6 border">
-      <h4><u>Classroom members</u></h4>
+      <h4><u>Instructors</u></h4>
       <table class="table table-hover">
         <thead>
           <tr>
@@ -63,7 +65,7 @@ You are at risk...more words...</textarea>
           </tr>
         </tbody>
       </table>
-      <a href="{{ route('settings_add_member', Request()->id) }}" class="btn btn-primary">Add new member</a>
+      <a href="{{ route('settings_add_member', Request()->id) }}" class="btn btn-primary">Add new instructor</a>
     </div>
   </div>
 </div>
