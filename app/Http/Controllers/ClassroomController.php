@@ -35,13 +35,6 @@ class ClassroomController extends Controller
     return redirect()->route('statistics_index', $classroom->id);
   }
 
-  public function enterClassroom(Request $request)
-  {
-    $classroom = Classroom::where('id', $request->id)->first();
-
-    return view('classroom')->with('classroom', $classroom);
-  }
-
   public function searchIndex(Request $request)
   {
     $searchdata['term'] = $request->term;
