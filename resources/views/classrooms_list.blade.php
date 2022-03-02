@@ -30,7 +30,11 @@
                             </div>
                             <div class="card-body">
                               <div>
-                                Section: {{ $classroom->section }}
+                                Section:
+                                @if ($classroom->section)
+                                  {{ $classroom->section }}
+                                @else -
+                                @endif
                               </div>
                               <div>
                                 Files: {{ rand(0,10) }}

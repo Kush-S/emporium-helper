@@ -17,7 +17,7 @@ class CreateClassroomsTable extends Migration
             $table->id();
             $table->string('term');
             $table->string('number');
-            $table->string('section');
+            $table->string('section')->nullable();
             $table->integer('year');
             $table->timestamps();
         });

@@ -29,7 +29,7 @@
                 </div>
                 <div class="form-group pb-3">
                   <label for="file_name">Class Section</label>
-                  <input type="text" class="form-control" name="class_section" placeholder="Example: 1001" required></input>
+                  <input type="text" class="form-control" name="class_section" placeholder="Example: 1001"></input>
                 </div>
                 <div class="float-end">
                   <a href="{{route("dashboard")}}" class="btn btn-danger">Cancel</a>
