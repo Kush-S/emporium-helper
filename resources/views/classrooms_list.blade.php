@@ -11,21 +11,34 @@
                 </div>
 
                 <div class="card-body">
-                  @foreach ($classrooms->chunk(6) as $chunk)
+                  @foreach ($classrooms->chunk(4) as $chunk)
                     <div class="row pb-4">
                       @foreach ($chunk as $classroom)
-                        <div class="col-sm-2">
+                        <div class="col-sm-3">
                           <a style="text-decoration:none;" href="{{ route("statistics_index", $classroom->id) }}">
                           <div class="card text-white bg-secondary cards">
-                            <div class="card-header text-white bg-dark mb-3">
-                              {{ $classroom->number }}
+                            <div class="card-header text-white bg-dark">
+                              {{ $classroom->number }} -
+                              @if ($classroom->term == 'Spring')
+                                Sp'
+                              @elseif ($classroom->term == 'Fall')
+                                Fa'
+                              @elseif ($classroom->term == 'Summer')
+                                Su'
+                              @endif
+                               {{ substr($classroom->year, -2) }}
                             </div>
                             <div class="card-body">
-                              {{ $classroom->term }}
-                              {{ $classroom->year }}<br>
-                              Section: {{ $classroom->section }}<br>
-                              Files: {{ rand(0,10) }}<br>
-                              Students at risk: {{rand(0,5)}}
+                              <div>
+                                Section: {{ $classroom->section }}
+                              </div>
+                              <div>
+                                Files: {{ rand(0,10) }}
+                              </div>
+                              <div>
+                                <?php $randRisk =  rand(0,5) ?>
+                                At risk: <span class="{{ $randRisk > 0 ? 'text-danger' : 'text-white' }}">{{$randRisk}}</span>
+                              </div>
                             </div>
                           </div>
                           </a>
