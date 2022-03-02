@@ -15,9 +15,9 @@
                     <div class="row pb-4">
                       @foreach ($chunk as $classroom)
                         <div class="col-sm-3">
-                          <a style="text-decoration:none;" href="{{ route("statistics_index", $classroom->id) }}">
-                          <div class="card text-white bg-secondary cards">
-                            <div class="card-header text-white bg-dark">
+                          <a style="text-decoration:none;" href="{{ route("analysis_index", $classroom->id) }}">
+                          <div class="card text-white bg-dark cards">
+                            <div class="card-header text-white bg-secondary">
                               {{ $classroom->number }} -
                               @if ($classroom->term == 'Spring')
                                 Sp'

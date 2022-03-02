@@ -32,7 +32,7 @@ class ClassroomController extends Controller
     $classroom->year = $request->class_year;
     $classroom->save();
 
-    return redirect()->route('statistics_index', $classroom->id);
+    return redirect()->route('analysis_index', $classroom->id);
   }
 
   public function searchIndex(Request $request)

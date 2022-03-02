@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ZybooksFileController;
-use App\Http\Controllers\StatisticsController;
+use App\Http\Controllers\AnalysisController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\SettingsController;
 
@@ -36,8 +36,8 @@ Route::middleware(['auth'])->prefix('classroom')->group(function () {
     Route::post('/save', [ClassroomController::class, 'saveClassroom'])->name('classroom_save');
     Route::get('/search', [ClassroomController::class, 'searchIndex'])->name('classroom_search_index');
     Route::group(['prefix' => '/{id}'], function($id){
-      Route::group(['prefix' => '/statistics'], function(){
-        Route::get('/', [StatisticsController::class, 'index'])->name('statistics_index');
+      Route::group(['prefix' => '/analysis'], function(){
+        Route::get('/', [AnalysisController::class, 'index'])->name('analysis_index');
       });
       Route::group(['prefix' => '/files'], function(){
         Route::get('/', [ZybooksFileController::class, 'index'])->name('files_index');

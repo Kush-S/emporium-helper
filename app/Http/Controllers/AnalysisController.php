@@ -7,13 +7,13 @@ use App\Models\ZybooksFile;
 use App\Models\Student;
 use App\Models\Risk;
 
-class StatisticsController extends Controller
+class AnalysisController extends Controller
 {
   public function index()
   {
     // $risk = Risk::select('name')->get();
 
-    return view('statistics');
+    return view('analysis');
   }
 
   public function recalculateRisk()
@@ -51,7 +51,7 @@ class StatisticsController extends Controller
 
     return redirect()->route('statistics_index');
   }
-  
+
   private function setParsedToFalse()
   {
     foreach(ZybooksFile::all() as $file){
