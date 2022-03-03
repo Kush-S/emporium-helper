@@ -60,7 +60,7 @@
                           <td>{{ $classroom->year }}</td>
                           <td>{{ $classroom->number }}</td>
                           <td>{{ $classroom->section }}</td>
-                          <td><a href="{{ route("classroom_enter", $classroom->id) }}">Visit</a></td>
+                          <td><a href="{{ route("analysis_index", $classroom->id) }}">Visit</a></td>
                         </tr>
                       @endforeach
                     </tbody>
