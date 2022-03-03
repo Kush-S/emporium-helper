@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container pb-4">
     <div class="row">
         <div class="col-md-10 offset-md-1">
             <div class="card">
@@ -60,7 +60,7 @@
                           <td>{{ $classroom->year }}</td>
                           <td>{{ $classroom->number }}</td>
                           <td>{{ $classroom->section }}</td>
-                          <td><a href="{{ route("analysis_index", $classroom->id) }}">Visit</a></td>
+                          <td><a href="{{ route("analysis_index", $classroom->id) }}">Enter</a></td>
                         </tr>
                       @endforeach
                     </tbody>
@@ -70,4 +70,5 @@
         </div>
     </div>
 </div>
+<x-footer/>
 @endsection
