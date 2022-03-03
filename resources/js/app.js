@@ -1,4 +1,5 @@
 require('./bootstrap');
+require('chart.js/dist/chart.min.js');
 
 import Alpine from 'alpinejs';
 
