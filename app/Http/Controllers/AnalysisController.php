@@ -12,8 +12,9 @@ class AnalysisController extends Controller
   public function index()
   {
     // $risk = Risk::select('name')->get();
-
-    return view('analysis');
+    $randNums = array();
+    array_push($randNums, rand(1,15), rand(1,15), rand(1,15), rand(1,15), rand(1,15), rand(1,15));
+    return view('analysis')->with('randNums', $randNums);
   }
 
   public function recalculateRisk()
