@@ -21,7 +21,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar-border-top navbar navbar-expand-md navbar-light navbar-orange shadow-sm">
+        <nav class="navbar-border-top navbar navbar-expand-md navbar-light color-orange shadow-sm">
             <div class="container">
                 <a class="navbar-brand text-white" href="{{ url('/') }}">
                     <i class="bi bi-house"></i>
