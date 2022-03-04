@@ -19,22 +19,17 @@
   </div>
   {{-- <div class="row" style="height: 300px"> --}}
   <div class="row">
-    <div class="col-6 d-flex justify-content-center">
-        <div class="col-4 py-5">
-          <a href="{{ route('analysis_students_list', Request()->id) }}" class="btn btn-primary d-flex justify-content-center p-3">Student list</a>
-        </div>
-      </div>
     <div class="col-6 d-flex justify-content-center py-2">
       <div class="row pt-2">
         <div class="text-center">
           {{-- Files used: {{ count($randNums) }} --}}
         </div>
         <div class="text-center">
-          Total students: {{ rand(10,30) }}
+          <?php $randRisk =  rand(0,1) ?>
+          Current risk: <span class="{{ $randRisk > 0 ? 'text-danger' : '' }}">{{$randRisk}}</span>
         </div>
         <div class="text-center">
-          <?php $randRisk =  rand(0,1) ?>
-          Students at risk: <span class="{{ $randRisk > 0 ? 'text-danger' : '' }}">{{$randRisk}}</span>
+          Notified: No
         </div>
       </div>
 
