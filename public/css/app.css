@@ -18046,11 +18046,15 @@ textarea.form-control-lg {
   border-top: 10px solid #4f2c01;
 }
 
-.navbar-orange {
+.color-orange {
   background-color: #ff5900;
 }
 
 .color-brown {
   background-color: #4f2c1d;
+}
+
+.color-light-brown {
+  background-color: #2e271e;
 }
 
