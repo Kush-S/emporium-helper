@@ -17,7 +17,7 @@
                         <div class="col-sm-3">
                           <a style="text-decoration:none;" href="{{ route("analysis_index", $classroom->id) }}">
                           <div class="card text-white cards">
-                            <div class="card-header text-white navbar-orange">
+                            <div class="card-header text-white color-orange">
                               {{ $classroom->number }} -
                               @if ($classroom->term == 'Spring')
                                 Sp'
