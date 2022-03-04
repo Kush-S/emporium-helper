@@ -1,7 +1,7 @@
 <x-headers/>
 
-<div class="container bg-light border rounded">
-  <div class="row pb-5" style="height: 300px">
+<div class="container bg-light border rounded mb-5">
+  <div class="row">
     <div class="col-md-6 text-center p-4 border">
       <canvas id="chart1"></canvas>
     </div>
@@ -9,7 +9,8 @@
       <canvas id="chart2"></canvas>
     </div>
   </div>
-  <div class="row pb-5" style="height: 300px">
+  {{-- <div class="row" style="height: 300px"> --}}
+  <div class="row">
     <div class="col-md-6 text-center">
 
     </div>
@@ -18,6 +19,7 @@
     </div>
   </div>
 </div>
+<x-footer/>
 
 <script>
 var nums = {!!json_encode($randNums)!!}

@@ -1,5 +1,5 @@
 <x-headers/>
-<div class="container bg-light border rounded">
+<div class="container bg-light border rounded mb-5">
   <div class="p-5 d-flex justify-content-center">
       <h4>Upload zyBooks and Canvas grade files here</h4>
   </div>
@@ -42,3 +42,4 @@
     zyBooks files | Canvas files
   </div>
 </div>
+<x-footer/>

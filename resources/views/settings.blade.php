@@ -1,6 +1,6 @@
 <x-headers/>
 
-<div class="container bg-light border rounded">
+<div class="container bg-light border rounded mb-5">
   {{-- <div class="p-5 d-flex justify-content-center">
     <h4>Upload zyBooks files here. One file for each week.</h4>
   </div> --}}
@@ -69,3 +69,4 @@ You are at risk...more words...</textarea>
     </div>
   </div>
 </div>
+<x-footer/>
