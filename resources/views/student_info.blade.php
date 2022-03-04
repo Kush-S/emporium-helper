@@ -1,5 +1,7 @@
-<x-headers/>
+@extends('layouts.app')
 
+@section('content')
+<script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
 <div class="container bg-light border rounded mb-5">
   <div class="row">
     <div class="col-md-6 text-center p-4 border">
@@ -81,3 +83,4 @@ const myChart1 = new Chart(ctx, {
     }
 });
 </script>
+@endsection
