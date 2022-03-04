@@ -4,7 +4,7 @@
   <div class="container bg-light border rounded">
     <div class="row">
       <div class="pt-2">
-        {{-- <a href="{{ route("statistics_calculate") }}" class="btn btn-danger float-end">Import grades</a> --}}
+        <a href="{{ route('analysis_index', Request()->id) }}" class="btn btn-primary">Back to analysis</a>
       </div>
       <div class="p-5 d-flex justify-content-center">
         <h4>Student Risk Statistics</h4>

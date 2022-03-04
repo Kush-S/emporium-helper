@@ -15,7 +15,7 @@
 
     </div>
     <div class="">
-      <button class="btn btn-primary">Student list</button>
+      <a href="{{ route('analysis_students', Request()->id) }}" class="btn btn-primary">Student list</a>
     </div>
   </div>
 </div>

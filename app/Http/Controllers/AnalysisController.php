@@ -17,6 +17,11 @@ class AnalysisController extends Controller
     return view('analysis')->with('randNums', $randNums);
   }
 
+  public function student_list()
+  {
+    return view('analysis_student_list');
+  }
+
   public function recalculateRisk()
   {
     $this->setParsedToFalse();
