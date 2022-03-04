@@ -19,7 +19,7 @@
     <div class="col-6 d-flex justify-content-center py-2">
       <div class="row pt-2">
         <div class="text-center">
-          Files used: {{ count($randNums) }}
+          {{-- Files used: {{ count($randNums) }} --}}
         </div>
         <div class="text-center">
           Total students: {{ rand(10,30) }}
@@ -36,7 +36,7 @@
 <x-footer/>
 
 <script>
-var nums = {!!json_encode($randNums)!!}
+var nums = [5,2,1,4,5,6]
 console.log(nums)
 </script>
 <script>
@@ -80,43 +80,4 @@ const myChart1 = new Chart(ctx, {
         }
     }
 });
-</script>
-
-<script>
-  const labels = ['Chapter 1.csv', 'Chapter 2.csv', 'Chapter 3.csv', 'Chapter 4.csv', 'Chapter 5.csv', 'Chapter 6.csv'];
-
-  const data = {
-    labels: [
-      'At risk',
-      'Not at risk',
-    ],
-    datasets: [{
-      label: 'My First Dataaaaaaaaaaaaaaaaaaaaaaaaset',
-      data: [5,20],
-      backgroundColor: [
-        'rgb(255, 99, 132)',
-        'rgb(54, 162, 235)',
-        'rgb(255, 205, 86)'
-      ],
-      hoverOffset: 4
-    }]
-  };
-
-  const config = {
-    type: 'doughnut',
-    data: data,
-    options: {
-      maintainAspectRatio: false,
-      title:{
-        display: true,
-        text: 'test'
-      }
-    }
-  };
-</script>
-<script>
-  const myChart2 = new Chart(
-    document.getElementById('chart2'),
-    config
-  );
 </script>
