@@ -1,4 +1,4 @@
-<div class="bg-dark py-4">
+<div class="color-light-brown py-4">
   <div class="row">
     <div class="col py-2">
       <div class="row border-end">
