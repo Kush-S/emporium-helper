@@ -2,6 +2,12 @@
 
 @section('content')
 <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+<div class="container">
+  <div class="pb-2">
+    <a href="{{ route('analysis_students_list', Request()->id) }}" class="btn btn-primary">Back to student list</a>
+  </div>
+</div>
+
 <div class="container bg-light border rounded mb-5">
   <div class="row">
     <div class="col-md-6 text-center p-4 border">
