@@ -16,8 +16,8 @@
                       @foreach ($chunk as $classroom)
                         <div class="col-sm-3">
                           <a style="text-decoration:none;" href="{{ route("analysis_index", $classroom->id) }}">
-                          <div class="card text-white bg-dark cards">
-                            <div class="card-header text-white bg-secondary">
+                          <div class="card text-white cards">
+                            <div class="card-header text-white navbar-orange">
                               {{ $classroom->number }} -
                               @if ($classroom->term == 'Spring')
                                 Sp'
@@ -28,7 +28,7 @@
                               @endif
                                {{ substr($classroom->year, -2) }}
                             </div>
-                            <div class="card-body">
+                            <div class="card-body bg-dark">
                               <div>
                                 Section:
                                 @if ($classroom->section)
