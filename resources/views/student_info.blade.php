@@ -25,8 +25,8 @@
           {{-- Files used: {{ count($randNums) }} --}}
         </div>
         <div class="text-center">
-          <?php $randRisk =  rand(0,1) ?>
-          Current risk: <span class="{{ $randRisk > 0 ? 'text-danger' : '' }}">{{$randRisk}}</span>
+          <?php $randRisk =  rand(0,10) ?>
+          Current risk: <span class="{{ $randRisk > 0 ? 'text-danger' : '' }}">{{$randRisk}}%</span>
         </div>
         <div class="text-center">
           Notified: No
