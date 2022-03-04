@@ -46,7 +46,7 @@ const myChart1 = new Chart(ctx, {
     data: {
         labels: ['Chapter 1.csv', 'Chapter 2.csv', 'Chapter 3.csv', 'Chapter 4.csv', 'Chapter 5.csv', 'Chapter 6.csv'],
         datasets: [{
-            label: '# of Votes',
+            label: 'Students at risk',
             data: nums,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
@@ -72,40 +72,46 @@ const myChart1 = new Chart(ctx, {
             y: {
                 beginAtZero: true
             },
-            xAxes: [{
-              ticks : {
-                minRotation : 90
+            x: {
+              ticks: {
+                minRotation: 0
               }
-            }]
+            }
         }
     }
 });
 </script>
 
 <script>
-  const labels = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-  ];
+  const labels = ['Chapter 1.csv', 'Chapter 2.csv', 'Chapter 3.csv', 'Chapter 4.csv', 'Chapter 5.csv', 'Chapter 6.csv'];
 
   const data = {
-    labels: labels,
+    labels: [
+      'At risk',
+      'Not at risk',
+    ],
     datasets: [{
-      label: 'My First dataset',
-      backgroundColor: 'rgb(255, 99, 132)',
-      borderColor: 'rgb(255, 99, 132)',
-      data: nums,
+      label: 'My First Dataaaaaaaaaaaaaaaaaaaaaaaaset',
+      data: [5,20],
+      backgroundColor: [
+        'rgb(255, 99, 132)',
+        'rgb(54, 162, 235)',
+        'rgb(255, 205, 86)'
+      ],
+      hoverOffset: 4
     }]
   };
 
   const config = {
-    type: 'line',
+    type: 'doughnut',
     data: data,
-    options: {}
+    options: {
+      maintainAspectRatio: false,
+      title:{
+        display: true,
+        text: 'test'
+      }
+    }
   };
 </script>
 <script>
