@@ -1,4 +1,12 @@
-<x-headers/>
+@extends('layouts.app')
+
+@section('content')
+<script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
+<div class="container">
+  <div class="pb-2">
+    <a href="{{ route('analysis_students_list', Request()->id) }}" class="btn btn-primary">Back to student list</a>
+  </div>
+</div>
 
 <div class="container bg-light border rounded mb-5">
   <div class="row">
@@ -11,22 +19,17 @@
   </div>
   {{-- <div class="row" style="height: 300px"> --}}
   <div class="row">
-    <div class="col-6 d-flex justify-content-center">
-        <div class="col-4 py-5">
-          <a href="{{ route('analysis_students_list', Request()->id) }}" class="btn btn-primary d-flex justify-content-center p-3">Student list</a>
-        </div>
-      </div>
     <div class="col-6 d-flex justify-content-center py-2">
       <div class="row pt-2">
         <div class="text-center">
-          Files used: {{ count($randNums) }}
+          {{-- Files used: {{ count($randNums) }} --}}
         </div>
         <div class="text-center">
-          Total students: {{ rand(10,30) }}
+          <?php $randRisk =  rand(0,10) ?>
+          Current risk: <span class="{{ $randRisk > 0 ? 'text-danger' : '' }}">{{$randRisk}}%</span>
         </div>
         <div class="text-center">
-          <?php $randRisk =  rand(0,1) ?>
-          Students at risk: <span class="{{ $randRisk > 0 ? 'text-danger' : '' }}">{{$randRisk}}</span>
+          Notified: No
         </div>
       </div>
 
@@ -36,7 +39,7 @@
 <x-footer/>
 
 <script>
-var nums = {!!json_encode($randNums)!!}
+var nums = [5,2,1,4,5,6]
 console.log(nums)
 </script>
 <script>
@@ -81,42 +84,4 @@ const myChart1 = new Chart(ctx, {
     }
 });
 </script>
-
-<script>
-  const labels = ['Chapter 1.csv', 'Chapter 2.csv', 'Chapter 3.csv', 'Chapter 4.csv', 'Chapter 5.csv', 'Chapter 6.csv'];
-
-  const data = {
-    labels: [
-      'At risk',
-      'Not at risk',
-    ],
-    datasets: [{
-      label: 'My First Dataaaaaaaaaaaaaaaaaaaaaaaaset',
-      data: [5,20],
-      backgroundColor: [
-        'rgb(255, 99, 132)',
-        'rgb(54, 162, 235)',
-        'rgb(255, 205, 86)'
-      ],
-      hoverOffset: 4
-    }]
-  };
-
-  const config = {
-    type: 'doughnut',
-    data: data,
-    options: {
-      maintainAspectRatio: false,
-      title:{
-        display: true,
-        text: 'test'
-      }
-    }
-  };
-</script>
-<script>
-  const myChart2 = new Chart(
-    document.getElementById('chart2'),
-    config
-  );
-</script>
+@endsection

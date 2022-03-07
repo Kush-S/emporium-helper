@@ -23,6 +23,11 @@ class AnalysisController extends Controller
     return view('analysis_student_list');
   }
 
+  public function student_info()
+  {
+    return view('student_info');
+  }
+
   public function recalculateRisk()
   {
     $this->setParsedToFalse();
