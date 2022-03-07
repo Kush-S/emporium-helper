@@ -13,4 +13,9 @@ class Classroom extends Model
     {
       return $this->hasMany(ZybooksFile::class);
     }
+
+    public function users()
+    {
+      return $this->belongsToMany(User::class);
+    }
 }
