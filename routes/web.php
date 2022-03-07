@@ -35,7 +35,7 @@ Route::middleware(['auth'])->prefix('classroom')->group(function () {
     Route::get('/create', [ClassroomController::class, 'create'])->name('classroom_create');
     Route::post('/save', [ClassroomController::class, 'saveClassroom'])->name('classroom_save');
     Route::get('/search', [ClassroomController::class, 'searchIndex'])->name('classroom_search_index');
-    Route::group(['prefix' => '/{id}'], function($id){
+    Route::middleware(['access'])->prefix('{id}')->group(function($id){
       Route::group(['prefix' => '/analysis'], function(){
         Route::get('/', [AnalysisController::class, 'index'])->name('analysis_index');
         Route::get('/students', [AnalysisController::class, 'student_list'])->name('analysis_students');

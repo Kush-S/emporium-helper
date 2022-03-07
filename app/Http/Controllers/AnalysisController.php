@@ -9,9 +9,10 @@ use App\Models\Risk;
 
 class AnalysisController extends Controller
 {
-  public function index()
+  public function index(Request $request)
   {
     // $risk = Risk::select('name')->get();
+    error_log($request->id);
     $randNums = array();
     array_push($randNums, rand(1,15), rand(1,15), rand(1,15), rand(1,15), rand(1,15), rand(1,15));
     return view('analysis')->with('randNums', $randNums);
