@@ -11,14 +11,10 @@ class ClassroomController extends Controller
 {
   public function index()
   {
-    $classrooms = Classroom::all()->sortByDesc('year');
+    $user = User::find(Auth::user()->id);
+    $classrooms = $user->classrooms()->get()->sortByDesc('year');
 
     return view('classrooms_list')->with('classrooms', $classrooms);
-  }
-
-  public function create()
-  {
-    return view('classroom_create');
   }
 
   public function saveClassroom(Request $request)
@@ -35,8 +31,6 @@ class ClassroomController extends Controller
 
     // save the many-to-many relationship
     $user->classrooms()->attach($classroom->id);
-
-
 
     return redirect()->route('analysis_index', $classroom->id);
   }
