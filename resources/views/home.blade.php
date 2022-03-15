@@ -4,6 +4,11 @@
 <div class="container pb-4">
     <div class="row">
       <div class="col-md-10 offset-md-1">
+        @if (session('status'))
+            <div class="alert alert-danger">
+                {{ session('status') }}
+            </div>
+        @endif
         <div class="card">
           <div class="card-header">Home</div>
           <div class="card-body">
