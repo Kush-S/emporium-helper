@@ -17,6 +17,11 @@ class ClassroomController extends Controller
     return view('classrooms_list')->with('classrooms', $classrooms);
   }
 
+  public function create()
+  {
+    return view('classroom_create');
+  }
+
   public function saveClassroom(Request $request)
   {
     $user = User::find(Auth::user()->id);
