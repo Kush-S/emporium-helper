@@ -56,13 +56,17 @@ You are at risk...more words...</textarea>
         </thead>
         <tbody>
           <tr>
-            <td>Mark Jacob</td>
-            <td>mjacob@bgsu.edu</td>
+            <td>{{ $owner->name }} (owner)</td>
+            <td>{{ $owner->email }}</td>
           </tr>
-          <tr>
-            <td>Otto Thornton</td>
-            <td>othorn@bgsu.edu</td>
-          </tr>
+          @foreach ($instructors as $instructor)
+            @if ($instructor->email != $owner->email)
+            <tr>
+              <td>{{ $instructor->name }}</td>
+              <td>{{ $instructor->email }}</td>
+            </tr>
+            @endif
+          @endforeach
         </tbody>
       </table>
       <a href="{{ route('settings_add_member', Request()->id) }}" class="btn btn-primary">Add new instructor</a>
