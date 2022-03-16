@@ -8,18 +8,33 @@ use App\Models\User;
 
 class SettingsController extends Controller
 {
-  public function index(Request $request)
+  public function __construct(Request $request)
   {
-    $classroom = Classroom::find($request->id);
-    $owner = User::find($classroom->owner);
+    $this->classroom = Classroom::find($request->id);
+  }
 
-    $instructors = $classroom->users;
+  public function index()
+  {
+    $owner = User::find($this->classroom->owner);
+    $instructors = $this->classroom->users;
 
     return view('settings')->with('owner', $owner)->with('instructors', $instructors);
   }
 
-  public function add_member()
+  public function addInstructor()
   {
-    return view('add_member');
+    $users = User::all();
+    $instructors = $this->classroom->users;
+    $nonInstructors = [];
+
+    foreach($users as $user)
+    {
+      if(!$instructors->contains($user))
+      {
+        array_push($nonInstructors, $user);
+      }
+    }
+
+    return view('add_instructor')->with('nonInstructors', $nonInstructors);
   }
 }

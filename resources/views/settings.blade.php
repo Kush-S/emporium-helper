@@ -69,7 +69,7 @@ You are at risk...more words...</textarea>
           @endforeach
         </tbody>
       </table>
-      <a href="{{ route('settings_add_member', Request()->id) }}" class="btn btn-primary">Add new instructor</a>
+      <a href="{{ route('settings_add_instructor', Request()->id) }}" class="btn btn-primary">Add new instructor</a>
     </div>
   </div>
 </div>
