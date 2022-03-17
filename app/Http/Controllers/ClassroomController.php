@@ -32,6 +32,7 @@ class ClassroomController extends Controller
     $classroom->section = $request->class_section;
     $classroom->year = $request->class_year;
     $classroom->owner = $user->id;
+    if ($classroom->section == NULL) {$classroom->section = ' ';}
     $classroom->save();
 
     // save the many-to-many relationship
