@@ -45,4 +45,12 @@ class SettingsController extends Controller
 
     return redirect()->route('settings_index', $request->id);
   }
+
+  public function removeInstructor(Request $request)
+  {
+    $user = User::find($request->instructor_id);
+    $user->classrooms()->detach($request->id);
+
+    return redirect()->route('settings_index', $request->id);
+  }
 }

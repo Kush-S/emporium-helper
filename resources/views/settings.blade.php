@@ -52,6 +52,7 @@ You are at risk...more words...</textarea>
           <tr>
             <th scope="col">Name</th>
             <th scope="col">Email</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
@@ -64,6 +65,7 @@ You are at risk...more words...</textarea>
             <tr>
               <td>{{ $instructor->name }}</td>
               <td>{{ $instructor->email }}</td>
+              <td><a href="{{ route('settings_remove_instructor', [Request()->id, $instructor->id]) }}" class="btn btn-danger">Remove</a></td>
             </tr>
             @endif
           @endforeach
