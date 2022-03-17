@@ -1,9 +1,19 @@
 <x-headers/>
 
+<div class="container d-flex justify-content-center ">
+  <div class="row">
+    <div class="pt-1 h4 pb-2 text-white bg-info rounded-pill">
+      {{ $classroom->number }}
+      (@if ($classroom->term == 'Spring')Sp'
+      @elseif ($classroom->term == 'Fall')Fa'
+      @elseif ($classroom->term == 'Summer')Su'
+      @endif
+      {{ substr($classroom->year, -2) }})
+    </div>
+  </div>
+</div>
+
 <div class="container bg-light border rounded mb-5">
-  {{-- <div class="p-5 d-flex justify-content-center">
-    <h4>Upload zyBooks files here. One file for each week.</h4>
-  </div> --}}
   <div class="row py-5">
     <div class="col-lg-4">
       <h4><u>Edit risk calculation variables</u></h4>

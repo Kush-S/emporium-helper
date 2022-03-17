@@ -5,17 +5,23 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ZybooksFile;
 use App\Models\Student;
+use App\Models\Classroom;
 use Config;
 use Illuminate\Support\Facades\Storage;
 use App\Jobs\ProcessStudentGeneralInfo;
 
 class ZybooksFileController extends Controller
 {
+  public function __construct(Request $request)
+  {
+    $this->classroom = Classroom::find($request->id);
+  }
+
   public function index()
   {
     $files = ZybooksFile::select('name')->get();
 
-    return view('zybooks_files')->with('files', $files);
+    return view('zybooks_files')->with('files', $files)->with('classroom', $this->classroom);
   }
 
   public function uploadFile(Request $request)
@@ -89,6 +95,6 @@ class ZybooksFileController extends Controller
   }
 
   public function parseStudentGrades(){
-    
+
   }
 }

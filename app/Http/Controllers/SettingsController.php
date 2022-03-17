@@ -18,7 +18,7 @@ class SettingsController extends Controller
     $owner = User::find($this->classroom->owner);
     $instructors = $this->classroom->users;
 
-    return view('settings')->with('owner', $owner)->with('instructors', $instructors);
+    return view('settings')->with('owner', $owner)->with('instructors', $instructors)->with('classroom', $this->classroom);
   }
 
   public function addInstructor()
