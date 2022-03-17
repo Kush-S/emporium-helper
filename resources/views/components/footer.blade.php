@@ -15,7 +15,7 @@
     </div>
     <div class="col m-auto">
       <div class="col-md-6">
-        <img src="{{ asset('images/bgsu_logo.png') }}">
+        <img src="{{ asset('images/app_logo.png') }}" style="max-height: 70px;">
       </div>
     </div>
   </div>

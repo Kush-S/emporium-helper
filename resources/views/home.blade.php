@@ -21,10 +21,12 @@
               </div>
             </div>
 
-              Welcome to the {{ config('app.name', 'Laravel') }} app, {{ Auth::user()->name }}.
+            <div class="mt-4">
+              <h2>Welcome to the {{ config('app.name', 'Laravel') }} app, {{ Auth::user()->name }}.</h2>
               <br>
               <br>
               The purpose of this app is to help instructors see which of their students are at a risk of failing the class by analyzing instructor uploaded zyBooks and Canvas grade files.
+            </div>
           </div>
         </div>
       </div>
