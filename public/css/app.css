@@ -18058,3 +18058,7 @@ textarea.form-control-lg {
   background-color: #2e271e;
 }
 
+.custom-min-height {
+  min-height: 650px;
+}
+
