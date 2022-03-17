@@ -23,7 +23,7 @@ class SettingsController extends Controller
 
   public function addInstructor()
   {
-    $users = User::all();
+    $users = User::orderBy('email')->get()->all();
     $instructors = $this->classroom->users;
     $nonInstructors = [];
 
