@@ -5,17 +5,22 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ZybooksFile;
 use App\Models\Student;
+use App\Models\Classroom;
 use App\Models\Risk;
 
 class AnalysisController extends Controller
 {
+  public function __construct(Request $request)
+  {
+    $this->classroom = Classroom::find($request->id);
+  }
+
   public function index(Request $request)
   {
-    // $risk = Risk::select('name')->get();
-    error_log($request->id);
     $randNums = array();
     array_push($randNums, rand(1,15), rand(1,15), rand(1,15), rand(1,15), rand(1,15), rand(1,15));
-    return view('analysis')->with('randNums', $randNums);
+
+    return view('analysis')->with('randNums', $randNums)->with('classroom', $this->classroom);
   }
 
   public function student_list()
