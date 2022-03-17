@@ -48,8 +48,8 @@ class ClassroomController extends Controller
     $searchdata['number'] = $request->number;
     $searchdata['section'] = $request->section;
 
-    $classrooms = Classroom::
-    where('year', 'LIKE', '%' . $request->year . '%')
+    $classrooms = Auth::user()->classrooms()
+    ->where('year', 'LIKE', '%' . $request->year . '%')
     ->where('term', 'LIKE', '%' . $request->term . '%')
     ->where('number', 'LIKE', '%' . $request->number . '%')
     ->where('section', 'LIKE', '%' . $request->section . '%')
