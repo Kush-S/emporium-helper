@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container pb-4">
+<div class="container pb-4 custom-min-height">
     <div class="row">
       <div class="col-md-10 offset-md-1">
         @if (session('status'))
