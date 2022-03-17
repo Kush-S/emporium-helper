@@ -13,9 +13,9 @@
         </a>
       </div>
     </div>
-    <div class="col">
-      <div class="text-white">
-        icon
+    <div class="col m-auto">
+      <div class="col-md-6">
+        <img src="{{ asset('images/bgsu_logo.png') }}">
       </div>
     </div>
   </div>
