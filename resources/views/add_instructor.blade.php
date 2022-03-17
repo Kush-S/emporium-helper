@@ -9,7 +9,7 @@
     </div>
     <div class="row justify-content-center pb-4">
       <div class="col-md-6">
-        <form>
+        <form method="POST" action="{{ route('settings_add_instructor_submit', Request()->id) }}">
           @csrf
           <table class="table table-hover table-striped table-muted">
             <thead>

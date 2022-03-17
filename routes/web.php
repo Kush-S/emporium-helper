@@ -50,7 +50,7 @@ Route::middleware(['auth', 'whitelisted'])->prefix('classroom')->group(function 
       Route::group(['prefix' => '/settings'], function(){
         Route::get('/', [SettingsController::class, 'index'])->name('settings_index');
         Route::get('/add_instructor', [SettingsController::class, 'addInstructor'])->name('settings_add_instructor');
-        Route::post('/add_instructor_submit', [SettingsController::class, 'addMember'])->name('settings_add_instructor_submit');
+        Route::post('/add_instructor_submit', [SettingsController::class, 'addInstructorSubmit'])->name('settings_add_instructor_submit');
       });
     });
     // Route::get('/{id}', [ClassroomController::class, 'enterClassroom'])->name('classroom_enter');

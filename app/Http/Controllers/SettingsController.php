@@ -37,4 +37,12 @@ class SettingsController extends Controller
 
     return view('add_instructor')->with('nonInstructors', $nonInstructors);
   }
+
+  public function addInstructorSubmit(Request $request)
+  {
+    $user = User::find($request->instructor_id);
+    $user->classrooms()->attach($request->id);
+
+    return redirect()->route('settings_index', $request->id);
+  }
 }
