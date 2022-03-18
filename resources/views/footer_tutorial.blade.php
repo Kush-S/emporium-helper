@@ -5,7 +5,7 @@
     <div class="row">
       <div class="col-md-10 offset-md-1">
         <div class="card">
-          <div class="card-header">Credits</div>
+          <div class="card-header">Tutorial</div>
           <div class="card-body">
             <div class="row justify-content-center pb-2">
               To use this app...
