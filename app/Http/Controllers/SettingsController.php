@@ -46,7 +46,7 @@ class SettingsController extends Controller
     // Only classroom owner can add instructor
     if(Auth::user()->id != $this->classroom->owner)
     {
-      return redirect()->route('settings_index', $request->id)->with('status', 'Unable to add. Only classroom owner may add an instructor!');
+      return redirect()->route('settings_index', $request->id)->with('error', 'Unable to add. Only classroom owner may add an instructor!');
     }
 
     $user->classrooms()->attach($request->id);
@@ -61,7 +61,7 @@ class SettingsController extends Controller
     // Only classroom owner can remove instructor
     if(Auth::user()->id != $this->classroom->owner)
     {
-      return redirect()->route('settings_index', $request->id)->with('status', 'Unable to remove. Only classroom owner may remove an instructor!');
+      return redirect()->route('settings_index', $request->id)->with('error', 'Unable to remove. Only classroom owner may remove an instructor!');
     }
 
     $user->classrooms()->detach($request->id);

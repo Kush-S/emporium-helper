@@ -9,6 +9,11 @@
             {{ session('status') }}
           </div>
         @endif
+        @if (session('error'))
+          <div class="alert alert-danger">
+            {{ session('error') }}
+          </div>
+        @endif
         <h2 class="row justify-content-center">Select an instructor</h2>
       </div>
     </div>
