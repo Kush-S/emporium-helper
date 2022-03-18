@@ -26,7 +26,7 @@
                 <td></td>
               @endempty
               @foreach ($nonInstructors as $nonInstructor)
-                <tr>
+                <tr class="cards">
                   <td><input type="radio" id="{{ $nonInstructor->id }}" name="instructor_id" value="{{ $nonInstructor->id }}"></td>
                   <td><label for="{{ $nonInstructor->id }}">{{ $nonInstructor->name }}</label></td>
                   <td><label for="{{ $nonInstructor->id }}">{{ $nonInstructor->email }}</label></td>
