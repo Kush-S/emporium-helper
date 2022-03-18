@@ -43,7 +43,7 @@ class SettingsController extends Controller
     $user = User::find($request->instructor_id);
     $user->classrooms()->attach($request->id);
 
-    return redirect()->route('settings_index', $request->id);
+    return redirect()->route('settings_index', $request->id)->with('status', 'Successfully added ' . $user->name . ' ' . '(' . $user->email . ') to this classroom');
   }
 
   public function removeInstructor(Request $request)
@@ -51,6 +51,6 @@ class SettingsController extends Controller
     $user = User::find($request->instructor_id);
     $user->classrooms()->detach($request->id);
 
-    return redirect()->route('settings_index', $request->id);
+    return redirect()->route('settings_index', $request->id)->with('status', 'Successfully removed ' . $user->name . ' ' . '(' . $user->email . ') from this classroom');
   }
 }

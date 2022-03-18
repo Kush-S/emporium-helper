@@ -1,5 +1,16 @@
 <x-headers/>
 
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      @if (session('status'))
+        <div class="alert alert-success">
+          {{ session('status') }}
+        </div>
+      @endif
+  </div>
+</div>
+
 <div class="container d-flex justify-content-center">
   <div class="row">
     <div class="pt-1 h4 pb-2 text-white bg-info rounded-pill">
