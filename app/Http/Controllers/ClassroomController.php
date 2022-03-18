@@ -38,7 +38,7 @@ class ClassroomController extends Controller
     // save the many-to-many relationship
     $user->classrooms()->attach($classroom->id);
 
-    return redirect()->route('analysis_index', $classroom->id);
+    return redirect()->route('analysis_index', $classroom->id)->with('status', 'Successfully created ' . $classroom->number . ' for ' . $classroom->term . ' ' . $classroom->year . '!');
   }
 
   public function searchIndex(Request $request)
