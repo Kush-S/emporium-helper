@@ -25,4 +25,19 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    public function indexFooterAbout()
+    {
+        return view('footer_about');
+    }
+
+    public function indexFooterCredits()
+    {
+        return view('footer_credits');
+    }
+
+    public function indexFooterTutorial()
+    {
+        return view('footer_tutorial');
+    }
 }

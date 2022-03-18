@@ -5,6 +5,7 @@ use App\Http\Controllers\ZybooksFileController;
 use App\Http\Controllers\AnalysisController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\SettingsController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,9 @@ Route::get('/', function () {
 
 require __DIR__.'/auth.php';
 
+Route::get('/about', [HomeController::class, 'indexFooterAbout'])->name('index_footer_about');
+Route::get('/credits', [HomeController::class, 'indexFooterCredits'])->name('index_footer_credits');
+Route::get('/tutorial', [HomeController::class, 'indexFooterTutorial'])->name('index_footer_tutorial');
 
 // Route::get('/', [ZybooksFileController::class, 'index']);
 
