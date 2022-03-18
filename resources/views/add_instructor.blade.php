@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-  <div class="container bg-light mb-4 border">
+  <div class="container bg-light mb-4 border" style="min-height: 640px;">
     <div class="row justify-content-center py-2">
       <div class="col-md-6">
         <h2 class="row justify-content-center">Select an instructor</h2>
