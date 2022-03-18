@@ -4,6 +4,11 @@
   <div class="container bg-light mb-4 border" style="min-height: 640px;">
     <div class="row justify-content-center py-2">
       <div class="col-md-6">
+        @if (session('status'))
+          <div class="alert alert-success">
+            {{ session('status') }}
+          </div>
+        @endif
         <h2 class="row justify-content-center">Select an instructor</h2>
       </div>
     </div>

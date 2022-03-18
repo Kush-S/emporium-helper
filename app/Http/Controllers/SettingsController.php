@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Classroom;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class SettingsController extends Controller
 {
@@ -41,6 +42,13 @@ class SettingsController extends Controller
   public function addInstructorSubmit(Request $request)
   {
     $user = User::find($request->instructor_id);
+
+    // Only classroom owner can add instructor
+    if(Auth::user()->id != $this->classroom->owner)
+    {
+      return redirect()->route('settings_index', $request->id)->with('status', 'Unable to remove. Only classroom owner may remove an instructor!');
+    }
+
     $user->classrooms()->attach($request->id);
 
     return redirect()->route('settings_index', $request->id)->with('status', 'Successfully added ' . $user->name . ' ' . '(' . $user->email . ') to this classroom');
@@ -49,6 +57,13 @@ class SettingsController extends Controller
   public function removeInstructor(Request $request)
   {
     $user = User::find($request->instructor_id);
+
+    // Only classroom owner can remove instructor
+    if(Auth::user()->id != $this->classroom->owner)
+    {
+      return redirect()->route('settings_index', $request->id)->with('status', 'Unable to remove. Only classroom owner may remove an instructor!');
+    }
+
     $user->classrooms()->detach($request->id);
 
     return redirect()->route('settings_index', $request->id)->with('status', 'Successfully removed ' . $user->name . ' ' . '(' . $user->email . ') from this classroom');
