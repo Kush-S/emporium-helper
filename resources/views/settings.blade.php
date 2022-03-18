@@ -73,12 +73,12 @@
 
   <div class="row pb-4">
     <div class="col-md-5">
-      <strong>Email template for student notifications</strong><br>
-      This email template is used when sending a student a notification from this app. This template is specific to this classroom.
+      <strong>Add or remove instructors</strong><br>
+      Instructors who have access to this classroom. Only whitelisted instructors will be available to access classrooms, regardless if they are added to a classroom.
     </div>
     <div class="col-md-7">
       <div class="card">
-        <h3 class="card-header">Email Template</h3>
+        <h3 class="card-header">Instructors</h3>
         <div class="card-body">
           <table class="table table-hover">
             <thead>
