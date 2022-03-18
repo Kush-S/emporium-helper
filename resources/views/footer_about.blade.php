@@ -8,15 +8,17 @@
           <div class="card-header">About</div>
           <div class="card-body">
             <div class="row justify-content-center pb-2">
-              Test
+              This app is, and does...
             </div>
 
-            <div class="mt-4">
-              <h2>Welcome to the {{ config('app.name', 'Laravel') }} app, {{ Auth::user()->name }}.</h2>
-              <br>
-              <br>
-              The purpose of this app is to help instructors see which of their students are at a risk of failing the class by analyzing instructor uploaded zyBooks and Canvas grade files.
+            <div class="row justify-content-center mt-4">
+              For...
             </div>
+
+            <div class="row justify-content-center mt-4">
+              Why...
+            </div>
+
             <div class="col-md-6 my-5 d-flex justify-content-center text-center m-auto">
               <img src="{{ asset('images/bgsu_logo.png') }}" style="width:70%;">
             </div>
