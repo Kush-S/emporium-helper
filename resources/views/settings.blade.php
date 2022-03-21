@@ -31,15 +31,14 @@
 </div>
 
 <div class="container bg-white border rounded mb-5">
-  <div class="row py-5">
+  <div class="row pt-3">
     <div class="col-md-5">
-      <strong>Edit risk calculation variables</strong><br>
-      These variables are used to calculate the risk for this classroom. The calculation is<br>
-      risk = -m * grade + b
+      <div><h3>Edit risk calculation variables</h3></div>
+      <div>These variables are used to calculate the risk for this classroom. The calculation is<br>
+      risk = -m * grade + b</div>
     </div>
     <div class="col-md-7">
       <div class="card">
-        <h3 class="card-header">Variables</h3>
         <div class="card-body">
           <form>
             <div class="form-group pb-2">
@@ -62,14 +61,13 @@
     </div>
   </div>
 
-  <div class="row py-5">
+  <div class="row pt-3">
     <div class="col-md-5">
-      <strong>Email template for student notifications</strong><br>
-      This email template is used when sending a student a notification from this app. This template is specific to this classroom.
+      <div><h3>Email template for student notifications</h3></div>
+      <div>This email template is used when sending a student a notification from this app. This template is specific to this classroom.</div>
     </div>
       <div class="col-md-7">
         <div class="card">
-          <h3 class="card-header">Email Template</h3>
           <div class="card-body">
             <form>
               <div class="form-group pb-2">
@@ -88,14 +86,13 @@
       </div>
   </div>
 
-  <div class="row pb-4">
+  <div class="row py-2">
     <div class="col-md-5">
-      <strong>Add or remove instructors</strong><br>
-      Instructors who have access to this classroom. Only whitelisted instructors will be available to access classrooms, regardless if they are added to a classroom.
+      <div><h3>Add or remove instructors</h3></div>
+      <div>Instructors who have access to this classroom. Only whitelisted instructors will be available to access classrooms, regardless if they are added to a classroom.</div>
     </div>
     <div class="col-md-7">
       <div class="card">
-        <h3 class="card-header">Instructors</h3>
         <div class="card-body">
           <table class="table table-hover">
             <thead>
