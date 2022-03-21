@@ -21,11 +21,11 @@
   <div class="row">
     <div class="pt-1 h4 pb-2 text-white bg-info rounded-pill">
       {{ $classroom->number }}
-      (@if ($classroom->term == 'Spring')Sp'
+      @if ($classroom->term == 'Spring')Sp'
       @elseif ($classroom->term == 'Fall')Fa'
       @elseif ($classroom->term == 'Summer')Su'
       @endif
-      {{ substr($classroom->year, -2) }})
+      {{ substr($classroom->year, -2) }}
     </div>
   </div>
 </div>

@@ -8,7 +8,7 @@
  <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
 </head>
 
-<div class="container mb-3">
+<div class="container mb-1">
   <div class="row">
     <ul class="nav justify-content-center">
       <li class="nav-item">
