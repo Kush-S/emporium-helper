@@ -20,7 +20,7 @@
             </div>
 
             <div class="col-md-6 my-5 d-flex justify-content-center text-center m-auto">
-              <img src="{{ asset('images/bgsu_logo.png') }}" style="width:70%;">
+              <img src="{{ asset('images/bgsu_logo2.jpg') }}" style="width:70%;">
             </div>
           </div>
         </div>
