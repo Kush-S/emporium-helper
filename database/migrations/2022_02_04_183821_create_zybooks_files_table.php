@@ -16,9 +16,10 @@ class CreateZybooksFilesTable extends Migration
         Schema::create('zybooks_files', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->timestamps();
             $table->unsignedBigInteger('classroom_id');
             $table->foreign('classroom_id')->references('id')->on('classrooms');
+            $table->json('analysis');
+            $table->timestamps();
         });
     }
 
