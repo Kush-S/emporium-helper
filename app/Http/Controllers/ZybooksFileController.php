@@ -26,25 +26,33 @@ class ZybooksFileController extends Controller
 
   public function uploadFile(Request $request)
   {
+    // Verify file doesn't already exists for this classroom
+    // However, both canvas and zybooks can have the same file (ex. week1.csv can exist in canvas and zybooks in same classroom)
+    if(ZybooksFile::where('name',$request->input_file->getClientOriginalName())
+      ->where('type', $request->type)
+      ->where('classroom_id', $request->id)
+      ->exists())
+      {
+        error_log('found already');
+        return redirect()->route('files_index', $request->id)->with('error', '\'' . $request->input_file->getClientOriginalName() . '\'' . ' file already exists in this classroom!');
+      }
+
     // Save file name in database
     $file = new ZybooksFile;
-    $file->name = $request->file_name . '.csv';
-    $file->parsed = [
-      "student_info" => false,
-      "participation_total" => false,
-      "challenge_total" => false,
-      "lab_total" => false,
-      "total" => false];
+    $file->name = $request->input_file->getClientOriginalName();
+    $file->type = $request->type;
+    $file->classroom_id = $request->id;
     $file->save();
 
     // Save file to project directory
     $path = $request
-            ->file('zybooks_file_input')
-            ->storeAs(Config::get('emporium_variables.storage_directory'), $request->file_name . '.csv');
+            ->file('input_file')
+            ->storeAs($file->classroom_id . '/' . $file->type, $file->name);
 
     // call parseFile() on uploaded file
-    $this->parseStudentInfo($file);
-    return redirect()->route('files_index');
+    // $this->parseStudentInfo($file);
+
+    return redirect()->route('files_index', $request->id)->with('status', 'File ' . '\'' . $file->name . '\'' . ' uploaded successfully!');
   }
 
   public function downloadFile($file)

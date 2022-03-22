@@ -1,5 +1,22 @@
 <x-headers/>
 
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      @if (session('status'))
+        <div class="alert alert-success">
+          {{ session('status') }}
+        </div>
+      @endif
+      @if (session('error'))
+        <div class="alert alert-danger">
+          {{ session('error') }}
+        </div>
+      @endif
+    </div>
+  </div>
+</div>
+
 <div class="container d-flex justify-content-center ">
   <div class="row">
     <div class="pt-1 h4 pb-2 text-white bg-info rounded-pill">
@@ -22,19 +39,15 @@
     <form method="POST" enctype="multipart/form-data" action="{{ route('files_upload', Request()->id) }}">
       @csrf
       <div class="form-group pb-3">
-        <input type="file" class="form-control-file" name="zybooks_file_input" required>
+        <input type="file" class="form-control-file" name="input_file" required>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-        <label class="form-check-label" for="exampleRadios1">
-          zyBooks file
-        </label>
+        <input class="form-check-input" type="radio" name="type" value="zybooks" checked>
+        <label class="form-check-label" for="exampleRadios1">zyBooks file</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-        <label class="form-check-label" for="exampleRadios2">
-          Canvas grade file
-        </label>
+        <input class="form-check-input" type="radio" name="type" value="canvas">
+        <label class="form-check-label" for="exampleRadios2">Canvas grade file</label>
       </div>
       <button type="submit" class="btn btn-primary mt-2">Upload</button>
     </form>
