@@ -9,7 +9,8 @@ class ZybooksFile extends Model
 {
     use HasFactory;
 
-    protected $casts = [
-        'parsed' => 'array'
-    ];
+    public function classroom()
+    {
+      return $this->belongsTo(Classroom::class);
+    }
 }
