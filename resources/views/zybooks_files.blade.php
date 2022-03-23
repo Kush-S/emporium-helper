@@ -30,12 +30,12 @@
   </div>
 </div>
 
-<div class="container bg-light border rounded mb-5">
-  <div class="p-5 d-flex justify-content-center">
+<div class="container bg-light border rounded mb-5" style="min-height: 500px;">
+  <div class="row p-2 text-center">
       <h4>Upload zyBooks and Canvas grade files here</h4>
   </div>
 
-  <div class="pt-2 d-flex justify-content-center">
+  <div class="py-2 d-flex justify-content-center ps-5 ms-5">
     <form method="POST" enctype="multipart/form-data" action="{{ route('files_upload', Request()->id) }}">
       @csrf
       <div class="form-group pb-3">
@@ -65,8 +65,46 @@
         </div>
     @endforeach
   </div> --}}
-  <div class="pt-5 d-flex justify-content-center">
+
+  {{-- <div class="pt-5 d-flex justify-content-center">
     zyBooks files | Canvas files
+  </div> --}}
+
+  <div class="row py-2 border-top">
+    <div class="col-5 mx-auto">
+      <div class="text-center h4">zyBooks files</div>
+      @foreach($zybooks_files as $file)
+        <div class="input-group input-group-lg cards">
+          <form method="POST" action="{{ route('files_delete', Request()->id) }}">
+            @csrf
+            <input type="hidden" name="file_name" value="{{$file->name}}">
+            <input type="hidden" name="type" value="zybooks">
+            <button type="submit" class="input-group-text p-2" style="height: 100%;"><i class="bi bi-trash"></i></button>
+          </form>
+          <a href="#" class="bg-white form-control p-2 px-5 text-center text-decoration-none text-black">
+            <div class="">{{ $file->name }}</div>
+          </a>
+        </div>
+      @endforeach
+    </div>
+
+    <div class="col-5 mx-auto">
+      <div class="text-center h4">Canvas grade files</div>
+      @foreach($canvas_files as $file)
+        <div class="input-group input-group-lg cards">
+          <form method="POST" action="{{ route('files_delete', Request()->id) }}">
+            @csrf
+            <input type="hidden" name="file_name" value="{{$file->name}}">
+            <input type="hidden" name="type" value="canvas">
+            <button type="submit" class="input-group-text p-2" style="height: 100%;"><i class="bi bi-trash"></i></button>
+          </form>
+          <a href="#" class="bg-white form-control p-2 px-5 text-center text-decoration-none text-black">
+            <div class="">{{ $file->name }}</div>
+          </a>
+        </div>
+      @endforeach
+    </div>
   </div>
+
 </div>
 <x-footer/>

@@ -19,9 +19,15 @@ class ZybooksFileController extends Controller
 
   public function index()
   {
-    $files = ZybooksFile::select('name')->get();
+    $zybooks_files = ZybooksFile
+    ::where('classroom_id', $this->classroom->id)
+    ->where('type', 'zybooks')->get()->sortBy('name');;
 
-    return view('zybooks_files')->with('files', $files)->with('classroom', $this->classroom);
+    $canvas_files = ZybooksFile
+    ::where('classroom_id', $this->classroom->id)
+    ->where('type', 'canvas')->get()->sortBy('name');;
+
+    return view('zybooks_files')->with('zybooks_files', $zybooks_files)->with('canvas_files', $canvas_files)->with('classroom', $this->classroom);
   }
 
   public function uploadFile(Request $request)
@@ -60,16 +66,19 @@ class ZybooksFileController extends Controller
     return Storage::download('zybooks_files/' . $file);
   }
 
-  public function deleteFile($file)
+  public function deleteFile(Request $request)
   {
     // delete from storage
-    Storage::delete('zybooks_files/' . $file);
+    Storage::delete($this->classroom->id . '/' . $request->type . '/' . $request->file_name);
 
     // delete from database
-    $database_file = ZybooksFile::where('name', $file)->first();
+    $database_file = ZybooksFile
+      ::where('name', $request->file_name)
+      ->where('type', $request->type)
+      ->where('classroom_id', $this->classroom->id)->first();
     $database_file->delete();
 
-    return redirect()->route('files_index');
+    return redirect()->route('files_index', $this->classroom->id)->with('status', '\'' . $request->file_name . '\'' . ' deleted successfully!');
   }
 
   private function parseStudentInfo($file)
