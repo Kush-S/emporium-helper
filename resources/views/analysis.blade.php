@@ -30,12 +30,9 @@
   </div>
 </div>
 
-<div class="container bg-light border rounded mb-5">
+<div class="container bg-light py-5 border mb-2" style="min-height: 550px;">
   <div class="row">
-    <div class="col-md-6 text-center p-4 border">
-      <canvas id="chart2"></canvas>
-    </div>
-    <div class="col-6 d-flex justify-content-center">
+    <div class="col d-flex justify-content-center border-end">
       <div class="col py-5">
         <div class="text-center">
           <form method="POST" class="row p-2" action="{{route('analysis_file', Request()->id)}}">
@@ -76,17 +73,17 @@
         <a href="{{ route('analysis_students_list', Request()->id) }}" class="btn btn-primary d-flex justify-content-center p-3 col-4 mx-auto">Student list</a>
       </div>
     </div>
+    <div class="col text-center p-4">
+      <canvas id="chart2"></canvas>
+    </div>
+    <div class="col p-4 my-auto">
+      <canvas id="chart1"></canvas>
+    </div>
 
   </div>
   {{-- <div class="row" style="height: 300px"> --}}
   <div class="row">
-    <div class="col-md-6 text-center p-4 border">
-      <canvas id="chart1"></canvas>
-    </div>
-    <div class="col-6 d-flex justify-content-center py-2">
 
-
-    </div>
   </div>
 </div>
 <x-footer/>
@@ -130,7 +127,7 @@ const myChart1 = new Chart(ctx, {
         },
         title: {
           display: true,
-          text: 'Average scores'
+          text: 'Average scores (%)'
         }
       },
       scales: {
