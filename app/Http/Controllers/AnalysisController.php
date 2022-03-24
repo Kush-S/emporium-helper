@@ -26,6 +26,8 @@ class AnalysisController extends Controller
     ->where('type', 'canvas')->get()->sortBy('name');
 
     $selected_file = $request->selected_file;
+    error_log($request);
+    error_log($request->file_type);
 
     $randNums = array();
     array_push($randNums, rand(1,15), rand(1,15), rand(1,15), rand(1,15), rand(1,15), rand(1,15));

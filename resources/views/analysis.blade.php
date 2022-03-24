@@ -38,19 +38,21 @@
     <div class="col-6 d-flex justify-content-center">
       <div class="col py-5">
         <div class="text-center">
-          <form method="POST" class="row p-2" action="#">
+          <form method="POST" class="row p-2" action="{{route('analysis_file', Request()->id)}}">
             @csrf
             <select class="form-select col" name="selected_file">
               @if ($selected_file == "")
                 <option disabled selected>No file selected</option>
               @endif
+
               <option disabled>--zyBooks files--</option>
               @foreach ($zybooks_files as $file)
-                <option value="{{ $file->name }}" id="{{ $file->type }}">{{ $file->name }}</option>
+                <option value="{{ $file->name, $file->type }}" file_type="{{ $file->type, $file->type  }}">{{ $file->name }}</option>
               @endforeach
+
               <option disabled>--Canvas files--</option>
               @foreach ($canvas_files as $file)
-                <option value="{{ $file->name }}" id="{{ $file->type }}">{{ $file->name }}</option>
+                <option value="{{ $file->name, $file->type  }}" file_type="{{ $file->type, $file->type  }}">{{ $file->name }}</option>
               @endforeach
             </select>
             <button type="submit" class="btn btn-primary col-2">Select</button>
@@ -58,10 +60,10 @@
         </div>
         <div class="row pt-2">
           <div class="text-center">
-            File selected: {{$selected_file}}
+            File selected: <span class="">{{$selected_file}}</span>
           </div>
           <div class="text-center">
-            Files used: {{ count($randNums) }}
+            {{-- File type: {{ $selected_file->type }} --}}
           </div>
           <div class="text-center">
             Total students: {{ rand(10,30) }}
@@ -98,10 +100,10 @@ const ctx = document.getElementById('chart1').getContext('2d');
 const myChart1 = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ['Chapter 1.csv', 'Chapter 2.csv', 'Chapter 3.csv', 'Chapter 4.csv', 'Chapter 5.csv', 'Chapter 6.csv'],
+        labels: ['Participation', 'Challenge', 'Lab'],
         datasets: [{
-            label: 'Students at risk',
-            data: nums,
+            label: [],
+            data: [50, 95, 90],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -122,16 +124,25 @@ const myChart1 = new Chart(ctx, {
         }]
     },
     options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            },
-            x: {
-              ticks: {
-                minRotation: 0
-              }
-            }
+      plugins: {
+        legend: {
+          display: false,
+        },
+        title: {
+          display: true,
+          text: 'Average scores'
         }
+      },
+      scales: {
+          y: {
+            beginAtZero: true
+          },
+          x: {
+            ticks: {
+              minRotation: 0
+            }
+          }
+      }
     }
 });
 </script>
