@@ -48,7 +48,7 @@ Route::middleware(['auth', 'whitelisted'])->prefix('classroom')->group(function 
       Route::group(['prefix' => '/files'], function(){
         Route::get('/', [ZybooksFileController::class, 'index'])->name('files_index');
         Route::post('/upload', [ZybooksFileController::class, 'uploadFile'])->name('files_upload');
-        Route::get('/download/{file}', [ZybooksFileController::class, 'downloadFile'])->name('files_download');
+        Route::get('/download/{type}/{file}', [ZybooksFileController::class, 'downloadFile'])->name('files_download');
         Route::post('/delete', [ZybooksFileController::class, 'deleteFile'])->name('files_delete');
       });
       Route::group(['prefix' => '/settings'], function(){

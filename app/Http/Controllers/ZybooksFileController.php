@@ -61,9 +61,9 @@ class ZybooksFileController extends Controller
     return redirect()->route('files_index', $request->id)->with('status', 'File ' . '\'' . $file->name . '\'' . ' uploaded successfully!');
   }
 
-  public function downloadFile($file)
+  public function downloadFile($id,$type,$file)
   {
-    return Storage::download('zybooks_files/' . $file);
+    return Storage::download($id . '/' . $type . '/' . $file);
   }
 
   public function deleteFile(Request $request)

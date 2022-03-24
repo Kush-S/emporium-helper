@@ -81,7 +81,7 @@
             <input type="hidden" name="type" value="zybooks">
             <button type="submit" class="input-group-text p-2" style="height: 100%;"><i class="bi bi-trash"></i></button>
           </form>
-          <a href="#" class="bg-white form-control p-2 px-5 text-center text-decoration-none text-black">
+          <a href="{{ route('files_download', [Request()->id, $file->type, $file->name]) }}" class="bg-white form-control p-2 px-5 text-center text-decoration-none text-black">
             <div class="">{{ $file->name }}</div>
           </a>
         </div>
@@ -98,7 +98,7 @@
             <input type="hidden" name="type" value="canvas">
             <button type="submit" class="input-group-text p-2" style="height: 100%;"><i class="bi bi-trash"></i></button>
           </form>
-          <a href="#" class="bg-white form-control p-2 px-5 text-center text-decoration-none text-black">
+          <a href="{{ route('files_download', [Request()->id, $file->type, $file->name]) }}" class="bg-white form-control p-2 px-5 text-center text-decoration-none text-black">
             <div class="">{{ $file->name }}</div>
           </a>
         </div>
