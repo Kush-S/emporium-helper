@@ -8,6 +8,11 @@
           {{ session('status') }}
         </div>
       @endif
+      @if (session('error'))
+        <div class="alert alert-danger">
+          {{ session('error') }}
+        </div>
+      @endif
     </div>
   </div>
 </div>
@@ -28,32 +33,56 @@
 <div class="container bg-light border rounded mb-5">
   <div class="row">
     <div class="col-md-6 text-center p-4 border">
-      <canvas id="chart1"></canvas>
-    </div>
-    <div class="col-md-6 text-center p-4 border">
       <canvas id="chart2"></canvas>
     </div>
+    <div class="col-6 d-flex justify-content-center">
+      <div class="col py-5">
+        <div class="text-center">
+          <form method="POST" class="row p-2" action="#">
+            @csrf
+            <select class="form-select col" name="selected_file">
+              @if ($selected_file == "")
+                <option disabled selected>No file selected</option>
+              @endif
+              <option disabled>--zyBooks files--</option>
+              @foreach ($zybooks_files as $file)
+                <option value="{{ $file->name }}" id="{{ $file->type }}">{{ $file->name }}</option>
+              @endforeach
+              <option disabled>--Canvas files--</option>
+              @foreach ($canvas_files as $file)
+                <option value="{{ $file->name }}" id="{{ $file->type }}">{{ $file->name }}</option>
+              @endforeach
+            </select>
+            <button type="submit" class="btn btn-primary col-2">Select</button>
+          </form>
+        </div>
+        <div class="row pt-2">
+          <div class="text-center">
+            File selected: {{$selected_file}}
+          </div>
+          <div class="text-center">
+            Files used: {{ count($randNums) }}
+          </div>
+          <div class="text-center">
+            Total students: {{ rand(10,30) }}
+          </div>
+          <div class="text-center">
+            <?php $randRisk =  rand(0,1) ?>
+            Students at risk: <span class="{{ $randRisk > 0 ? 'text-danger' : '' }}">{{$randRisk}}</span>
+          </div>
+        </div>
+        <a href="{{ route('analysis_students_list', Request()->id) }}" class="btn btn-primary d-flex justify-content-center p-3 col-4 mx-auto">Student list</a>
+      </div>
+    </div>
+
   </div>
   {{-- <div class="row" style="height: 300px"> --}}
   <div class="row">
-    <div class="col-6 d-flex justify-content-center">
-        <div class="col-4 py-5">
-          <a href="{{ route('analysis_students_list', Request()->id) }}" class="btn btn-primary d-flex justify-content-center p-3">Student list</a>
-        </div>
-      </div>
+    <div class="col-md-6 text-center p-4 border">
+      <canvas id="chart1"></canvas>
+    </div>
     <div class="col-6 d-flex justify-content-center py-2">
-      <div class="row pt-2">
-        <div class="text-center">
-          Files used: {{ count($randNums) }}
-        </div>
-        <div class="text-center">
-          Total students: {{ rand(10,30) }}
-        </div>
-        <div class="text-center">
-          <?php $randRisk =  rand(0,1) ?>
-          Students at risk: <span class="{{ $randRisk > 0 ? 'text-danger' : '' }}">{{$randRisk}}</span>
-        </div>
-      </div>
+
 
     </div>
   </div>

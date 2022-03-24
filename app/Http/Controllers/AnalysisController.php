@@ -17,10 +17,25 @@ class AnalysisController extends Controller
 
   public function index(Request $request)
   {
+    $zybooks_files = ZybooksFile
+    ::where('classroom_id', $this->classroom->id)
+    ->where('type', 'zybooks')->get()->sortBy('name');
+
+    $canvas_files = ZybooksFile
+    ::where('classroom_id', $this->classroom->id)
+    ->where('type', 'canvas')->get()->sortBy('name');
+
+    $selected_file = $request->selected_file;
+
     $randNums = array();
     array_push($randNums, rand(1,15), rand(1,15), rand(1,15), rand(1,15), rand(1,15), rand(1,15));
 
-    return view('analysis')->with('randNums', $randNums)->with('classroom', $this->classroom);
+    return view('analysis')
+      ->with('randNums', $randNums)
+      ->with('classroom', $this->classroom)
+      ->with('zybooks_files', $zybooks_files)
+      ->with('canvas_files', $canvas_files)
+      ->with('selected_file', $selected_file);
   }
 
   public function student_list()
