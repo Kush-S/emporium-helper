@@ -47,7 +47,7 @@ class AnalysisController extends Controller
 
   public function student_info()
   {
-    return view('student_info');
+    return view('analysis_student_info');
   }
 
   public function recalculateRisk()

@@ -55,17 +55,17 @@
             <button type="submit" class="btn btn-primary col-2">Select</button>
           </form>
         </div>
-        <div class="row pt-2">
-          <div class="text-center">
+        <div class="row py-3">
+          <div class="text-center h5">
             File selected: <span class="">{{$selected_file}}</span>
           </div>
-          <div class="text-center">
+          <div class="text-center h5">
             {{-- File type: {{ $selected_file->type }} --}}
           </div>
-          <div class="text-center">
+          <div class="text-center h5">
             Total students: {{ rand(10,30) }}
           </div>
-          <div class="text-center">
+          <div class="text-center h5">
             <?php $randRisk =  rand(0,1) ?>
             Students at risk: <span class="{{ $randRisk > 0 ? 'text-danger' : '' }}">{{$randRisk}}</span>
           </div>
