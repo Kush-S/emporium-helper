@@ -23,9 +23,18 @@
         <span class="text-decoration-underline">Notified:</span>
         <span class="">No</span>
       </div>
-      <div class="pt-2 text-center">
-        <a href="{{ route('analysis_students_list', Request()->id) }}" class="btn btn-primary">Back to student list</a>
+      <div class="row mx-auto">
+        <div class="col">
+          <div class="pt-2 text-center">
+            <a href="{{ route('analysis_students_list', Request()->id) }}" class="btn btn-primary">Notify</a>
+          </div>
+          <div class="pt-2 text-center">
+            <a href="{{ route('analysis_students_list', Request()->id) }}" class="btn btn-danger">Back to student list</a>
+          </div>
+        </div>
+
       </div>
+
     </div>
 
     <div class="col-7 text-center p-4 border">
