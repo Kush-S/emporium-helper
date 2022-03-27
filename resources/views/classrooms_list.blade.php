@@ -43,7 +43,7 @@
                               @endif
                             </div>
                             <div>
-                              Files: {{ rand(0,10) }}
+                              Files: {{ $classroom->files }}
                             </div>
                             <div>
                               <?php $randRisk =  rand(0,5) ?>

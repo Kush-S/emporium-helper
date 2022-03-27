@@ -50,6 +50,10 @@ class ZybooksFileController extends Controller
     $file->classroom_id = $request->id;
     $file->save();
 
+    // Update files count
+    $this->classroom->files += 1;
+    $this->classroom->save();
+
     // Save file to project directory
     $path = $request
             ->file('input_file')
@@ -77,6 +81,10 @@ class ZybooksFileController extends Controller
       ->where('type', $request->type)
       ->where('classroom_id', $this->classroom->id)->first();
     $database_file->delete();
+
+    // Update files count
+    $this->classroom->files -= 1;
+    $this->classroom->save();
 
     return redirect()->route('files_index', $this->classroom->id)->with('status', '\'' . $request->file_name . '\'' . ' deleted successfully!');
   }

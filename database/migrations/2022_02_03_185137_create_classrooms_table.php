@@ -19,6 +19,7 @@ class CreateClassroomsTable extends Migration
             $table->string('number');
             $table->string('section')->nullable();
             $table->integer('year');
+            $table->integer('files')->default(0);
             $table->unsignedBigInteger('owner');
             $table->timestamps();
         });
