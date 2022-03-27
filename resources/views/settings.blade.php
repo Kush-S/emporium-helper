@@ -1,4 +1,28 @@
-<x-headers/>
+@extends('layouts.app')
+
+@section('content')
+
+<div class="container mb-4">
+  <div class="row">
+    <div class="col">
+      <div class="float-start h4">
+        {{ $classroom->number }}
+        (@if ($classroom->term == 'Spring')Sp'
+        @elseif ($classroom->term == 'Fall')Fa'
+        @elseif ($classroom->term == 'Summer')Su'
+        @endif
+        {{ substr($classroom->year, -2) }})
+      </div>
+      <div class="float-end">
+        <x-headers/>
+      </div>
+    </div>
+    {{-- <div class="col">
+
+    </div> --}}
+  </div>
+</div>
+
 
 <div class="container">
   <div class="row justify-content-center">
@@ -17,7 +41,7 @@
   </div>
 </div>
 
-<div class="container d-flex justify-content-center">
+{{-- <div class="container d-flex justify-content-center">
   <div class="row">
     <div class="pt-1 h4 pb-2 text-white bg-info rounded-pill">
       {{ $classroom->number }}
@@ -28,7 +52,7 @@
       {{ substr($classroom->year, -2) }}
     </div>
   </div>
-</div>
+</div> --}}
 
 <div class="container bg-white border rounded mb-5">
   <div class="row pt-3">
@@ -126,3 +150,5 @@
 
 </div>
 <x-footer/>
+
+@endsection
