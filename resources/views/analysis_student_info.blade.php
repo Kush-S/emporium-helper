@@ -89,7 +89,7 @@ const gradesBarChart = new Chart(ctx, {
       scales: {
           y: {
               beginAtZero: true,
-              mine: 0,
+              min: 0,
               max: 100
           },
           x: {
