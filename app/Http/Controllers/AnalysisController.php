@@ -17,17 +17,21 @@ class AnalysisController extends Controller
 
   public function index(Request $request)
   {
+    // zyBooks files for this classroom
     $zybooks_files = ZybooksFile
     ::where('classroom_id', $this->classroom->id)
     ->where('type', 'zybooks')->get()->sortBy('name');
 
+    // Canvas files for this classroom
     $canvas_files = ZybooksFile
     ::where('classroom_id', $this->classroom->id)
     ->where('type', 'canvas')->get()->sortBy('name');
 
-    $selected_file = $request->selected_file;
-    error_log($request);
-    error_log($request->file_type);
+
+    $selected_zybooks_file = $request->selected_zybooks_file;
+    $selected_canvas_file = $request->selected_canvas_file;
+    error_log($request->selected_zybooks_file);
+    error_log($request->selected_canvas_file);
 
     $randNums = array();
     array_push($randNums, rand(1,15), rand(1,15), rand(1,15), rand(1,15), rand(1,15), rand(1,15));
@@ -37,7 +41,8 @@ class AnalysisController extends Controller
       ->with('classroom', $this->classroom)
       ->with('zybooks_files', $zybooks_files)
       ->with('canvas_files', $canvas_files)
-      ->with('selected_file', $selected_file);
+      ->with('selected_zybooks_file', $selected_zybooks_file)
+      ->with('selected_canvas_file', $selected_canvas_file);
   }
 
   public function student_list()

@@ -5,7 +5,7 @@
 <div class="container mb-4">
   <div class="row">
     <div class="col">
-      <div class="float-start h4 bg-dark p-2 rounded text-white">
+      <div class="float-start h4 text-black p-2 rounded">
         {{ $classroom->number }}
         (@if ($classroom->term == 'Spring')Sp'
         @elseif ($classroom->term == 'Fall')Fa'
@@ -54,34 +54,45 @@
   </div>
 </div> --}}
 
-<div class="container bg-light py-5 border mb-2" style="min-height: 550px;">
+<div class="container bg-light py-5 border mb-5" style="min-height: 550px;">
   <div class="row">
     <div class="col d-flex justify-content-center border-end">
       <div class="col py-5">
         <div class="text-center">
           <form method="POST" class="row p-2" action="{{route('analysis_file', Request()->id)}}">
             @csrf
-            <select class="form-select col" name="selected_file">
-              @if ($selected_file == "")
-                <option disabled selected>No file selected</option>
+            <select class="form-select mb-2" name="selected_zybooks_file">
+              @if ($selected_zybooks_file == "" || $selected_zybooks_file == "None")
+                <option selected>None</option>
+              @else
+                <option>None</option>
               @endif
-
-              <option disabled>--zyBooks files--</option>
               @foreach ($zybooks_files as $file)
-                <option value="{{ $file->name, $file->type }}" file_type="{{ $file->type, $file->type  }}">{{ $file->name }}</option>
-              @endforeach
-
-              <option disabled>--Canvas files--</option>
-              @foreach ($canvas_files as $file)
-                <option value="{{ $file->name, $file->type  }}" file_type="{{ $file->type, $file->type  }}">{{ $file->name }}</option>
+                <option value="{{ $file->name }}" @if($selected_zybooks_file == $file->name) selected @endif>{{ $file->name }}</option>
               @endforeach
             </select>
-            <button type="submit" class="btn btn-primary col-2">Select</button>
+
+            <select class="form-select mb-2" name="selected_canvas_file">
+              @if ($selected_canvas_file == "" || $selected_canvas_file == "None")
+                <option selected>None</option>
+              @else
+                <option>None</option>
+              @endif
+              @foreach ($canvas_files as $file)
+                <option value="{{ $file->name }}"  @if($selected_canvas_file == $file->name) selected @endif>{{ $file->name }}</option>
+              @endforeach
+            </select>
+            <div class="">
+              <button type="submit" class="btn btn-primary float-end">Load files</button>
+            </div>
           </form>
         </div>
         <div class="row py-3">
           <div class="text-center h5">
-            File selected: <span class="">{{$selected_file}}</span>
+            zyBooks file selected: <span class="">{{$selected_zybooks_file}}</span>
+          </div>
+          <div class="text-center h5">
+            Canvas file selected: <span class="">{{$selected_canvas_file}}</span>
           </div>
           <div class="text-center h5">
             {{-- File type: {{ $selected_file->type }} --}}
