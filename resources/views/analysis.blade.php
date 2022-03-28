@@ -41,7 +41,7 @@
 
 <div class="container bg-light py-5 border mb-5" style="min-height: 550px;">
   <div class="row">
-    <div class="col d-flex justify-content-center border-end">
+    <div class="col-4 d-flex justify-content-center border-end">
       <div class="col py-5">
         <div class="text-center">
           <form method="POST" class="row p-2" action="{{route('analysis_file', Request()->id)}}">
@@ -89,30 +89,32 @@
             {{-- File type: {{ $selected_file->type }} --}}
           </div>
           <div class="text-center h5">
-            Total students: {{ rand(10,30) }}
+            Total students: {{ $zybooksClassStats['Student count'] }}
           </div>
           <div class="text-center h5">
-            <?php $randRisk =  rand(0,1) ?>
-            Students at risk: <span class="{{ $randRisk > 0 ? 'text-danger' : '' }}">{{$randRisk}}</span>
+            Students at risk: <span class="{{ $zybooksClassStats['Student count'] > 0 ? 'text-danger' : '' }}">{{ $zybooksClassStats['At risk'] }}</span>
           </div>
         </div>
         <a href="{{ route('analysis_students_list', Request()->id) }}" class="btn btn-primary d-flex justify-content-center p-3 col-4 mx-auto">Student list</a>
       </div>
     </div>
-    <div class="col text-center my-auto" style='max-width: 350px;'>
-      @if ($selected_zybooks_file == "None")
-        <div class="">No data found, chart not shown.</div>
-      @else
-        <canvas id="chart2"></canvas>
-      @endif
-    </div>
-    <div class="col p-4 my-auto">
-      <canvas id="chart1"></canvas>
-    </div>
 
-  </div>
-  {{-- <div class="row" style="height: 300px"> --}}
-  <div class="row">
+    {{-- If zyBooks file is selected --}}
+    @if ($selected_zybooks_file != "None")
+      <div class="col-4 text-center my-auto">
+          <canvas id="chart2"></canvas>
+      </div>
+      <div class="col-4 text-center p-4 my-auto">
+        <canvas id="chart1"></canvas>
+      </div>
+    @else
+      <div class="col-4 text-center my-auto">
+          <div class="">Select file to view this chart.</div>
+      </div>
+      <div class="col-4 text-center my-auto">
+          <div class="">Select file to view this chart.</div>
+      </div>
+    @endif
 
   </div>
 </div>
@@ -163,7 +165,8 @@ const myChart1 = new Chart(ctx, {
       },
       scales: {
           y: {
-            beginAtZero: true
+            beginAtZero: true,
+            max: 100
           },
           x: {
             ticks: {
