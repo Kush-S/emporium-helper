@@ -27,17 +27,52 @@ class AnalysisController extends Controller
     ::where('classroom_id', $this->classroom->id)
     ->where('type', 'canvas')->get()->sortBy('name');
 
-
-    $selected_zybooks_file = $request->selected_zybooks_file;
-    $selected_canvas_file = $request->selected_canvas_file;
-    error_log($request->selected_zybooks_file);
-    error_log($request->selected_canvas_file);
-
-    $randNums = array();
-    array_push($randNums, rand(1,15), rand(1,15), rand(1,15), rand(1,15), rand(1,15), rand(1,15));
+    $selected_zybooks_file = "None";
+    $selected_canvas_file = "None";
+    $zybooksStudentData = [];
+    $zybooksClassStats = [0,0];
 
     return view('analysis')
-      ->with('randNums', $randNums)
+      ->with('classroom', $this->classroom)
+      ->with('zybooks_files', $zybooks_files)
+      ->with('canvas_files', $canvas_files)
+      ->with('selected_zybooks_file', $selected_zybooks_file)
+      ->with('selected_canvas_file', $selected_canvas_file)
+      ->with('zybooksStudentData', $zybooksStudentData)
+      ->with('zybooksClassStats', $zybooksClassStats);
+  }
+
+  public function index_file_selected(Request $request)
+  {
+    // zyBooks files for this classroom
+    $zybooks_files = ZybooksFile
+    ::where('classroom_id', $this->classroom->id)
+    ->where('type', 'zybooks')->get()->sortBy('name');
+
+    // Canvas files for this classroom
+    $canvas_files = ZybooksFile
+    ::where('classroom_id', $this->classroom->id)
+    ->where('type', 'canvas')->get()->sortBy('name');
+
+    // Get names of file(s) selected
+    $selected_zybooks_file = $request->selected_zybooks_file;
+    $selected_canvas_file = $request->selected_canvas_file;
+
+    if($selected_zybooks_file != "None"){
+      $zybooksStudentData = $this->getZybooksData('parseZybooks.py', $selected_zybooks_file);
+      error_log($zybooksStudentData);
+      $zybooksStudentData = json_decode($zybooksStudentData, true);
+
+      $zybooksClassStats = $this->getZybooksData('parseZybooksStats.py', $selected_zybooks_file);
+      error_log($zybooksClassStats);
+      $zybooksClassStats = json_decode($zybooksClassStats, true);
+
+
+    }
+
+    return view('analysis')
+      ->with('zybooksStudentData', $zybooksStudentData)
+      ->with('zybooksClassStats', $zybooksClassStats)
       ->with('classroom', $this->classroom)
       ->with('zybooks_files', $zybooks_files)
       ->with('canvas_files', $canvas_files)
@@ -53,6 +88,15 @@ class AnalysisController extends Controller
   public function student_info()
   {
     return view('analysis_student_info');
+  }
+
+  public function getZybooksData($script, $file)
+  {
+    $shell_command = 'python python_scripts/' . $script .' ../storage/app/' . $this->classroom->id . '/zybooks/' . $file;
+    error_log($shell_command);
+    $output_json = shell_exec($shell_command);
+
+    return $output_json;
   }
 
   public function recalculateRisk()

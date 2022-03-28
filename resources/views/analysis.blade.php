@@ -2,6 +2,7 @@
 
 @section('content')
 
+{{-- Class title and year --}}
 <div class="container mb-4">
   <div class="row">
     <div class="col">
@@ -17,13 +18,10 @@
         <x-headers/>
       </div>
     </div>
-    {{-- <div class="col">
-
-    </div> --}}
   </div>
 </div>
 
-
+{{-- Status and error messages --}}
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-8">
@@ -41,19 +39,6 @@
   </div>
 </div>
 
-{{-- <div class="container d-flex justify-content-center ">
-  <div class="row">
-    <div class="pt-1 h4 pb-2 text-white bg-info rounded-pill">
-      {{ $classroom->number }}
-      (@if ($classroom->term == 'Spring')Sp'
-      @elseif ($classroom->term == 'Fall')Fa'
-      @elseif ($classroom->term == 'Summer')Su'
-      @endif
-      {{ substr($classroom->year, -2) }})
-    </div>
-  </div>
-</div> --}}
-
 <div class="container bg-light py-5 border mb-5" style="min-height: 550px;">
   <div class="row">
     <div class="col d-flex justify-content-center border-end">
@@ -61,27 +46,33 @@
         <div class="text-center">
           <form method="POST" class="row p-2" action="{{route('analysis_file', Request()->id)}}">
             @csrf
-            <select class="form-select mb-2" name="selected_zybooks_file">
-              @if ($selected_zybooks_file == "" || $selected_zybooks_file == "None")
-                <option selected>None</option>
-              @else
-                <option>None</option>
-              @endif
-              @foreach ($zybooks_files as $file)
-                <option value="{{ $file->name }}" @if($selected_zybooks_file == $file->name) selected @endif>{{ $file->name }}</option>
-              @endforeach
-            </select>
+            <label class="col-4 col-form-label">zyBooks Files:</label>
+            <div class="col-8">
+              <select class="form-select mb-2" name="selected_zybooks_file">
+                @if ($selected_zybooks_file == "None")
+                  <option selected>None</option>
+                @else
+                  <option>None</option>
+                @endif
+                @foreach ($zybooks_files as $file)
+                  <option value="{{ $file->name }}" @if($selected_zybooks_file == $file->name) selected @endif>{{ $file->name }}</option>
+                @endforeach
+              </select>
+            </div>
 
-            <select class="form-select mb-2" name="selected_canvas_file">
-              @if ($selected_canvas_file == "" || $selected_canvas_file == "None")
-                <option selected>None</option>
-              @else
-                <option>None</option>
-              @endif
-              @foreach ($canvas_files as $file)
-                <option value="{{ $file->name }}"  @if($selected_canvas_file == $file->name) selected @endif>{{ $file->name }}</option>
-              @endforeach
-            </select>
+            <label class="col-4 col-form-label">Canvas Files:</label>
+            <div class="col-8">
+              <select class="form-select mb-2" name="selected_canvas_file">
+                @if ($selected_canvas_file == "None")
+                  <option selected>None</option>
+                @else
+                  <option>None</option>
+                @endif
+                @foreach ($canvas_files as $file)
+                  <option value="{{ $file->name }}"  @if($selected_canvas_file == $file->name) selected @endif>{{ $file->name }}</option>
+                @endforeach
+              </select>
+            </div>
             <div class="">
               <button type="submit" class="btn btn-primary float-end">Load files</button>
             </div>
@@ -108,7 +99,7 @@
         <a href="{{ route('analysis_students_list', Request()->id) }}" class="btn btn-primary d-flex justify-content-center p-3 col-4 mx-auto">Student list</a>
       </div>
     </div>
-    <div class="col text-center p-4">
+    <div class="col text-center" style='max-width: 350px;'>
       <canvas id="chart2"></canvas>
     </div>
     <div class="col p-4 my-auto">
@@ -124,9 +115,10 @@
 <x-footer/>
 
 <script>
-var nums = {!!json_encode($randNums)!!}
-console.log(nums)
+  var zybooksClassStats = {!! json_encode($zybooksClassStats) !!}
+  console.log(zybooksClassStats)
 </script>
+
 <script>
 const ctx = document.getElementById('chart1').getContext('2d');
 const myChart1 = new Chart(ctx, {
@@ -135,7 +127,7 @@ const myChart1 = new Chart(ctx, {
         labels: ['Participation', 'Challenge', 'Lab'],
         datasets: [{
             label: [],
-            data: [50, 95, 90],
+            data: [zybooksClassStats['Participation average'], zybooksClassStats['Challenge average'], zybooksClassStats['Lab average']],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -189,7 +181,7 @@ const myChart1 = new Chart(ctx, {
     ],
     datasets: [{
       label: 'My First Dataaaaaaaaaaaaaaaaaaaaaaaaset',
-      data: [5,20],
+      data: [zybooksClassStats['At risk'], zybooksClassStats['Student count']],
       backgroundColor: [
         'rgb(255, 99, 132)',
         'rgb(54, 162, 235)',

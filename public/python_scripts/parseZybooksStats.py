@@ -1,5 +1,6 @@
 import pandas as pd
 import sys
+import json
 
 df = pd.read_csv(str(sys.argv[1]))
 
@@ -18,6 +19,12 @@ df2["Lab total"] = df.loc[:, df.columns.str.match("(Lab total)(?!.time)(.+)")]
 # Calculate risk of each student based on participation, challenge, and lab grade
 df2['Risk'] = 100 - (df2['Participation total'] / 20 + df2['Challenge total'] / 20 + df2['Lab total'] / 1.11)
 
-json = df2.to_json(orient='index')
+stats = {'Student count': len(df2),
+         'At risk': float((df2['Risk'] > 30).sum()),
+         'Participation average': float(df2['Participation total'].mean()),
+         'Challenge average': float(df2['Challenge total'].mean()),
+         'Lab average': float(df2['Lab total'].mean())
+        }
+stats_json = json.dumps(stats)
 
-print(json)
+print(stats_json)
