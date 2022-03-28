@@ -44,6 +44,14 @@ class AnalysisController extends Controller
 
   public function index_file_selected(Request $request)
   {
+    // Get names of file(s) selected
+    $selected_zybooks_file = $request->selected_zybooks_file;
+    $selected_canvas_file = $request->selected_canvas_file;
+    if($selected_zybooks_file == "None" && $selected_zybooks_file == "None")
+    {
+      return redirect()->route('analysis_index', $request->id);
+    }
+
     // zyBooks files for this classroom
     $zybooks_files = ZybooksFile
     ::where('classroom_id', $this->classroom->id)
@@ -54,10 +62,6 @@ class AnalysisController extends Controller
     ::where('classroom_id', $this->classroom->id)
     ->where('type', 'canvas')->get()->sortBy('name');
 
-    // Get names of file(s) selected
-    $selected_zybooks_file = $request->selected_zybooks_file;
-    $selected_canvas_file = $request->selected_canvas_file;
-
     if($selected_zybooks_file != "None"){
       $zybooksStudentData = $this->getZybooksData('parseZybooks.py', $selected_zybooks_file);
       error_log($zybooksStudentData);
@@ -66,8 +70,6 @@ class AnalysisController extends Controller
       $zybooksClassStats = $this->getZybooksData('parseZybooksStats.py', $selected_zybooks_file);
       error_log($zybooksClassStats);
       $zybooksClassStats = json_decode($zybooksClassStats, true);
-
-
     }
 
     return view('analysis')

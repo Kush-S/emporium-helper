@@ -99,8 +99,12 @@
         <a href="{{ route('analysis_students_list', Request()->id) }}" class="btn btn-primary d-flex justify-content-center p-3 col-4 mx-auto">Student list</a>
       </div>
     </div>
-    <div class="col text-center" style='max-width: 350px;'>
-      <canvas id="chart2"></canvas>
+    <div class="col text-center my-auto" style='max-width: 350px;'>
+      @if ($selected_zybooks_file == "None")
+        <div class="">No data found, chart not shown.</div>
+      @else
+        <canvas id="chart2"></canvas>
+      @endif
     </div>
     <div class="col p-4 my-auto">
       <canvas id="chart1"></canvas>
