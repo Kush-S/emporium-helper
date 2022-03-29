@@ -30,7 +30,7 @@ class AnalysisController extends Controller
     $selected_zybooks_file = "None";
     $selected_canvas_file = "None";
     $zybooksStudentData = [];
-    $zybooksClassStats = [0,0];
+    $zybooksClassStats = array('Student count' => '', 'At risk' => '');
 
     return view('analysis')
       ->with('classroom', $this->classroom)
