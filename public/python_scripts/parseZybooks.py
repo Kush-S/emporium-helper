@@ -16,7 +16,7 @@ df2["Challenge total"] = df.loc[:, df.columns.str.match("(Challenge total)(?!.ti
 df2["Lab total"] = df.loc[:, df.columns.str.match("(Lab total)(?!.time)(.+)")]
 
 # Calculate risk of each student based on participation, challenge, and lab grade
-df2['Risk'] = 100 - (df2['Participation total'] / 20 + df2['Challenge total'] / 20 + df2['Lab total'] / 1.11)
+df2['Risk'] = (100 - (df2['Participation total'] / 20 + df2['Challenge total'] / 20 + df2['Lab total'] / 1.11)).round(2)
 
 # Sort by risk
 df2 = df2.sort_values(by=['Risk'], ascending=False)
