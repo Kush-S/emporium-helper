@@ -49,13 +49,9 @@
             <label class="col-4 col-form-label">zyBooks Files:</label>
             <div class="col-8">
               <select class="form-select mb-2" name="selected_zybooks_file">
-                @if ($selected_zybooks_file == "None")
-                  <option selected>None</option>
-                @else
-                  <option>None</option>
-                @endif
+                <option selected>None</option>
                 @foreach ($zybooks_files as $file)
-                  <option value="{{ $file->name }}" @if($selected_zybooks_file == $file->name) selected @endif>{{ $file->name }}</option>
+                  <option value="{{ $file->name }}">{{ $file->name }}</option>
                 @endforeach
               </select>
             </div>
@@ -63,13 +59,9 @@
             <label class="col-4 col-form-label">Canvas Files:</label>
             <div class="col-8">
               <select class="form-select mb-2" name="selected_canvas_file">
-                @if ($selected_canvas_file == "None")
-                  <option selected>None</option>
-                @else
-                  <option>None</option>
-                @endif
+                <option selected>None</option>
                 @foreach ($canvas_files as $file)
-                  <option value="{{ $file->name }}"  @if($selected_canvas_file == $file->name) selected @endif>{{ $file->name }}</option>
+                  <option value="{{ $file->name }}">{{ $file->name }}</option>
                 @endforeach
               </select>
             </div>
@@ -80,141 +72,30 @@
         </div>
         <div class="row py-3">
           <div class="text-center h5">
-            zyBooks file selected: <span class="">{{$selected_zybooks_file}}</span>
+            zyBooks file selected: <span class="">-</span>
           </div>
           <div class="text-center h5">
-            Canvas file selected: <span class="">{{$selected_canvas_file}}</span>
+            Canvas file selected: <span class="">-</span>
           </div>
           <div class="text-center h5">
-            {{-- File type: {{ $selected_file->type }} --}}
+            Total students: -
           </div>
           <div class="text-center h5">
-            Total students: {{ $zybooksClassStats['Student count'] }}
-          </div>
-          <div class="text-center h5">
-            Students at risk: <span class="{{ $zybooksClassStats['Student count'] > 0 ? 'text-danger' : '' }}">{{ $zybooksClassStats['At risk'] }}</span>
+            Students at risk: <span class="">-</span>
           </div>
         </div>
-        <a href="{{ route('analysis_students_list', Request()->id) }}" class="btn btn-primary d-flex justify-content-center p-3 col-4 mx-auto">Student list</a>
+        <button disabled class="btn btn-primary d-flex justify-content-center p-3 col-4 mx-auto">Student list</button>
       </div>
     </div>
 
-    {{-- If zyBooks file is selected --}}
-    @if ($selected_zybooks_file != "None")
-      <div class="col-4 text-center my-auto">
-          <canvas id="chart2"></canvas>
-      </div>
-      <div class="col-4 text-center p-4 my-auto">
-        <canvas id="chart1"></canvas>
-      </div>
-    @else
-      <div class="col-4 text-center my-auto">
-          <div class="">Select file to view this chart.</div>
-      </div>
-      <div class="col-4 text-center my-auto">
-          <div class="">Select file to view this chart.</div>
-      </div>
-    @endif
+    <div class="col-4 text-center my-auto">
+        <div class="">Select a file to view graphs.</div>
+    </div>
+    <div class="col-4 text-center my-auto">
+        <div class="">Select a file to view graphs.</div>
+    </div>
 
   </div>
 </div>
 <x-footer/>
-
-<script>
-  var zybooksClassStats = {!! json_encode($zybooksClassStats) !!}
-  console.log(zybooksClassStats)
-</script>
-
-<script>
-const ctx = document.getElementById('chart1').getContext('2d');
-const myChart1 = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Participation', 'Challenge', 'Lab'],
-        datasets: [{
-            label: [],
-            data: [zybooksClassStats['Participation average'], zybooksClassStats['Challenge average'], zybooksClassStats['Lab average']],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-      plugins: {
-        legend: {
-          display: false,
-        },
-        title: {
-          display: true,
-          text: 'Average scores (%)'
-        }
-      },
-      scales: {
-          y: {
-            beginAtZero: true,
-            max: 100
-          },
-          x: {
-            ticks: {
-              minRotation: 0
-            }
-          }
-      }
-    }
-});
-</script>
-
-<script>
-  const labels = ['Chapter 1.csv', 'Chapter 2.csv', 'Chapter 3.csv', 'Chapter 4.csv', 'Chapter 5.csv', 'Chapter 6.csv'];
-
-  const data = {
-    labels: [
-      'At risk',
-      'Not at risk',
-    ],
-    datasets: [{
-      label: 'My First Dataaaaaaaaaaaaaaaaaaaaaaaaset',
-      data: [zybooksClassStats['At risk'], zybooksClassStats['Student count']],
-      backgroundColor: [
-        'rgb(255, 99, 132)',
-        'rgb(54, 162, 235)',
-        'rgb(255, 205, 86)'
-      ],
-      hoverOffset: 4
-    }]
-  };
-
-  const config = {
-    type: 'doughnut',
-    data: data,
-    options: {
-      maintainAspectRatio: false,
-      title:{
-        display: true,
-        text: 'test'
-      }
-    }
-  };
-</script>
-<script>
-  const myChart2 = new Chart(
-    document.getElementById('chart2'),
-    config
-  );
-</script>
-
 @endsection

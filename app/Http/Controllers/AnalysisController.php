@@ -27,19 +27,10 @@ class AnalysisController extends Controller
     ::where('classroom_id', $this->classroom->id)
     ->where('type', 'canvas')->get()->sortBy('name');
 
-    $selected_zybooks_file = "None";
-    $selected_canvas_file = "None";
-    $zybooksStudentData = [];
-    $zybooksClassStats = array('Student count' => '', 'At risk' => '');
-
     return view('analysis')
       ->with('classroom', $this->classroom)
       ->with('zybooks_files', $zybooks_files)
-      ->with('canvas_files', $canvas_files)
-      ->with('selected_zybooks_file', $selected_zybooks_file)
-      ->with('selected_canvas_file', $selected_canvas_file)
-      ->with('zybooksStudentData', $zybooksStudentData)
-      ->with('zybooksClassStats', $zybooksClassStats);
+      ->with('canvas_files', $canvas_files);
   }
 
   public function index_file_selected(Request $request)
@@ -47,6 +38,8 @@ class AnalysisController extends Controller
     // Get names of file(s) selected
     $selected_zybooks_file = $request->selected_zybooks_file;
     $selected_canvas_file = $request->selected_canvas_file;
+
+    // If no files selected
     if($selected_zybooks_file == "None" && $selected_zybooks_file == "None")
     {
       return redirect()->route('analysis_index', $request->id);
@@ -72,7 +65,7 @@ class AnalysisController extends Controller
       $zybooksClassStats = json_decode($zybooksClassStats, true);
     }
 
-    return view('analysis')
+    return view('analysis.zybooks')
       ->with('zybooksStudentData', $zybooksStudentData)
       ->with('zybooksClassStats', $zybooksClassStats)
       ->with('classroom', $this->classroom)
@@ -84,12 +77,12 @@ class AnalysisController extends Controller
 
   public function student_list()
   {
-    return view('analysis_student_list');
+    return view('analysis.analysis_student_list');
   }
 
   public function student_info()
   {
-    return view('analysis_student_info');
+    return view('analysis.analysis_student_info');
   }
 
   public function getZybooksData($script, $file)
