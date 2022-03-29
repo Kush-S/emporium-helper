@@ -17,6 +17,7 @@
           <thead>
             <tr>
               <th scope="col">Name</th>
+              <th scope="col">Primary Email</th>
               <th scope="col">Current risk</th>
               <th scope="col">Participation</th>
               <th scope="col">Challenge</th>
@@ -25,22 +26,12 @@
           </thead>
 
           <tbody>
-            {{-- @for($i = 1; $i <= 10; $i++)
-              <tr>
-                <div class="">
-                  <td scope="row"><a href="{{ route('analysis_student_info', Request()->id) }}">John Doe {{$i}}</a></td>
-                  <td>{{10 - $i}}%</td>
-                  <td>{{rand(80,100)}}%</td>
-                  <td>{{rand(80,100)}}%</td>
-                  <td>{{rand(80,100)}}%</td>
-                </div>
-              </tr>
-            @endfor --}}
             @foreach ($zybooksStudentData as $student)
               <tr>
                 <div>
                   <td>{{ $student['First name']}} {{ $student['Last name']}}</td>
-                  <td>{{ $student['Risk']}}</td>
+                  <td>{{ $student['Primary email']}}</td>
+                  <td class="{{ $student['Risk'] > 30 ? 'text-danger h5' : '' }}">{{ $student['Risk']}}</td>
                   <td>{{ $student['Participation total']}}</td>
                   <td>{{ $student['Challenge total']}}</td>
                   <td>{{ $student['Lab total']}}</td>
