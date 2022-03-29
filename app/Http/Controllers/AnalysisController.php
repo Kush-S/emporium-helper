@@ -57,32 +57,33 @@ class AnalysisController extends Controller
 
     if($selected_zybooks_file != "None"){
       $zybooksStudentData = $this->getZybooksData('parseZybooks.py', $selected_zybooks_file);
-      error_log($zybooksStudentData);
       $zybooksStudentData = json_decode($zybooksStudentData, true);
 
       $zybooksClassStats = $this->getZybooksData('parseZybooksStats.py', $selected_zybooks_file);
-      error_log($zybooksClassStats);
       $zybooksClassStats = json_decode($zybooksClassStats, true);
     }
 
     return view('analysis.zybooks')
-      ->with('zybooksStudentData', $zybooksStudentData)
-      ->with('zybooksClassStats', $zybooksClassStats)
-      ->with('classroom', $this->classroom)
-      ->with('zybooks_files', $zybooks_files)
-      ->with('canvas_files', $canvas_files)
-      ->with('selected_zybooks_file', $selected_zybooks_file)
-      ->with('selected_canvas_file', $selected_canvas_file);
+          ->with('zybooksStudentData', $zybooksStudentData)
+          ->with('zybooksClassStats', $zybooksClassStats)
+          ->with('classroom', $this->classroom)
+          ->with('zybooks_files', $zybooks_files)
+          ->with('canvas_files', $canvas_files)
+          ->with('selected_zybooks_file', $selected_zybooks_file)
+          ->with('selected_canvas_file', $selected_canvas_file);
   }
 
-  public function student_list()
+  public function student_list(Request $request)
   {
-    return view('analysis.analysis_student_list');
+    $zybooksStudentData = json_decode($request->zybooksStudentData, true);
+
+    return view('analysis.zybooks_student_list')
+          ->with('zybooksStudentData', $zybooksStudentData);
   }
 
   public function student_info()
   {
-    return view('analysis.analysis_student_info');
+    return view('analysis.zybooks_student_info');
   }
 
   public function getZybooksData($script, $file)
@@ -92,52 +93,5 @@ class AnalysisController extends Controller
     $output_json = shell_exec($shell_command);
 
     return $output_json;
-  }
-
-  public function recalculateRisk()
-  {
-    $this->setParsedToFalse();
-    // foreach(ZybooksFile::all() as $file){
-    //   if ($file->parsed["student_info"] == false){
-    //     $file_name = escapeshellarg($file->name);
-    //
-    //     // student info - build and run python command
-    //     $shell_command = "python python_scripts/parseStudents.py ../storage/app/zybooks_files/" . $file_name;
-    //     error_log($shell_command);
-    //     $output_json = shell_exec($shell_command);
-    //
-    //     // decode output from python to JSON
-    //     $output_json = json_decode($output_json, true);
-    //
-    //     // store each student, if already not stored
-    //     foreach ($output_json as $info)
-    //     {
-    //       error_log("student");
-    //       $student = Student::firstOrCreate([
-    //         'first_name' => $info['First name'],
-    //         'last_name' => $info['Last name'],
-    //         'email' => $info['Primary email']
-    //       ]);
-    //     }
-    //
-    //     $temp = $file->parsed;
-    //     $temp["student_info"] = true;
-    //     $file->parsed = $temp;
-    //     $file->save();
-    //   }
-    // }
-
-    return redirect()->route('statistics_index');
-  }
-
-  private function setParsedToFalse()
-  {
-    foreach(ZybooksFile::all() as $file){
-      $temp = $file->parsed;
-      $temp["participation_total"] = $temp["challenge_total"] = $temp["lab_total"] = $temp["total"] = false;
-
-      $file->parsed = $temp;
-      $file->save();
-    }
   }
 }

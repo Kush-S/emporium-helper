@@ -43,7 +43,7 @@ Route::middleware(['auth', 'whitelisted'])->prefix('classroom')->group(function 
       Route::group(['prefix' => '/analysis'], function(){
         Route::get('/', [AnalysisController::class, 'index'])->name('analysis_index');
         Route::post('/file', [AnalysisController::class, 'index_file_selected'])->name('analysis_file');
-        Route::get('/students', [AnalysisController::class, 'student_list'])->name('analysis_students_list');
+        Route::post('/students', [AnalysisController::class, 'student_list'])->name('analysis_students_list');
         Route::get('/name', [AnalysisController::class, 'student_info'])->name('analysis_student_info');
       });
       Route::group(['prefix' => '/files'], function(){
