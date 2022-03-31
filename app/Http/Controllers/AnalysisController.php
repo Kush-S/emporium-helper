@@ -103,6 +103,7 @@ class AnalysisController extends Controller
     );
 
     return view('analysis.zybooks_student_info')
+          ->with('selected_zybooks_file', $request->selected_zybooks_file)
           ->with('classroom', $this->classroom)
           ->with('studentData', $studentData);
   }

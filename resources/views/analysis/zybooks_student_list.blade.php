@@ -18,7 +18,7 @@
     </div>
     <div class="text-center">
       <div class="h4 text-black p-2 rounded">
-        File: {{ $selected_zybooks_file }}
+        zyBooks file selected: {{ $selected_zybooks_file }}
       </div>
     </div>
     <div class="row">
@@ -45,6 +45,7 @@
                       <input type="hidden" name="result{{$i}}" value="{{$data}}">
                       @php $i++; @endphp
                     @endforeach --}}
+                    <input type="hidden" name="selected_zybooks_file" value="{{$selected_zybooks_file}}">
                     <input type="hidden" name="last_name" value="{{$student['Last name']}}">
                     <input type="hidden" name="first_name" value="{{$student['First name']}}">
                     <input type="hidden" name="primary_email" value="{{$student['Primary email']}}">

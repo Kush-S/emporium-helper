@@ -21,6 +21,10 @@
         <span class="">{{$studentData['first_name']}} {{$studentData['last_name']}}</span>
       </div>
       <div class="text-center h4">
+        <span class="text-decoration-underline">zyBooks file selected:</span>
+        <span class="">{{$selected_zybooks_file}}</span>
+      </div>
+      <div class="text-center h4">
         <span class="text-decoration-underline">Current risk:</span>
         <span class="{{ $studentData['risk'] > 30 ? 'text-danger' : 'text-success' }}">{{$studentData['risk']}}%</span>
       </div>
