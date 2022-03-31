@@ -16,6 +16,11 @@
         {{ substr($classroom->year, -2) }})
       </div>
     </div>
+    <div class="text-center">
+      <div class="h4 text-black p-2 rounded">
+        File: {{ $selected_zybooks_file }}
+      </div>
+    </div>
     <div class="row">
       <div class="col-8 mx-auto">
         <table class="table table-striped table-hover">
