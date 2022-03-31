@@ -12,27 +12,26 @@
       </div>
       <div class="text-center h4">
         <span class="text-decoration-underline">Name:</span>
-        <span class="">{{$first_name}} {{$last_name}}</span>
+        <span class="">{{$studentData['first_name']}} {{$studentData['last_name']}}</span>
       </div>
       <div class="text-center h4">
         <span class="text-decoration-underline">Current risk:</span>
-        <span class="{{ $risk > 0 ? 'text-danger' : '' }}">{{$risk}}%</span>
+        <span class="{{ $studentData['risk'] > 30 ? 'text-danger' : 'text-success' }}">{{$studentData['risk']}}%</span>
       </div>
       <div class="text-center h4">
         <span class="text-decoration-underline">Notified:</span>
         <span class="">No</span>
       </div>
+
       <div class="row mx-auto">
         <div class="col">
           <div class="pt-2 text-center">
             <a href="{{ route('analysis_students_list', Request()->id) }}" class="btn btn-primary">Notify</a>
           </div>
         </div>
-
       </div>
-
     </div>
-
+    
     <div class="col-7 text-center p-4 border">
       <canvas id="gradesBarChart"></canvas>
     </div>
@@ -41,18 +40,16 @@
 <x-footer/>
 
 <script>
-console.log({{$risk}})
-
 const ctx = document.getElementById('gradesBarChart').getContext('2d');
 const gradesBarChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ['Participation' + ' ' + '({{$participation_total}})',
-                'Challenge' + ' ' + '({{$challenge_total}})',
-                'Lab' + ' ' + '({{$lab_total}})'],
+        labels: ['Participation' + ' ' + '({{$studentData['participation_total']}})',
+                'Challenge' + ' ' + '({{$studentData['challenge_total']}})',
+                'Lab' + ' ' + '({{$studentData['lab_total']}})'],
         datasets: [{
             label: 'Students at risk',
-            data: [{{$participation_total}}, {{$challenge_total}}, {{$lab_total}}],
+            data: [{{$studentData['participation_total']}}, {{$studentData['challenge_total']}}, {{$studentData['lab_total']}}],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
