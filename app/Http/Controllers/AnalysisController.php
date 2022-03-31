@@ -33,7 +33,7 @@ class AnalysisController extends Controller
       ->with('canvas_files', $canvas_files);
   }
 
-  public function index_file_selected(Request $request)
+  public function file_selected(Request $request)
   {
     // Get names of file(s) selected
     $selected_zybooks_file = $request->selected_zybooks_file;
@@ -55,34 +55,40 @@ class AnalysisController extends Controller
     ::where('classroom_id', $this->classroom->id)
     ->where('type', 'canvas')->get()->sortBy('name');
 
+    // If both files selected
+
+    // If only canvas file selected
+
+    // If only zyBooks file selected
     if($selected_zybooks_file != "None"){
       $zybooksStudentData = $this->getZybooksData('parseZybooks.py', $selected_zybooks_file);
       $zybooksStudentData = json_decode($zybooksStudentData, true);
 
       $zybooksClassStats = $this->getZybooksData('parseZybooksStats.py', $selected_zybooks_file);
       $zybooksClassStats = json_decode($zybooksClassStats, true);
-    }
 
-    return view('analysis.zybooks')
-          ->with('zybooksStudentData', $zybooksStudentData)
-          ->with('zybooksClassStats', $zybooksClassStats)
-          ->with('classroom', $this->classroom)
-          ->with('zybooks_files', $zybooks_files)
-          ->with('canvas_files', $canvas_files)
-          ->with('selected_zybooks_file', $selected_zybooks_file)
-          ->with('selected_canvas_file', $selected_canvas_file);
+      return view('analysis.zybooks')
+            ->with('zybooksStudentData', $zybooksStudentData)
+            ->with('zybooksClassStats', $zybooksClassStats)
+            ->with('classroom', $this->classroom)
+            ->with('zybooks_files', $zybooks_files)
+            ->with('canvas_files', $canvas_files)
+            ->with('selected_zybooks_file', $selected_zybooks_file)
+            ->with('selected_canvas_file', $selected_canvas_file);
+    }
   }
 
-  public function student_list(Request $request)
+  public function student_list_zybooks(Request $request)
   {
     $zybooksStudentData = json_decode($request->zybooksStudentData, true);
 
     return view('analysis.zybooks_student_list')
           ->with('classroom', $this->classroom)
+          ->with('selected_zybooks_file', $request->selected_zybooks_file)
           ->with('zybooksStudentData', $zybooksStudentData);
   }
 
-  public function student_info(Request $request)
+  public function student_info_zybooks(Request $request)
   {
     $studentData = array(
       'first_name' => $request->first_name,
@@ -96,7 +102,9 @@ class AnalysisController extends Controller
       'lab_total' => $request->lab_total,
     );
 
-    return view('analysis.zybooks_student_info')->with('studentData', $studentData);
+    return view('analysis.zybooks_student_info')
+          ->with('classroom', $this->classroom)
+          ->with('studentData', $studentData);
   }
 
   public function getZybooksData($script, $file)

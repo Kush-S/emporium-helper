@@ -84,8 +84,9 @@
             Students at risk: <span class="{{ $zybooksClassStats['Student count'] > 0 ? 'text-danger' : '' }}">{{ $zybooksClassStats['At risk'] }}</span>
           </div>
         </div>
-        <form method="POST" class="row p-2" action="{{ route('analysis_students_list', Request()->id) }}">
+        <form method="POST" class="row p-2" action="{{ route('analysis_zybooks_students_list', Request()->id) }}">
           @csrf
+          <input type="hidden" name="selected_file" value="{{ $selected_zybooks_file }}">
           <input type="hidden" id="custId" name="zybooksStudentData" value="{{ json_encode($zybooksStudentData, true) }}">
           <button type="submit" class="btn btn-primary d-flex justify-content-center p-3 col-4 mx-auto">Student list</button>
         </form>

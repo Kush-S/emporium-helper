@@ -34,7 +34,7 @@
               <tr>
                 <div>
                   @php $i = 0; @endphp
-                  <form method="POST" enctype="multipart/form-data" action="{{ route('analysis_student_info', Request()->id) }}">
+                  <form method="POST" enctype="multipart/form-data" action="{{ route('analysis_zybooks_student_info', Request()->id) }}">
                     @csrf
                     {{-- @foreach ($student as $data)
                       <input type="hidden" name="result{{$i}}" value="{{$data}}">

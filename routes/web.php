@@ -42,9 +42,9 @@ Route::middleware(['auth', 'whitelisted'])->prefix('classroom')->group(function 
     Route::middleware(['access'])->prefix('{id}')->group(function($id){
       Route::group(['prefix' => '/analysis'], function(){
         Route::get('/', [AnalysisController::class, 'index'])->name('analysis_index');
-        Route::post('/file', [AnalysisController::class, 'index_file_selected'])->name('analysis_file');
-        Route::post('/studentList', [AnalysisController::class, 'student_list'])->name('analysis_students_list');
-        Route::post('/studentInfo', [AnalysisController::class, 'student_info'])->name('analysis_student_info');
+        Route::post('/file', [AnalysisController::class, 'file_selected'])->name('analysis_file');
+        Route::post('/studentListZybooks', [AnalysisController::class, 'student_list_zybooks'])->name('analysis_zybooks_students_list');
+        Route::post('/studentInfoZyBooks', [AnalysisController::class, 'student_info_zybooks'])->name('analysis_zybooks_student_info');
       });
       Route::group(['prefix' => '/files'], function(){
         Route::get('/', [ZybooksFileController::class, 'index'])->name('files_index');

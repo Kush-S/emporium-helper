@@ -7,8 +7,14 @@
   <div class="row">
     <div class="col-5 my-auto">
       <div class="text-center h4">
-        <span class="text-decoration-underline">Class:</span>
-        <span class=""> CS 2010, Sp' 20</span>
+        <div class="h4 text-black p-2 rounded">
+          {{ $classroom->number }}
+          (@if ($classroom->term == 'Spring')Sp'
+          @elseif ($classroom->term == 'Fall')Fa'
+          @elseif ($classroom->term == 'Summer')Su'
+          @endif
+          {{ substr($classroom->year, -2) }})
+        </div>
       </div>
       <div class="text-center h4">
         <span class="text-decoration-underline">Name:</span>
@@ -26,12 +32,12 @@
       <div class="row mx-auto">
         <div class="col">
           <div class="pt-2 text-center">
-            <a href="{{ route('analysis_students_list', Request()->id) }}" class="btn btn-primary">Notify</a>
+            <a href="{{ route('analysis_zybooks_students_list', Request()->id) }}" class="btn btn-primary">Notify</a>
           </div>
         </div>
       </div>
     </div>
-    
+
     <div class="col-7 text-center p-4 border">
       <canvas id="gradesBarChart"></canvas>
     </div>
