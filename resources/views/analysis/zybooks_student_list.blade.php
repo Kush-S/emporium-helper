@@ -7,7 +7,14 @@
   </div>
   <div class="row">
     <div class="text-center">
-      <h4>Student Risk Statistics</h4>
+      <div class="h4 text-black p-2 rounded">
+        Student Risk Statistics - {{ $classroom->number }}
+        (@if ($classroom->term == 'Spring')Sp'
+        @elseif ($classroom->term == 'Fall')Fa'
+        @elseif ($classroom->term == 'Summer')Su'
+        @endif
+        {{ substr($classroom->year, -2) }})
+      </div>
     </div>
     <div class="row">
       <div class="col-8 mx-auto">

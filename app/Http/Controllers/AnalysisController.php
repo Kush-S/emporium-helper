@@ -78,6 +78,7 @@ class AnalysisController extends Controller
     $zybooksStudentData = json_decode($request->zybooksStudentData, true);
 
     return view('analysis.zybooks_student_list')
+          ->with('classroom', $this->classroom)
           ->with('zybooksStudentData', $zybooksStudentData);
   }
 
@@ -94,7 +95,7 @@ class AnalysisController extends Controller
       'challenge_total' => $request->challenge_total,
       'lab_total' => $request->lab_total,
     );
-    
+
     return view('analysis.zybooks_student_info')->with('studentData', $studentData);
   }
 
