@@ -81,9 +81,19 @@ class AnalysisController extends Controller
           ->with('zybooksStudentData', $zybooksStudentData);
   }
 
-  public function student_info()
+  public function student_info(Request $request)
   {
-    return view('analysis.zybooks_student_info');
+    error_log($request->first_name);
+    error_log($request->risk);
+    return view('analysis.zybooks_student_info')
+            ->with('first_name', $request->first_name)
+            ->with('last_name', $request->last_name)
+            ->with('risk', $request->risk)
+            ->with('primary_email', $request->primary_email)
+            ->with('school_email', $request->school_email)
+            ->with('participation_total', $request->participation_total)
+            ->with('challenge_total', $request->challenge_total)
+            ->with('lab_total', $request->lab_total);
   }
 
   public function getZybooksData($script, $file)

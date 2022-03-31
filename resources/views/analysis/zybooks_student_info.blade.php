@@ -12,12 +12,11 @@
       </div>
       <div class="text-center h4">
         <span class="text-decoration-underline">Name:</span>
-        <span class=""> Joe Doe 2</span>
+        <span class="">{{$first_name}} {{$last_name}}</span>
       </div>
       <div class="text-center h4">
-        <?php $randRisk =  rand(0,10) ?>
         <span class="text-decoration-underline">Current risk:</span>
-        <span class="{{ $randRisk > 0 ? 'text-danger' : '' }}">{{$randRisk}}%</span>
+        <span class="{{ $risk > 0 ? 'text-danger' : '' }}">{{$risk}}%</span>
       </div>
       <div class="text-center h4">
         <span class="text-decoration-underline">Notified:</span>
@@ -27,9 +26,6 @@
         <div class="col">
           <div class="pt-2 text-center">
             <a href="{{ route('analysis_students_list', Request()->id) }}" class="btn btn-primary">Notify</a>
-          </div>
-          <div class="pt-2 text-center">
-            <a href="{{ route('analysis_students_list', Request()->id) }}" class="btn btn-danger">Back to student list</a>
           </div>
         </div>
 
@@ -45,18 +41,18 @@
 <x-footer/>
 
 <script>
-var nums = [5,2,1,4,5,6]
-console.log(nums)
-</script>
-<script>
+console.log({{$risk}})
+
 const ctx = document.getElementById('gradesBarChart').getContext('2d');
 const gradesBarChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ['Participation', 'Challenge', 'Lab'],
+        labels: ['Participation' + ' ' + '({{$participation_total}})',
+                'Challenge' + ' ' + '({{$challenge_total}})',
+                'Lab' + ' ' + '({{$lab_total}})'],
         datasets: [{
             label: 'Students at risk',
-            data: [50,90,70],
+            data: [{{$participation_total}}, {{$challenge_total}}, {{$lab_total}}],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',

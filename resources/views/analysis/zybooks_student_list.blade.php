@@ -9,9 +9,8 @@
     <div class="text-center">
       <h4>Student Risk Statistics</h4>
     </div>
-
     <div class="row">
-      <div class="col-6 mx-auto">
+      <div class="col-8 mx-auto">
         <table class="table table-striped table-hover">
           <thead>
             <tr>
@@ -23,12 +22,27 @@
               <th scope="col">Lab</th>
             </tr>
           </thead>
-
           <tbody>
             @foreach ($zybooksStudentData as $student)
               <tr>
                 <div>
-                  <td>{{ $student['First name']}} {{ $student['Last name']}}</td>
+                  @php $i = 0; @endphp
+                  <form method="POST" enctype="multipart/form-data" action="{{ route('analysis_student_info', Request()->id) }}">
+                    @csrf
+                    {{-- @foreach ($student as $data)
+                      <input type="hidden" name="result{{$i}}" value="{{$data}}">
+                      @php $i++; @endphp
+                    @endforeach --}}
+                    <input type="hidden" name="last_name" value="{{$student['Last name']}}">
+                    <input type="hidden" name="first_name" value="{{$student['First name']}}">
+                    <input type="hidden" name="primary_email" value="{{$student['Primary email']}}">
+                    <input type="hidden" name="school_email" value="{{$student['School email']}}">
+                    <input type="hidden" name="risk" value="{{$student['Risk']}}">
+                    <input type="hidden" name="participation_total" value="{{$student['Participation total']}}">
+                    <input type="hidden" name="challenge_total" value="{{$student['Challenge total']}}">
+                    <input type="hidden" name="lab_total" value="{{$student['Lab total']}}">
+                    <td><button type="submit" class="btn btn-link" formtarget="_blank">{{ $student['First name']}} {{ $student['Last name']}}</button></td>
+                  </form>
                   <td>{{ $student['Primary email']}}</td>
                   <td class="{{ $student['Risk'] > 30 ? 'text-danger h5' : '' }}">{{ $student['Risk']}}%</td>
                   <td>{{ $student['Participation total']}}</td>
@@ -41,7 +55,6 @@
         </table>
       </div>
     </div>
-
   </div>
 </div>
 <x-footer/>
