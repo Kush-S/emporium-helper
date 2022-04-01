@@ -35,7 +35,7 @@
     </div>
     <div class="col m-auto">
       <div class="pt-2 text-center">
-        Send {{$studentData['first_name']}} an email using email body saved in classroom settings.
+        Send {{$studentData['first_name']}} an email using email body saved in classroom settings.<br>
         <a href="{{ route('analysis_zybooks_students_list', Request()->id) }}" class="btn btn-danger">Notify</a>
       </div>
     </div>
