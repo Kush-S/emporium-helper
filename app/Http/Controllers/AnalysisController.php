@@ -7,6 +7,7 @@ use App\Models\ZybooksFile;
 use App\Models\Student;
 use App\Models\Classroom;
 use App\Models\Risk;
+use Symfony\Component\Process\Process;
 
 class AnalysisController extends Controller
 {
@@ -110,10 +111,9 @@ class AnalysisController extends Controller
 
   public function getZybooksData($script, $file)
   {
-    $shell_command = 'python python_scripts/' . $script .' ../storage/app/' . $this->classroom->id . '/zybooks/' . $file;
-    error_log($shell_command);
-    $output_json = shell_exec($shell_command);
+    $process = new Process(['python3', 'python_scripts/'.$script , '../storage/app/'.$this->classroom->id.'/zybooks/'.$file]);
+    $process->run();
 
-    return $output_json;
+    return $process->getOutput();
   }
 }
