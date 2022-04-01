@@ -81,9 +81,11 @@ class AnalysisController extends Controller
 
   public function student_list_zybooks(Request $request)
   {
+    $zybooksClassStats = json_decode($request->zybooksClassStats, true);
     $zybooksStudentData = json_decode($request->zybooksStudentData, true);
 
     return view('analysis.zybooks_student_list')
+          ->with('zybooksClassStats', $zybooksClassStats)
           ->with('classroom', $this->classroom)
           ->with('selected_zybooks_file', $request->selected_zybooks_file)
           ->with('zybooksStudentData', $zybooksStudentData);
@@ -91,6 +93,7 @@ class AnalysisController extends Controller
 
   public function student_info_zybooks(Request $request)
   {
+    $zybooksClassStats = json_decode($request->zybooksClassStats, true);
     $studentData = array(
       'first_name' => $request->first_name,
       'first_name' => $request->first_name,
@@ -104,6 +107,7 @@ class AnalysisController extends Controller
     );
 
     return view('analysis.zybooks_student_info')
+          ->with('zybooksClassStats', $zybooksClassStats)
           ->with('selected_zybooks_file', $request->selected_zybooks_file)
           ->with('classroom', $this->classroom)
           ->with('studentData', $studentData);
@@ -111,9 +115,17 @@ class AnalysisController extends Controller
 
   public function getZybooksData($script, $file)
   {
+    // For ubuntu server
     $process = new Process(['python3', 'python_scripts/'.$script , '../storage/app/'.$this->classroom->id.'/zybooks/'.$file]);
     $process->run();
 
     return $process->getOutput();
+
+    // For windows
+    // $shell_command = 'python python_scripts/' . $script .' ../storage/app/' . $this->classroom->id . '/zybooks/' . $file;
+    // error_log($shell_command);
+    // $output_json = shell_exec($shell_command);
+    //
+    // return $output_json;
   }
 }

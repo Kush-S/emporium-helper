@@ -54,6 +54,7 @@
                     <input type="hidden" name="participation_total" value="{{$student['Participation total']}}">
                     <input type="hidden" name="challenge_total" value="{{$student['Challenge total']}}">
                     <input type="hidden" name="lab_total" value="{{$student['Lab total']}}">
+                    <input type="hidden" id="custId" name="zybooksClassStats" value="{{ json_encode($zybooksClassStats, true) }}">
                     <td><button type="submit" class="btn btn-link" formtarget="_blank">{{ $student['First name']}} {{ $student['Last name']}}</button></td>
                   </form>
                   <td>{{ $student['Primary email']}}</td>
@@ -71,4 +72,8 @@
   </div>
 </div>
 <x-footer/>
+<script>
+var zybooksClassStats = {!! json_encode($zybooksClassStats) !!}
+console.log(zybooksClassStats)
+</script>
 @endsection
