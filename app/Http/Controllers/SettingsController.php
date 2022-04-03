@@ -78,8 +78,6 @@ class SettingsController extends Controller
     $this->classroom->email_template = $request->email_template;
     $this->classroom->save();
 
-    error_log($request->email_template);
-
     return redirect()->route('settings_index', $request->id)
                       ->with('status', 'Successfully update email template.');
   }
