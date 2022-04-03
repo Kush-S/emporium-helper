@@ -8,6 +8,8 @@ use App\Models\Student;
 use App\Models\Classroom;
 use App\Models\Risk;
 use Symfony\Component\Process\Process;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\StudentNotification;
 
 class AnalysisController extends Controller
 {
