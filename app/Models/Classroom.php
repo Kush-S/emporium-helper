@@ -18,4 +18,9 @@ class Classroom extends Model
     {
       return $this->belongsToMany(User::class);
     }
+
+    protected $casts = [
+        'last_analysis' => 'array',
+        'students_notified' => 'array',
+    ];
 }

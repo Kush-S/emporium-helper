@@ -57,51 +57,20 @@
 <div class="container bg-white border rounded mb-5">
   <div class="row pt-3">
     <div class="col-md-5">
-      <div><h3>Edit risk calculation variables</h3></div>
-      <div>These variables are used to calculate the risk for this classroom. The calculation is<br>
-      risk = -m * grade + b</div>
-    </div>
-    <div class="col-md-7">
-      <div class="card">
-        <div class="card-body">
-          <form>
-            <div class="form-group pb-2">
-              <label>m</label>
-              <input type="text" class="form-control" value="-1.06285">
-            </div>
-            <div class="form-group pb-2">
-              <label>b</label>
-              <input type="text" class="form-control" value="124.03443">
-            </div>
-            <div class="float-end">
-              <a href="#">reset to default</a>
-              <button type="submit" class="btn btn-danger">Cancel</button>
-              <button type="submit" class="btn btn-primary px-3">Save</button>
-            </div>
-          </form>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="row pt-3">
-    <div class="col-md-5">
       <div><h3>Email template for student notifications</h3></div>
       <div>This email template is used when sending a student a notification from this app. This template is specific to this classroom.</div>
     </div>
       <div class="col-md-7">
         <div class="card">
           <div class="card-body">
-            <form>
+            <form method="POST" class="row p-2" action="{{route('settings_update_email', Request()->id)}}">
+              @csrf
               <div class="form-group pb-2">
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="6">Dear student,
-
-    You are at risk...more words...</textarea>
+                <textarea class="form-control" rows="6" name="email_template">{{$email_template}}</textarea>
               </div>
               <div class="float-end">
-                <a href="#">reset to default</a>
-                <button type="submit" class="btn btn-danger">Cancel</button>
+                <a href="{{ route('settings_reset_email', Request()->id) }}">reset to default</a>
+                <a href="{{ route('settings_index', Request()->id) }}" class="btn btn-danger">Cancel</a>
                 <button type="submit" class="btn btn-primary">Save</button>
               </div>
             </form>

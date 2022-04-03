@@ -33,6 +33,9 @@ class ClassroomController extends Controller
     $classroom->year = $request->class_year;
     $classroom->owner = $user->id;
     if ($classroom->section == NULL) {$classroom->section = ' ';}
+    $classroom->last_analysis = [];
+    $classroom->email_template = "Dear student\n\n\tThis email is to notify you that your performance in this class is at risk. Please work with your instructor or TA to improve your standing in this class.\n\nzyCat App";
+    $classroom->students_notified = [];
     $classroom->save();
 
     // save the many-to-many relationship

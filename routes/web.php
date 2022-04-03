@@ -57,6 +57,8 @@ Route::middleware(['auth', 'whitelisted'])->prefix('classroom')->group(function 
         Route::get('/add_instructor', [SettingsController::class, 'addInstructor'])->name('settings_add_instructor');
         Route::post('/add_instructor_submit', [SettingsController::class, 'addInstructorSubmit'])->name('settings_add_instructor_submit');
         Route::get('/remove_instructor/{instructor_id}', [SettingsController::class, 'removeInstructor'])->name('settings_remove_instructor');
+        Route::post('/updateEmailTemplate', [SettingsController::class, 'updateEmailTemplate'])->name('settings_update_email');
+        Route::get('/resetEmailTemplate', [SettingsController::class, 'resetEmailTemplate'])->name('settings_reset_email');
       });
     });
     // Route::get('/{id}', [ClassroomController::class, 'enterClassroom'])->name('classroom_enter');

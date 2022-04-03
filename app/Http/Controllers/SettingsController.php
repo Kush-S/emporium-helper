@@ -18,8 +18,12 @@ class SettingsController extends Controller
   {
     $owner = User::find($this->classroom->owner);
     $instructors = $this->classroom->users;
+    $email_template = $this->classroom->email_template;
 
-    return view('settings')->with('owner', $owner)->with('instructors', $instructors)->with('classroom', $this->classroom);
+    return view('settings')->with('owner', $owner)
+                          ->with('instructors', $instructors)
+                          ->with('email_template', $email_template)
+                          ->with('classroom', $this->classroom);
   }
 
   public function addInstructor()
@@ -67,5 +71,25 @@ class SettingsController extends Controller
     $user->classrooms()->detach($request->id);
 
     return redirect()->route('settings_index', $request->id)->with('status', 'Successfully removed ' . $user->name . ' ' . '(' . $user->email . ') from this classroom');
+  }
+
+  public function updateEmailTemplate(Request $request)
+  {
+    $this->classroom->email_template = $request->email_template;
+    $this->classroom->save();
+
+    error_log($request->email_template);
+
+    return redirect()->route('settings_index', $request->id)
+                      ->with('status', 'Successfully update email template.');
+  }
+
+  public function resetEmailTemplate(Request $request)
+  {
+    $this->classroom->email_template = "Dear student\n\n\tThis email is to notify you that your performance in this class is at risk. Please work with your instructor or TA to improve your standing in this class.\n\nzyCat App";
+    $this->classroom->save();
+
+    return redirect()->route('settings_index', $request->id)
+                    ->with('status', 'Successfully reset email template back to default.');
   }
 }
