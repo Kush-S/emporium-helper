@@ -21,6 +21,10 @@
         <span class="">{{$studentData['first_name']}} {{$studentData['last_name']}}</span>
       </div>
       <div class="text-center h4">
+        <span class="text-decoration-underline">Email:</span>
+        <span class="">{{$studentData['primary_email']}}</span>
+      </div>
+      <div class="text-center h4">
         <span class="text-decoration-underline">zyBooks file selected:</span>
         <span class="">{{$selected_zybooks_file}}</span>
       </div>
@@ -35,8 +39,13 @@
     </div>
     <div class="col m-auto">
       <div class="pt-2 text-center">
-        Send {{$studentData['first_name']}} an email using email body saved in classroom settings.<br>
-        <a href="{{ route('analysis_zybooks_students_list', Request()->id) }}" class="btn btn-danger">Notify</a>
+        <div class="my-1">
+          Send {{$studentData['first_name']}} an email notification
+        </div>
+        <div class="mb-1">
+          <a href="{{ route('analysis_zybooks_students_list', Request()->id) }}" class="btn btn-danger">Notify</a>
+        </div>
+        <label for="exampleInputEmail1" class="form-label">*email template can be set in settings</label>
       </div>
     </div>
 
@@ -115,7 +124,7 @@ const ctx2 = document.getElementById('classBarChart').getContext('2d');
 const classBarChart = new Chart(ctx2, {
     type: 'bar',
     data: {
-        labels: [zybooksClassStats['Participation average'], zybooksClassStats['Challenge average'], zybooksClassStats['Lab average']],
+        labels: ['Participation ' + zybooksClassStats['Participation average'], 'Challenge ' + zybooksClassStats['Challenge average'], 'Lab ' + zybooksClassStats['Lab average']],
         datasets: [{
             label: 'Students at risk',
             data: [zybooksClassStats['Participation average'], zybooksClassStats['Challenge average'], zybooksClassStats['Lab average']],

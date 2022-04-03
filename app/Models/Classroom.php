@@ -20,7 +20,7 @@ class Classroom extends Model
     }
 
     protected $casts = [
-        'last_analysis' => 'array',
+        'files_selected' => 'array',
         'students_notified' => 'array',
     ];
 }

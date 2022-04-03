@@ -52,7 +52,7 @@
           <div class="py-2 h4">
             Select files to analyze, or upload files in the "Files" tab
           </div>
-          <form method="POST" class="row p-2" action="{{route('analysis_file', Request()->id)}}">
+          <form method="POST" class="row p-2" action="{{route('analysis_file_select', Request()->id)}}">
             @csrf
             <label class="col-4 col-form-label">zyBooks Files:</label>
             <div class="col-8">

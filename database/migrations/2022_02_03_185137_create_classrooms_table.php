@@ -20,7 +20,7 @@ class CreateClassroomsTable extends Migration
             $table->string('section')->nullable();
             $table->integer('year');
             $table->integer('files')->default(0);
-            $table->json('last_analysis');
+            $table->json('files_selected');
             $table->text('email_template');
             $table->json('students_notified');
             $table->unsignedBigInteger('owner');
