@@ -13,7 +13,7 @@
     <ul class="nav">
       <li class="nav-item">
         <a class="btn {{ Request::path() === 'classroom/' . Request()->id . '/analysis' ||
-          Request::path() === 'classroom/' . Request()->id . '/analysis/file'
+          Request::path() === 'classroom/' . Request()->id . '/analysis/show'
           ? 'btn-dark' : 'btn-secondary'}} px-4" href="{{route('analysis_index', Request()->id)}}">Analysis</a>
       </li>
       <li class="nav-item">
