@@ -39,11 +39,19 @@
   </div>
 </div>
 
-<div class="container bg-light py-5 border mb-5" style="min-height: 550px;">
+<div class="container bg-light pb-5 border mb-5" style="min-height: 550px;">
+  <div class="row justify-content-center p-2">
+    <div class="col-4 text-center border rounded-pill">
+      <div class="h4">Risk Analysis</div>
+    </div>
+  </div>
   <div class="row">
     <div class="col-4 d-flex justify-content-center border-end">
-      <div class="col py-5">
+      <div class="col py-2">
         <div class="text-center">
+          <div class="py-2 h4">
+            Select files to analyze, or upload files in the "Files" tab
+          </div>
           <form method="POST" class="row p-2" action="{{route('analysis_file', Request()->id)}}">
             @csrf
             <label class="col-4 col-form-label">zyBooks Files:</label>
@@ -66,7 +74,7 @@
               </select>
             </div>
             <div class="">
-              <button type="submit" class="btn btn-primary float-end">Load files</button>
+              <button type="submit" class="btn btn-primary float-end">Analyze</button>
             </div>
           </form>
         </div>
@@ -89,10 +97,10 @@
     </div>
 
     <div class="col-4 text-center my-auto">
-        <div class="">Select a file to view graphs.</div>
+        <div class="">Select a file to view these graphs.</div>
     </div>
     <div class="col-4 text-center my-auto">
-        <div class="">Select a file to view graphs.</div>
+        <div class="">Select a file to view these graphs.</div>
     </div>
 
   </div>
