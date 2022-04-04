@@ -46,8 +46,7 @@
                               Files: {{ $classroom->files }}
                             </div>
                             <div>
-                              <?php $randRisk =  rand(0,5) ?>
-                              At risk: <span class="{{ $randRisk > 0 ? 'text-danger' : 'text-white' }}">{{$randRisk}}</span>
+                              At risk: <span class="{{ $classroom->at_risk > 0 ? 'text-danger' : 'text-white' }}">{{$classroom->at_risk}}</span>
                             </div>
                           </div>
                         </div>
