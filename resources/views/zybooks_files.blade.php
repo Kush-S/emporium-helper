@@ -55,8 +55,10 @@
 </div> --}}
 
 <div class="container bg-light border rounded mb-5" style="min-height: 500px;">
-  <div class="row p-2 text-center">
-      <h4>Upload zyBooks and Canvas grade files here</h4>
+  <div class="row justify-content-center p-2">
+    <div class="col-3 text-center border-bottom">
+      <div class="h4">Upload grade files</div>
+    </div>
   </div>
 
   <div class="py-2 d-flex justify-content-center ps-5 ms-5">
@@ -67,11 +69,11 @@
       </div>
       <div class="form-check">
         <input class="form-check-input" type="radio" name="type" value="zybooks" checked>
-        <label class="form-check-label" for="exampleRadios1">zyBooks file</label>
+        <label class="form-check-label" for="exampleRadios1">zyBooks</label>
       </div>
       <div class="form-check">
         <input class="form-check-input" type="radio" name="type" value="canvas">
-        <label class="form-check-label" for="exampleRadios2">Canvas grade file</label>
+        <label class="form-check-label" for="exampleRadios2">Canvas</label>
       </div>
       <button type="submit" class="btn btn-primary mt-2">Upload</button>
     </form>
@@ -110,6 +112,11 @@
           </a>
         </div>
       @endforeach
+      <div class="py-5 text-center">
+        @if (count($zybooks_files) == 0)
+          <span>No files found.</span>
+        @endif
+      </div>
     </div>
 
     <div class="col-5 mx-auto">
@@ -127,6 +134,11 @@
           </a>
         </div>
       @endforeach
+      <div class="py-5 text-center">
+        @if (count($canvas_files) == 0)
+          <span>No files found.</span>
+        @endif
+      </div>
     </div>
   </div>
 

@@ -55,6 +55,11 @@
 </div> --}}
 
 <div class="container bg-white border rounded mb-5">
+  <div class="row justify-content-center p-2">
+    <div class="col-3 text-center border-bottom">
+      <div class="h4">Class configuration</div>
+    </div>
+  </div>
   <div class="row pt-3">
     <div class="col-md-5">
       <div><h3>Email template for student notifications</h3></div>
