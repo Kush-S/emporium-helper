@@ -70,7 +70,6 @@ const studentBarChart = new Chart(ctx, {
                 'Challenge' + ' ' + '({{$studentData['challenge_total']}})',
                 'Lab' + ' ' + '({{$studentData['lab_total']}})'],
         datasets: [{
-            label: 'Students at risk',
             data: [{{$studentData['participation_total']}}, {{$studentData['challenge_total']}}, {{$studentData['lab_total']}}],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
@@ -126,7 +125,6 @@ const classBarChart = new Chart(ctx2, {
     data: {
         labels: ['Participation ' + zybooksClassStats['Participation average'], 'Challenge ' + zybooksClassStats['Challenge average'], 'Lab ' + zybooksClassStats['Lab average']],
         datasets: [{
-            label: 'Students at risk',
             data: [zybooksClassStats['Participation average'], zybooksClassStats['Challenge average'], zybooksClassStats['Lab average']],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
