@@ -23,6 +23,8 @@ class CreateClassroomsTable extends Migration
             $table->json('files_selected');
             $table->text('email_template');
             $table->json('students_notified');
+            $table->json('risk_variables');
+            $table->integer('at_risk');
             $table->unsignedBigInteger('owner');
             $table->timestamps();
         });

@@ -22,5 +22,6 @@ class Classroom extends Model
     protected $casts = [
         'files_selected' => 'array',
         'students_notified' => 'array',
+        'risk_variables' => 'array',
     ];
 }
