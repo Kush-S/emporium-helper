@@ -41,7 +41,7 @@
 
 <div class="container bg-light pb-5 border mb-5" style="min-height: 550px;">
   <div class="row justify-content-center p-2">
-    <div class="col-4 text-center border rounded-pill">
+    <div class="col-3 text-center border-bottom">
       <div class="h4">Risk Analysis</div>
     </div>
   </div>
