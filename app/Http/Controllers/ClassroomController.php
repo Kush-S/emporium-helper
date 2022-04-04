@@ -34,9 +34,23 @@ class ClassroomController extends Controller
     $classroom->owner = $user->id;
     if ($classroom->section == NULL) {$classroom->section = ' ';}
 
+    // selected files JSON object
     $selected_files["zybooks"] = "None";
     $selected_files["canvas"] = "None";
     $classroom->files_selected = $selected_files;
+
+    // zybooks calculation variables JSON object
+    $variables["participation_m"] = -1.06285;
+    $variables["participation_b"] = 124.03443;
+    $variables["participation_weight"] = 20;
+    $variables["challenge_m"] = -0.94222;
+    $variables["challenge_b"] = 108.15462;
+    $variables["challenge_weight"] = 20;
+    $variables["lab_m"] = -0.92121;
+    $variables["lab_b"] = 104.09236;
+    $variables["lab_weight"] = 1.19;
+    $jsonArray["zybooks"] = $variables;
+    $classroom->risk_variables = $jsonArray;
 
     $classroom->email_template = "Dear student\n\n\tThis email is to notify you that your performance in this class is at risk. Please work with your instructor or TA to improve your standing in this class.\n\nzyCat App";
     $classroom->students_notified = [];

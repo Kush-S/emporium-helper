@@ -87,6 +87,11 @@ class AnalysisController extends Controller
       $zybooksClassStats = $this->getZybooksData('parseZybooksStats.py', $selected_zybooks_file);
       $zybooksClassStats = json_decode($zybooksClassStats, true);
 
+      // set risk for this class
+      $this->classroom->at_risk = $zybooksClassStats['At risk'];
+      $this->classroom->save();
+
+
       return view('analysis.zybooks')
             ->with('zybooksStudentData', $zybooksStudentData)
             ->with('zybooksClassStats', $zybooksClassStats)
@@ -135,14 +140,32 @@ class AnalysisController extends Controller
   public function getZybooksData($script, $file)
   {
     // For ubuntu server
-    $process = new Process(['python3', 'python_scripts/'.$script , '../storage/app/'.$this->classroom->id.'/zybooks/'.$file]);
+    $process = new Process(['python3', 'python_scripts/'.$script , '../storage/app/'.$this->classroom->id.'/zybooks/'.$file,
+                          $this->classroom->risk_variables["zybooks"]["participation_m"],
+                          $this->classroom->risk_variables["zybooks"]["participation_b"],
+                          $this->classroom->risk_variables["zybooks"]["participation_weight"],
+                          $this->classroom->risk_variables["zybooks"]["challenge_m"],
+                          $this->classroom->risk_variables["zybooks"]["challenge_b"],
+                          $this->classroom->risk_variables["zybooks"]["challenge_weight"],
+                          $this->classroom->risk_variables["zybooks"]["lab_m"],
+                          $this->classroom->risk_variables["zybooks"]["lab_b"],
+                          $this->classroom->risk_variables["zybooks"]["lab_weight"]
+                          ]);
     $process->run();
-    
+
     return $process->getOutput();
 
     // For windows
-    // $shell_command = 'python python_scripts/' . $script .' ../storage/app/' . $this->classroom->id . '/zybooks/' . $file;
-    // error_log($shell_command);
+    // $shell_command = 'python python_scripts/' . $script .' ../storage/app/' . $this->classroom->id . '/zybooks/' . $file . ' ' .
+    //                 $this->classroom->risk_variables["zybooks"]["participation_m"] . ' ' .
+    //                 $this->classroom->risk_variables["zybooks"]["participation_b"] . ' ' .
+    //                 $this->classroom->risk_variables["zybooks"]["participation_weight"] . ' ' .
+    //                 $this->classroom->risk_variables["zybooks"]["challenge_m"] . ' ' .
+    //                 $this->classroom->risk_variables["zybooks"]["challenge_b"] . ' ' .
+    //                 $this->classroom->risk_variables["zybooks"]["challenge_weight"] . ' ' .
+    //                 $this->classroom->risk_variables["zybooks"]["lab_m"] . ' ' .
+    //                 $this->classroom->risk_variables["zybooks"]["lab_b"] . ' ' .
+    //                 $this->classroom->risk_variables["zybooks"]["lab_weight"];
     // $output_json = shell_exec($shell_command);
     //
     // return $output_json;
