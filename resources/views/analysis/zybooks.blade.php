@@ -173,7 +173,7 @@ const doughnutChart = new Chart(ctx2, {
         labels: ['At risk', 'Not at risk'],
         datasets: [{
             label: '# of Votes',
-            data: [zybooksClassStats['At risk'], zybooksClassStats['Student count']],
+            data: [zybooksClassStats['At risk'], zybooksClassStats['Student count'] - zybooksClassStats['At risk']],
             backgroundColor: [
               'rgb(255, 99, 132)',
               'rgb(54, 162, 235)',
