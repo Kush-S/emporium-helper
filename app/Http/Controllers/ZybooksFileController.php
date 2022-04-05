@@ -72,6 +72,12 @@ class ZybooksFileController extends Controller
 
   public function deleteFile(Request $request)
   {
+    // Reset selected files to None for analysis
+    $selected_files["zybooks"] = "None";
+    $selected_files["canvas"] = "None";
+    $this->classroom->files_selected = $selected_files;
+    $this->classroom->save();
+
     // delete from storage
     Storage::delete($this->classroom->id . '/' . $request->type . '/' . $request->file_name);
 
