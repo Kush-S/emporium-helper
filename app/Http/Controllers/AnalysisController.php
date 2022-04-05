@@ -152,23 +152,25 @@ class AnalysisController extends Controller
                           $this->classroom->risk_variables["zybooks"]["lab_weight"]
                           ]);
     $process->run();
-
-    return $process->getOutput();
+    if($process->getOutput() != "")
+    {
+      return $process->getOutput();
+    }
 
     // For windows
-    // $shell_command = 'python python_scripts/' . $script .' ../storage/app/' . $this->classroom->id . '/zybooks/' . $file . ' ' .
-    //                 $this->classroom->risk_variables["zybooks"]["participation_m"] . ' ' .
-    //                 $this->classroom->risk_variables["zybooks"]["participation_b"] . ' ' .
-    //                 $this->classroom->risk_variables["zybooks"]["participation_weight"] . ' ' .
-    //                 $this->classroom->risk_variables["zybooks"]["challenge_m"] . ' ' .
-    //                 $this->classroom->risk_variables["zybooks"]["challenge_b"] . ' ' .
-    //                 $this->classroom->risk_variables["zybooks"]["challenge_weight"] . ' ' .
-    //                 $this->classroom->risk_variables["zybooks"]["lab_m"] . ' ' .
-    //                 $this->classroom->risk_variables["zybooks"]["lab_b"] . ' ' .
-    //                 $this->classroom->risk_variables["zybooks"]["lab_weight"];
-    // $output_json = shell_exec($shell_command);
-    //
-    // return $output_json;
+    $shell_command = 'python python_scripts/' . $script .' ../storage/app/' . $this->classroom->id . '/zybooks/' . $file . ' ' .
+                    $this->classroom->risk_variables["zybooks"]["participation_m"] . ' ' .
+                    $this->classroom->risk_variables["zybooks"]["participation_b"] . ' ' .
+                    $this->classroom->risk_variables["zybooks"]["participation_weight"] . ' ' .
+                    $this->classroom->risk_variables["zybooks"]["challenge_m"] . ' ' .
+                    $this->classroom->risk_variables["zybooks"]["challenge_b"] . ' ' .
+                    $this->classroom->risk_variables["zybooks"]["challenge_weight"] . ' ' .
+                    $this->classroom->risk_variables["zybooks"]["lab_m"] . ' ' .
+                    $this->classroom->risk_variables["zybooks"]["lab_b"] . ' ' .
+                    $this->classroom->risk_variables["zybooks"]["lab_weight"];
+    $output_json = shell_exec($shell_command);
+
+    return $output_json;
   }
 
   public function sendEmailToStudent(Request $request)
