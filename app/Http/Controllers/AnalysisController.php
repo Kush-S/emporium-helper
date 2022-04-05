@@ -71,6 +71,39 @@ class AnalysisController extends Controller
     // If both files selected
 
     // If only canvas file selected
+    if($selected_canvas_file != "None"){
+      // Set the last_analysis files value in database to only zybooks
+      $selected_files["zybooks"] = "None";
+      $selected_files["canvas"] = $selected_canvas_file;
+      $this->classroom->files_selected = $selected_files;
+      $this->classroom->save();
+
+      $canvasStudentData = $this->getCanvasData('parseCanvas.py', $selected_canvas_file);
+      $canvasStudentData = json_decode($canvasStudentData, true);
+
+      // $zybooksClassStats = $this->getZybooksData('parseZybooksStats.py', $selected_zybooks_file);
+      // $zybooksClassStats = json_decode($zybooksClassStats, true);
+
+      // if the file is not a canvas file
+      if ($canvasStudentData == false)
+        {
+          return redirect()->route('analysis_index', $this->classroom->id)
+                            ->with("error", "Unable to parse data, was that really a canvas file?");
+        }
+
+        // set risk for this class
+        // $this->classroom->at_risk = $zybooksClassStats['At risk'];
+        // $this->classroom->save();
+
+        return view('analysis.canvas')
+              // ->with('zybooksStudentData', $zybooksStudentData)
+              // ->with('zybooksClassStats', $zybooksClassStats)
+              ->with('classroom', $this->classroom)
+              ->with('zybooks_files', $zybooks_files)
+              ->with('canvas_files', $canvas_files)
+              ->with('selected_zybooks_file', $selected_zybooks_file)
+              ->with('selected_canvas_file', $selected_canvas_file);
+      }
 
     // If only zyBooks file selected
     if($selected_zybooks_file != "None"){
@@ -181,6 +214,34 @@ class AnalysisController extends Controller
                     $this->classroom->risk_variables["zybooks"]["lab_m"] . ' ' .
                     $this->classroom->risk_variables["zybooks"]["lab_b"] . ' ' .
                     $this->classroom->risk_variables["zybooks"]["lab_weight"];
+    $output_json = shell_exec($shell_command);
+
+    return $output_json;
+  }
+
+  public function getCanvasData($script, $file)
+  {
+    // For ubuntu server
+    $process = new Process(['python3', 'python_scripts/'.$script , '../storage/app/'.$this->classroom->id.'/canvas/'.$file,
+                          $this->classroom->risk_variables["canvas"]["risk_weight"],
+                          ]);
+    $process->run();
+
+    // Make sure non canvas file's analysis doesn't happen
+    if($process->isSuccessful() == "")
+    {
+      $selected_files["zybooks"] = "None";
+      $selected_files["canvas"] = "None";
+      $this->classroom->files_selected = $selected_files;
+      $this->classroom->save();
+
+      return false;
+    }
+    return $process->getOutput();
+
+    // For windows
+    $shell_command = 'python python_scripts/' . $script .' ../storage/app/' . $this->classroom->id . '/canvas/' . $file . ' ' .
+                    $this->classroom->risk_variables["canvas"]["risk_weight"];
     $output_json = shell_exec($shell_command);
 
     return $output_json;
