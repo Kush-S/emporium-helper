@@ -87,6 +87,12 @@ class AnalysisController extends Controller
       $zybooksClassStats = $this->getZybooksData('parseZybooksStats.py', $selected_zybooks_file);
       $zybooksClassStats = json_decode($zybooksClassStats, true);
 
+      if ($zybooksClassStats == false || $zybooksStudentData == false)
+        {
+          return redirect()->route('analysis_index', $this->classroom->id)
+                            ->with("error", "Unable to parse data, was that really a zyBooks file?");
+        }
+
       // set risk for this class
       $this->classroom->at_risk = $zybooksClassStats['At risk'];
       $this->classroom->save();
@@ -149,13 +155,20 @@ class AnalysisController extends Controller
                           $this->classroom->risk_variables["zybooks"]["challenge_weight"],
                           $this->classroom->risk_variables["zybooks"]["lab_m"],
                           $this->classroom->risk_variables["zybooks"]["lab_b"],
-                          $this->classroom->risk_variables["zybooks"]["lab_weight"]
+                          $this->classroom->risk_variables["zybooks"]["lab_weight"],
                           ]);
     $process->run();
-    if($process->getOutput() != "")
+
+    if($process->isSuccessful() == "")
     {
-      return $process->getOutput();
+      $selected_files["zybooks"] = "None";
+      $selected_files["canvas"] = "None";
+      $this->classroom->files_selected = $selected_files;
+      $this->classroom->save();
+
+      return false;
     }
+    return $process->getOutput();
 
     // For windows
     $shell_command = 'python python_scripts/' . $script .' ../storage/app/' . $this->classroom->id . '/zybooks/' . $file . ' ' .
