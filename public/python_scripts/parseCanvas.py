@@ -15,7 +15,7 @@ df2["Final Score"] = df["Final Score"]
 max_points = round(float(df2["Final Points"].max()), 2)
 
 # Calculate the risk from max_points
-df2["Risk"] = float(sys.argv[2]) - (df2["Final Points"] / max_points) * 100
+df2["Risk"] = (float(sys.argv[2]) - (df2["Final Points"] / max_points) * 100).round(2)
 
 # Sort students by max risk
 df2 = df2.sort_values(by=['Risk'], ascending=False)
