@@ -96,7 +96,7 @@ class AnalysisController extends Controller
         // $this->classroom->save();
 
         return view('analysis.canvas')
-              // ->with('zybooksStudentData', $zybooksStudentData)
+              ->with('canvasStudentData', $canvasStudentData)
               // ->with('zybooksClassStats', $zybooksClassStats)
               ->with('classroom', $this->classroom)
               ->with('zybooks_files', $zybooks_files)
@@ -192,6 +192,7 @@ class AnalysisController extends Controller
                           ]);
     $process->run();
 
+    // Make sure non zyabooks file's analysis doesn't happen
     if($process->isSuccessful() == "")
     {
       $selected_files["zybooks"] = "None";
@@ -245,6 +246,41 @@ class AnalysisController extends Controller
     $output_json = shell_exec($shell_command);
 
     return $output_json;
+  }
+
+  public function student_list_canvas(Request $request)
+  {
+    // $canvasClassStats = json_decode($request->zybooksClassStats, true);
+    $canvasStudentData = json_decode($request->canvasStudentData, true);
+
+    return view('analysis.canvas_student_list')
+          // ->with('canvasClassStats', $canvasClassStats)
+          ->with('classroom', $this->classroom)
+          ->with('selected_canvas_file', $request->selected_canvas_file)
+          ->with('canvasStudentData', $canvasStudentData);
+  }
+
+  public function student_info_canvas(Request $request)
+  {
+    // $zybooksClassStats = json_decode($request->zybooksClassStats, true);
+    // $studentData = array(
+    //   'first_name' => $request->first_name,
+    //   'first_name' => $request->first_name,
+    //   'last_name' => $request->last_name,
+    //   'risk' => $request->risk,
+    //   'primary_email' => $request->primary_email,
+    //   'school_email' => $request->school_email,
+    //   'participation_total' => $request->participation_total,
+    //   'challenge_total' => $request->challenge_total,
+    //   'lab_total' => $request->lab_total,
+    // );
+    //
+    // return view('analysis.zybooks_student_info')
+    //       ->with('zybooksClassStats', $zybooksClassStats)
+    //       ->with('selected_zybooks_file', $request->selected_zybooks_file)
+    //       ->with('classroom', $this->classroom)
+    //       ->with('studentData', $studentData);
+    return redirect()->route("analysis_index");
   }
 
   public function sendEmailToStudent(Request $request)

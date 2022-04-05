@@ -46,6 +46,8 @@ Route::middleware(['auth', 'whitelisted'])->prefix('classroom')->group(function 
         Route::get('/show', [AnalysisController::class, 'show_analysis'])->name('analysis_show');
         Route::post('/studentListZybooks', [AnalysisController::class, 'student_list_zybooks'])->name('analysis_zybooks_students_list');
         Route::post('/studentInfoZyBooks', [AnalysisController::class, 'student_info_zybooks'])->name('analysis_zybooks_student_info');
+        Route::post('/studentListCanvas', [AnalysisController::class, 'student_list_canvas'])->name('analysis_canvas_students_list');
+        Route::post('/studentInfoCanvas', [AnalysisController::class, 'student_info_canvas'])->name('analysis_canvas_student_info');
       });
       Route::group(['prefix' => '/files'], function(){
         Route::get('/', [ZybooksFileController::class, 'index'])->name('files_index');

@@ -80,7 +80,7 @@
         </div>
         <div class="row py-3">
           <div class="text-center h5">
-            zyBooks file selected: <span class="">{{$selected_zybooks_file}}</span>
+            {{-- zyBooks file selected: <span class="">{{$selected_zybooks_file}}</span> --}}
           </div>
           <div class="text-center h5">
             Canvas file selected: <span class="">{{$selected_canvas_file}}</span>
@@ -92,11 +92,11 @@
             Students at risk: <span class=""></span>
           </div>
         </div>
-        <form method="POST" class="row p-2" action="{{ route('analysis_zybooks_students_list', Request()->id) }}">
+        <form method="POST" class="row p-2" action="{{ route('analysis_canvas_students_list', Request()->id) }}">
           @csrf
-          <input type="hidden" name="selected_zybooks_file" value="{{ $selected_zybooks_file }}">
-          <input type="hidden" id="custId" name="zybooksStudentData" value="">
-          <input type="hidden" id="custId" name="zybooksClassStats" value="">
+          <input type="hidden" name="selected_zybooks_file" value="{{ $selected_canvas_file }}">
+          <input type="hidden" id="custId" name="canvasStudentData" value="{{ json_encode($canvasStudentData, true) }}">
+          <input type="hidden" id="custId" name="canvasClassStats" value="">
           <button type="submit" class="btn btn-primary d-flex justify-content-center p-3 col-4 mx-auto">Student list</button>
         </form>
       </div>
@@ -173,7 +173,7 @@ const doughnutChart = new Chart(ctx2, {
         labels: ['At risk', 'Not at risk'],
         datasets: [{
             label: '# of Votes',
-            data: [zybooksClassStats['At risk'], zybooksClassStats['Student count'] - zybooksClassStats['At risk']],
+            data: [10, 20],
             backgroundColor: [
               'rgb(255, 99, 132)',
               'rgb(54, 162, 235)',
