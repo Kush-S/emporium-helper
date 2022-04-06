@@ -204,6 +204,7 @@ class AnalysisController extends Controller
     return $process->getOutput();
 
     // For windows
+    $file = escapeshellarg($file);
     $shell_command = 'python python_scripts/' . $script .' ../storage/app/' . $this->classroom->id . '/zybooks/' . $file . ' ' .
                     $this->classroom->risk_variables["zybooks"]["participation_m"] . ' ' .
                     $this->classroom->risk_variables["zybooks"]["participation_b"] . ' ' .
@@ -240,6 +241,7 @@ class AnalysisController extends Controller
     return $process->getOutput();
 
     // For windows
+    $file = escapeshellarg($file);
     $shell_command = 'python python_scripts/' . $script .' ../storage/app/' . $this->classroom->id . '/canvas/' . $file . ' ' .
                     $this->classroom->risk_variables["canvas"]["risk_weight"];
     $output_json = shell_exec($shell_command);
