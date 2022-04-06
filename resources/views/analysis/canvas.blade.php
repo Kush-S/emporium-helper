@@ -94,7 +94,7 @@
         </div>
         <form method="POST" class="row p-2" action="{{ route('analysis_canvas_students_list', Request()->id) }}">
           @csrf
-          <input type="hidden" name="selected_zybooks_file" value="{{ $selected_canvas_file }}">
+          <input type="hidden" name="selected_canvas_file" value="{{ $selected_canvas_file }}">
           <input type="hidden" id="custId" name="canvasStudentData" value="{{ json_encode($canvasStudentData, true) }}">
           <input type="hidden" id="custId" name="canvasClassStats" value="{{ json_encode($canvasClassStats, true) }}">
           <button type="submit" class="btn btn-primary d-flex justify-content-center p-3 col-4 mx-auto">Student list</button>
