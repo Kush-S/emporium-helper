@@ -2,7 +2,7 @@ import pandas as pd
 import sys
 import json
 
-df = pd.read_csv(str(sys.argv[1]))
+df = pd.read_csv(str(sys.argv[1]), skiprows=[1])
 
 df2 = pd.DataFrame()
 df2["Student name"] = df["Student"]
