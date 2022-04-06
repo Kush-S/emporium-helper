@@ -274,7 +274,7 @@ class AnalysisController extends Controller
 
     return view('analysis.canvas_student_info')
           ->with('canvasClassStats', $canvasClassStats)
-          ->with('selected_canvas_file', $request->selected_zybooks_file)
+          ->with('selected_canvas_file', $request->selected_canvas_file)
           ->with('classroom', $this->classroom)
           ->with('studentData', $studentData);
   }
