@@ -39,7 +39,7 @@
                 @php $i = 0; @endphp
                 <form method="POST" enctype="multipart/form-data" action="{{ route('analysis_canvas_student_info', Request()->id) }}">
                   @csrf
-                  <input type="hidden" name="selected_zybooks_file" value="{{$selected_canvas_file}}">
+                  <input type="hidden" name="selected_canvas_file" value="{{$selected_canvas_file}}">
                   <input type="hidden" name="student_name" value="{{$student['Student name']}}">
                   <input type="hidden" name="student_id" value="{{$student['SIS Login ID']}}">
                   <input type="hidden" name="risk" value="{{$student['Risk']}}">
