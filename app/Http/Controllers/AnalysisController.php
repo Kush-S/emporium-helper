@@ -69,9 +69,22 @@ class AnalysisController extends Controller
     ->where('type', 'canvas')->get()->sortBy('name');
 
     // If both files selected
+    if($selected_zybooks_file != "None" && $selected_canvas_file != "None"){
+      $selected_files["zybooks"] = $selected_zybooks_file;
+      $selected_files["canvas"] = $selected_canvas_file;
+      $this->classroom->files_selected = $selected_files;
+      $this->classroom->save();
+
+      return view('analysis.mix')
+            ->with('classroom', $this->classroom)
+            ->with('zybooks_files', $zybooks_files)
+            ->with('canvas_files', $canvas_files)
+            ->with('selected_zybooks_file', $selected_zybooks_file)
+            ->with('selected_canvas_file', $selected_canvas_file);
+    }
 
     // If only canvas file selected
-    if($selected_canvas_file != "None"){
+    elseif($selected_canvas_file != "None"){
       // Set the last_analysis files value in database to only zybooks
       $selected_files["zybooks"] = "None";
       $selected_files["canvas"] = $selected_canvas_file;
@@ -85,7 +98,7 @@ class AnalysisController extends Controller
       $canvasClassStats = json_decode($canvasClassStats, true);
 
       // if the file is not a canvas file
-      if ($canvasStudentData == false)
+      if($canvasStudentData == false)
         {
           return redirect()->route('analysis_index', $this->classroom->id)
                             ->with("error", "Unable to parse data, was that really a canvas file?");
@@ -106,7 +119,7 @@ class AnalysisController extends Controller
       }
 
     // If only zyBooks file selected
-    if($selected_zybooks_file != "None"){
+    elseif($selected_zybooks_file != "None"){
 
       // Set the last_analysis files value in database to only zybooks
       $selected_files["zybooks"] = $selected_zybooks_file;
@@ -139,7 +152,7 @@ class AnalysisController extends Controller
             ->with('canvas_files', $canvas_files)
             ->with('selected_zybooks_file', $selected_zybooks_file)
             ->with('selected_canvas_file', $selected_canvas_file);
-    }
+      }
   }
 
   public function student_list_zybooks(Request $request)
@@ -203,7 +216,7 @@ class AnalysisController extends Controller
     }
     return $process->getOutput();
 
-    // For windows
+    // // For windows
     $file = escapeshellarg($file);
     $shell_command = 'python python_scripts/' . $script .' ../storage/app/' . $this->classroom->id . '/zybooks/' . $file . ' ' .
                     $this->classroom->risk_variables["zybooks"]["participation_m"] . ' ' .
