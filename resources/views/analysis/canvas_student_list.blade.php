@@ -17,7 +17,7 @@
   </div>
   <div class="text-center">
     <div class="h4 text-black p-2 rounded">
-      zyBooks file selected: {{ $selected_canvas_file }}
+      Canvas file selected: {{ $selected_canvas_file }}
     </div>
   </div>
   <div class="row">
@@ -37,12 +37,15 @@
             <tr>
               <div>
                 @php $i = 0; @endphp
-                <form method="POST" enctype="multipart/form-data" action="{{ route('analysis_zybooks_student_info', Request()->id) }}">
+                <form method="POST" enctype="multipart/form-data" action="{{ route('analysis_canvas_student_info', Request()->id) }}">
                   @csrf
                   <input type="hidden" name="selected_zybooks_file" value="{{$selected_canvas_file}}">
                   <input type="hidden" name="student_name" value="{{$student['Student name']}}">
+                  <input type="hidden" name="student_id" value="{{$student['SIS Login ID']}}">
                   <input type="hidden" name="risk" value="{{$student['Risk']}}">
-                  {{-- <input type="hidden" id="custId" name="zybooksClassStats" value="{{ json_encode($zybooksClassStats, true) }}"> --}}
+                  <input type="hidden" name="final_points" value="{{$student['Final Points']}}">
+                  <input type="hidden" name="final_score" value="{{$student['Final Score']}}">
+                  {{-- <input type="hidden" id="custId" name="zybooksClassStats" value="{{ json_encode($canvasClassStats, true) }}"> --}}
                   <td><button type="submit" class="btn btn-link" formtarget="_blank">{{ $student['Student name']}}</button></td>
                 </form>
                 <td>{{ $student['SIS Login ID']}}</td>

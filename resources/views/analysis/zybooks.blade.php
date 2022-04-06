@@ -89,7 +89,7 @@
             Total students: {{ $zybooksClassStats['Student count'] }}
           </div>
           <div class="text-center h5">
-            Students at risk: <span class="{{ $zybooksClassStats['Student count'] > 0 ? 'text-danger' : '' }}">{{ $zybooksClassStats['At risk'] }}</span>
+            Students at risk: <span class="{{ $zybooksClassStats['At risk'] > 0 ? 'text-danger' : '' }}">{{ $zybooksClassStats['At risk'] }}</span>
           </div>
         </div>
         <form method="POST" class="row p-2" action="{{ route('analysis_zybooks_students_list', Request()->id) }}">

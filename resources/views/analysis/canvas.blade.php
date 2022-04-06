@@ -86,10 +86,10 @@
             Canvas file selected: <span class="">{{$selected_canvas_file}}</span>
           </div>
           <div class="text-center h5">
-            Total students:
+            Total students: {{$canvasClassStats["Student count"]}}
           </div>
           <div class="text-center h5">
-            Students at risk: <span class=""></span>
+            Students at risk: <span class="{{ $canvasClassStats['At risk'] > 0 ? 'text-danger' : '' }}">{{ $canvasClassStats['At risk']}}</span>
           </div>
         </div>
         <form method="POST" class="row p-2" action="{{ route('analysis_canvas_students_list', Request()->id) }}">
@@ -114,8 +114,8 @@
 <x-footer/>
 
 <script>
-  var zybooksClassStats = ""
-  console.log(zybooksClassStats)
+  var canvasClassStats = {!! json_encode($canvasClassStats) !!}
+  console.log(canvasClassStats)
 </script>
 
 <script>
@@ -123,10 +123,10 @@ const ctx = document.getElementById('chart1').getContext('2d');
 const barChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ['Participation', 'Challenge', 'Lab'],
+        labels: ['Points average', 'Score average'],
         datasets: [{
-            label: [],
-            data: [zybooksClassStats['Participation average'], zybooksClassStats['Challenge average'], zybooksClassStats['Lab average']],
+            label: ['1','2'],
+            data: [canvasClassStats['Points average'], canvasClassStats['Score average']],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -147,7 +147,7 @@ const barChart = new Chart(ctx, {
         },
         title: {
           display: true,
-          text: 'Average scores (%)'
+          text: 'Average points'
         }
       },
       scales: {
@@ -173,7 +173,7 @@ const doughnutChart = new Chart(ctx2, {
         labels: ['At risk', 'Not at risk'],
         datasets: [{
             label: '# of Votes',
-            data: [10, 20],
+            data: [canvasClassStats['At risk'], canvasClassStats['Student count'] - canvasClassStats['At risk']],
             backgroundColor: [
               'rgb(255, 99, 132)',
               'rgb(54, 162, 235)',

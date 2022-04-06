@@ -81,8 +81,9 @@ class AnalysisController extends Controller
       $canvasStudentData = $this->getCanvasData('parseCanvas.py', $selected_canvas_file);
       $canvasStudentData = json_decode($canvasStudentData, true);
 
-      // $zybooksClassStats = $this->getZybooksData('parseZybooksStats.py', $selected_zybooks_file);
-      // $zybooksClassStats = json_decode($zybooksClassStats, true);
+      $canvasClassStats = $this->getCanvasData('parseCanvasStats.py', $selected_canvas_file);
+      $canvasClassStats = json_decode($canvasClassStats, true);
+      // error_log($canvasClassStats);
 
       // if the file is not a canvas file
       if ($canvasStudentData == false)
@@ -97,7 +98,7 @@ class AnalysisController extends Controller
 
         return view('analysis.canvas')
               ->with('canvasStudentData', $canvasStudentData)
-              // ->with('zybooksClassStats', $zybooksClassStats)
+              ->with('canvasClassStats', $canvasClassStats)
               ->with('classroom', $this->classroom)
               ->with('zybooks_files', $zybooks_files)
               ->with('canvas_files', $canvas_files)
@@ -158,7 +159,6 @@ class AnalysisController extends Controller
   {
     $zybooksClassStats = json_decode($request->zybooksClassStats, true);
     $studentData = array(
-      'first_name' => $request->first_name,
       'first_name' => $request->first_name,
       'last_name' => $request->last_name,
       'risk' => $request->risk,
@@ -262,25 +262,22 @@ class AnalysisController extends Controller
 
   public function student_info_canvas(Request $request)
   {
-    // $zybooksClassStats = json_decode($request->zybooksClassStats, true);
-    // $studentData = array(
-    //   'first_name' => $request->first_name,
-    //   'first_name' => $request->first_name,
-    //   'last_name' => $request->last_name,
-    //   'risk' => $request->risk,
-    //   'primary_email' => $request->primary_email,
-    //   'school_email' => $request->school_email,
-    //   'participation_total' => $request->participation_total,
-    //   'challenge_total' => $request->challenge_total,
-    //   'lab_total' => $request->lab_total,
-    // );
+    // $canvasClassStats = json_decode($request->zybooksClassStats, true);
+    $studentData = array(
+      'student_name' => $request->student_name,
+      'risk' => $request->risk,
+      'student_id' => $request->student_id,
+      'risk' => $request->risk,
+      'final_points' => $request->final_points,
+      'challenge_total' => $request->challenge_total,
+      'final_score' => $request->final_score,
+    );
     //
-    // return view('analysis.zybooks_student_info')
-    //       ->with('zybooksClassStats', $zybooksClassStats)
-    //       ->with('selected_zybooks_file', $request->selected_zybooks_file)
-    //       ->with('classroom', $this->classroom)
-    //       ->with('studentData', $studentData);
-    return redirect()->route("analysis_index");
+    return view('analysis.canvas_student_info')
+          // ->with('canvasClassStats', $zybooksClassStats)
+          ->with('selected_canvas_file', $request->selected_zybooks_file)
+          ->with('classroom', $this->classroom)
+          ->with('studentData', $studentData);
   }
 
   public function sendEmailToStudent(Request $request)
