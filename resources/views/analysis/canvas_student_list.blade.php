@@ -45,7 +45,7 @@
                   <input type="hidden" name="risk" value="{{$student['Risk']}}">
                   <input type="hidden" name="final_points" value="{{$student['Final Points']}}">
                   <input type="hidden" name="final_score" value="{{$student['Final Score']}}">
-                  {{-- <input type="hidden" id="custId" name="zybooksClassStats" value="{{ json_encode($canvasClassStats, true) }}"> --}}
+                  <input type="hidden" name="canvasClassStats" value="{{ json_encode($canvasClassStats, true) }}">
                   <td><button type="submit" class="btn btn-link" formtarget="_blank">{{ $student['Student name']}}</button></td>
                 </form>
                 <td>{{ $student['SIS Login ID']}}</td>

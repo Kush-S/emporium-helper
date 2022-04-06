@@ -62,13 +62,16 @@
 <x-footer/>
 
 <script>
+var canvasClassStats = {!! json_encode($canvasClassStats) !!}
+
 const ctx = document.getElementById('studentBarChart').getContext('2d');
 const studentBarChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ['1', '2', '2'],
+        labels: ['Current points obtained ' + '(' + '{{$studentData['final_points']}}' + ')',
+                'Current grade ' + '(' + '{{$studentData['final_score']}}' + '%)'],
         datasets: [{
-            data: [10,20,30],
+            data: ['{{$studentData['final_points']}}', '{{$studentData['final_score']}}'],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -95,14 +98,14 @@ const studentBarChart = new Chart(ctx, {
         },
         title: {
           display: true,
-          text: 'Scores (%) for ' + '' + ' '
+          text: 'Grades for ' + '{{$studentData['student_name']}}'
         }
       },
       scales: {
           y: {
               beginAtZero: true,
               min: 0,
-              max: 100
+              max: Math.round(canvasClassStats['Points average'])
           },
           x: {
             ticks: {
@@ -121,9 +124,10 @@ const ctx2 = document.getElementById('classBarChart').getContext('2d');
 const classBarChart = new Chart(ctx2, {
     type: 'bar',
     data: {
-        labels: ['1','2','3'],
+        labels: ['Average points obtained (' + canvasClassStats['Points average'] + ')',
+                'Average grade (' + canvasClassStats['Score average'] + '%)'],
         datasets: [{
-            data: [10,20,30],
+            data: [canvasClassStats['Points average'], canvasClassStats['Score average']],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -150,14 +154,14 @@ const classBarChart = new Chart(ctx2, {
         },
         title: {
           display: true,
-          text: 'Class average scores (%)'
+          text: 'Class average',
         }
       },
       scales: {
           y: {
               beginAtZero: true,
               min: 0,
-              max: 100
+              max: Math.round(canvasClassStats['Points average'])
           },
           x: {
             ticks: {

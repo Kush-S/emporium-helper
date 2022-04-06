@@ -83,7 +83,6 @@ class AnalysisController extends Controller
 
       $canvasClassStats = $this->getCanvasData('parseCanvasStats.py', $selected_canvas_file);
       $canvasClassStats = json_decode($canvasClassStats, true);
-      // error_log($canvasClassStats);
 
       // if the file is not a canvas file
       if ($canvasStudentData == false)
@@ -250,11 +249,11 @@ class AnalysisController extends Controller
 
   public function student_list_canvas(Request $request)
   {
-    // $canvasClassStats = json_decode($request->zybooksClassStats, true);
+    $canvasClassStats = json_decode($request->canvasClassStats, true);
     $canvasStudentData = json_decode($request->canvasStudentData, true);
 
     return view('analysis.canvas_student_list')
-          // ->with('canvasClassStats', $canvasClassStats)
+          ->with('canvasClassStats', $canvasClassStats)
           ->with('classroom', $this->classroom)
           ->with('selected_canvas_file', $request->selected_canvas_file)
           ->with('canvasStudentData', $canvasStudentData);
@@ -262,7 +261,7 @@ class AnalysisController extends Controller
 
   public function student_info_canvas(Request $request)
   {
-    // $canvasClassStats = json_decode($request->zybooksClassStats, true);
+    $canvasClassStats = json_decode($request->canvasClassStats, true);
     $studentData = array(
       'student_name' => $request->student_name,
       'risk' => $request->risk,
@@ -272,9 +271,9 @@ class AnalysisController extends Controller
       'challenge_total' => $request->challenge_total,
       'final_score' => $request->final_score,
     );
-    //
+
     return view('analysis.canvas_student_info')
-          // ->with('canvasClassStats', $zybooksClassStats)
+          ->with('canvasClassStats', $canvasClassStats)
           ->with('selected_canvas_file', $request->selected_zybooks_file)
           ->with('classroom', $this->classroom)
           ->with('studentData', $studentData);

@@ -96,16 +96,16 @@
           @csrf
           <input type="hidden" name="selected_zybooks_file" value="{{ $selected_canvas_file }}">
           <input type="hidden" id="custId" name="canvasStudentData" value="{{ json_encode($canvasStudentData, true) }}">
-          <input type="hidden" id="custId" name="canvasClassStats" value="">
+          <input type="hidden" id="custId" name="canvasClassStats" value="{{ json_encode($canvasClassStats, true) }}">
           <button type="submit" class="btn btn-primary d-flex justify-content-center p-3 col-4 mx-auto">Student list</button>
         </form>
       </div>
     </div>
 
-    <div class="col-4 text-center my-auto">
+    <div class="col-3 text-center my-auto">
         <canvas id="chart2"></canvas>
     </div>
-    <div class="col-4 text-center p-4 my-auto">
+    <div class="col-5 text-center p-4 my-auto">
       <canvas id="chart1"></canvas>
     </div>
 
@@ -115,7 +115,6 @@
 
 <script>
   var canvasClassStats = {!! json_encode($canvasClassStats) !!}
-  console.log(canvasClassStats)
 </script>
 
 <script>
@@ -123,9 +122,9 @@ const ctx = document.getElementById('chart1').getContext('2d');
 const barChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ['Points average', 'Score average'],
+        labels: ['Average points obtained ' + '(' + canvasClassStats['Points average'] + ')',
+                'Average grade % ' + '(' + canvasClassStats['Score average'] + ')'],
         datasets: [{
-            label: ['1','2'],
             data: [canvasClassStats['Points average'], canvasClassStats['Score average']],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
@@ -153,7 +152,7 @@ const barChart = new Chart(ctx, {
       scales: {
           y: {
             beginAtZero: true,
-            max: 100
+            max: Math.round(canvasClassStats['Points average'])
           },
           x: {
             ticks: {
