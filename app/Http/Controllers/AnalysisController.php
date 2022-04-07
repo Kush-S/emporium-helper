@@ -78,6 +78,13 @@ class AnalysisController extends Controller
       $mixClassStats = $this->getMixData('parseMixStats.py', $selected_canvas_file, $selected_zybooks_file);
       $mixClassStats = json_decode($mixClassStats, true);
 
+      // if the file is not a canvas file
+      if($mixClassStats == false)
+        {
+          return redirect()->route('analysis_index', $this->classroom->id)
+                            ->with("error", "Unable to parse data, was that really a canvas file?");
+        }
+
       // set risk for this class
       $this->classroom->at_risk = $mixClassStats['At risk'];
       $this->classroom->save();
