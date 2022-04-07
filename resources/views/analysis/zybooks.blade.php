@@ -102,10 +102,10 @@
       </div>
     </div>
 
-    <div class="col-4 text-center my-auto">
+    <div class="col-3 text-center my-auto">
         <canvas id="chart2"></canvas>
     </div>
-    <div class="col-4 text-center p-4 my-auto">
+    <div class="col-5 text-center p-4 my-auto">
       <canvas id="chart1"></canvas>
     </div>
 
