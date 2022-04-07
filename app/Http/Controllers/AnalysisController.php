@@ -68,23 +68,28 @@ class AnalysisController extends Controller
     ::where('classroom_id', $this->classroom->id)
     ->where('type', 'canvas')->get()->sortBy('name');
 
-    // If both files selected
+    // *** If both files selected ***
     if($selected_zybooks_file != "None" && $selected_canvas_file != "None"){
       $selected_files["zybooks"] = $selected_zybooks_file;
       $selected_files["canvas"] = $selected_canvas_file;
       $this->classroom->files_selected = $selected_files;
       $this->classroom->save();
 
+      $mixClassStats = $this->getMixData('parseMixStats.py', $selected_canvas_file, $selected_zybooks_file);
+      $mixClassStats = json_decode($mixClassStats, true);
+
       return view('analysis.mix')
             ->with('classroom', $this->classroom)
             ->with('zybooks_files', $zybooks_files)
             ->with('canvas_files', $canvas_files)
             ->with('selected_zybooks_file', $selected_zybooks_file)
-            ->with('selected_canvas_file', $selected_canvas_file);
+            ->with('selected_canvas_file', $selected_canvas_file)
+            ->with('mixClassStats', $mixClassStats);
     }
 
-    // If only canvas file selected
+    // *** If only canvas file selected ***
     elseif($selected_canvas_file != "None"){
+
       // Set the last_analysis files value in database to only zybooks
       $selected_files["zybooks"] = "None";
       $selected_files["canvas"] = $selected_canvas_file;
@@ -105,8 +110,8 @@ class AnalysisController extends Controller
         }
 
         // set risk for this class
-        // $this->classroom->at_risk = $zybooksClassStats['At risk'];
-        // $this->classroom->save();
+        $this->classroom->at_risk = $canvasClassStats['At risk'];
+        $this->classroom->save();
 
         return view('analysis.canvas')
               ->with('canvasStudentData', $canvasStudentData)
@@ -118,7 +123,7 @@ class AnalysisController extends Controller
               ->with('selected_canvas_file', $selected_canvas_file);
       }
 
-    // If only zyBooks file selected
+    // *** If only zyBooks file selected ***
     elseif($selected_zybooks_file != "None"){
 
       // Set the last_analysis files value in database to only zybooks
@@ -292,6 +297,40 @@ class AnalysisController extends Controller
           ->with('selected_canvas_file', $request->selected_canvas_file)
           ->with('classroom', $this->classroom)
           ->with('studentData', $studentData);
+  }
+
+  public function getMixData($script, $file1, $file2)
+  {
+    // For ubuntu server
+    $process = new Process(['python3', 'python_scripts/'.$script,
+                          '../storage/app/'.$this->classroom->id.'/canvas/'.$file1,
+                          '../storage/app/'.$this->classroom->id.'/zybooks/'.$file2,
+                          $this->classroom->risk_variables["mix"]["risk_weight"]
+                          ]);
+    $process->run();
+
+    // Make sure wrong file's analysis doesn't happen
+    if($process->isSuccessful() == "")
+    {
+      $selected_files["zybooks"] = "None";
+      $selected_files["canvas"] = "None";
+      $this->classroom->files_selected = $selected_files;
+      $this->classroom->save();
+
+      return false;
+    }
+    return $process->getOutput();
+
+    // For windows
+    $file1 = escapeshellarg($file1);
+    $file2 = escapeshellarg($file2);
+    $shell_command = 'python python_scripts/' . $script .
+                    ' ../storage/app/' . $this->classroom->id .'/canvas/' . $file1 . ' ' .
+                    ' ../storage/app/' . $this->classroom->id .'/zybooks/' . $file2 . ' ' .
+                    $this->classroom->risk_variables["canvas"]["risk_weight"];
+    $output_json = shell_exec($shell_command);
+
+    return $output_json;
   }
 
   public function sendEmailToStudent(Request $request)

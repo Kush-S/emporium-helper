@@ -86,10 +86,10 @@
             Canvas file selected: <span class="">{{$selected_canvas_file}}</span>
           </div>
           <div class="text-center h5">
-            Total students:
+            Total students: {{$mixClassStats['Student count']}}
           </div>
           <div class="text-center h5">
-            Students at risk: <span class=""></span>
+            Students at risk: <span class="{{ $mixClassStats['At risk'] > 0 ? 'text-danger' : '' }}">{{$mixClassStats['At risk']}}</span>
           </div>
         </div>
         <form method="POST" class="row p-2" action="{{ route('analysis_zybooks_students_list', Request()->id) }}">
@@ -114,6 +114,8 @@
 <x-footer/>
 
 <script>
+var mixClassStats = {!! json_encode($mixClassStats) !!}
+console.log(mixClassStats);
 </script>
 
 <script>
@@ -124,7 +126,7 @@ const barChart = new Chart(ctx, {
         labels: ['Participation', 'Challenge', 'Lab'],
         datasets: [{
             label: [],
-            data: [10,20,30],
+            data: [mixClassStats['Participation average'], mixClassStats['Challenge average'], mixClassStats['Lab average']],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -168,10 +170,10 @@ const ctx2 = document.getElementById('chart2').getContext('2d');
 const doughnutChart = new Chart(ctx2, {
     type: 'doughnut',
     data: {
-        labels: ['At risk', 'Not at risk', 's'],
+        labels: ['At risk', 'Not at risk'],
         datasets: [{
             label: '# of Votes',
-            data: [10,10,10],
+            data: [mixClassStats['At risk'], mixClassStats['Student count'] - mixClassStats['At risk']],
             backgroundColor: [
               'rgb(255, 99, 132)',
               'rgb(54, 162, 235)',

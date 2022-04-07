@@ -56,15 +56,7 @@ class ClassroomController extends Controller
     $jsonArray["canvas"] = $variablesCanvas;
 
     // zybooks calculation variables JSON object
-    $variablesMix["participation_m"] = -1.06285;
-    $variablesMix["participation_b"] = 124.03443;
-    $variablesMix["participation_weight"] = 20;
-    $variablesMix["challenge_m"] = -0.94222;
-    $variablesMix["challenge_b"] = 108.15462;
-    $variablesMix["challenge_weight"] = 20;
-    $variablesMix["lab_m"] = -0.92121;
-    $variablesMix["lab_b"] = 104.09236;
-    $variablesMix["lab_weight"] = 1.19;
+    $variablesMix["risk_weight"] = 100;
     $jsonArray["mix"] = $variablesMix;
 
     $classroom->risk_variables = $jsonArray;
