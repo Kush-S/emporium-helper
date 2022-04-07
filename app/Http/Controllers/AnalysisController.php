@@ -82,7 +82,7 @@ class AnalysisController extends Controller
       if($mixClassStats == false)
         {
           return redirect()->route('analysis_index', $this->classroom->id)
-                            ->with("error", "Unable to parse data, was that really a canvas file?");
+                            ->with("error", "Unable to parse data, are those files from the correct source (zybooks csv from zybooks, and canvas csv from canvas)?");
         }
 
       // set risk for this class
