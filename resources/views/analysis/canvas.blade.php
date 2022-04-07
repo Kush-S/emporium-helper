@@ -101,6 +101,7 @@
         </form>
       </div>
     </div>
+
     <div class="col-8">
       <div class="row">
         <div class="col-6 text-center p-4 my-auto">
@@ -116,8 +117,7 @@
         </div>
       </div>
     </div>
-
-
+    
   </div>
 </div>
 <x-footer/>

@@ -78,6 +78,10 @@ class AnalysisController extends Controller
       $mixClassStats = $this->getMixData('parseMixStats.py', $selected_canvas_file, $selected_zybooks_file);
       $mixClassStats = json_decode($mixClassStats, true);
 
+      // set risk for this class
+      $this->classroom->at_risk = $mixClassStats['At risk'];
+      $this->classroom->save();
+
       return view('analysis.mix')
             ->with('classroom', $this->classroom)
             ->with('zybooks_files', $zybooks_files)
