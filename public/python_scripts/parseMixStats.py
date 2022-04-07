@@ -28,9 +28,9 @@ stats = {'Student count': len(df2),
         'At risk': float((df2['Risk'] > 30).sum()),
          'Points average': float(df2['Final Points'].mean().round(2)),
          'Score average': float(df2['Final Score'].mean().round(2)),
-         'Participation average': df3['Participation total'].mean(),
-         'Challenge average': df3['Challenge total'].mean(),
-         'Lab average': df3['Lab total'].mean(),
+         'Participation average': float(df3['Participation total'].mean().round(2)),
+         'Challenge average': float(df3['Challenge total'].mean().round(2)),
+         'Lab average': float(df3['Lab total'].mean().round(2)),
         }
 stats
 

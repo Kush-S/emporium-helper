@@ -102,10 +102,10 @@
       </div>
     </div>
 
-    <div class="col-4 text-center my-auto">
+    <div class="col-3 text-center my-auto">
         <canvas id="chart2"></canvas>
     </div>
-    <div class="col-4 text-center p-4 my-auto">
+    <div class="col-5 text-center p-4 my-auto">
       <canvas id="chart1"></canvas>
     </div>
 
@@ -123,7 +123,9 @@ const ctx = document.getElementById('chart1').getContext('2d');
 const barChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ['Participation', 'Challenge', 'Lab'],
+        labels: ['Participation (' + mixClassStats['Participation average'] +')',
+                'Challenge (' + mixClassStats['Challenge average'] +')',
+                'Lab (' + mixClassStats['Lab average'] +')'],
         datasets: [{
             label: [],
             data: [mixClassStats['Participation average'], mixClassStats['Challenge average'], mixClassStats['Lab average']],
