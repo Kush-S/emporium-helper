@@ -101,13 +101,22 @@
         </form>
       </div>
     </div>
+    <div class="col-8">
+      <div class="row">
+        <div class="col-6 text-center p-4 my-auto">
+          <canvas id="chart1"></canvas>
+        </div>
+        <div class="col-6 text-center p-4 my-auto">
+          <canvas id="chart3"></canvas>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col text-center my-auto">
+            <canvas id="chart2"></canvas>
+        </div>
+      </div>
+    </div>
 
-    <div class="col-3 text-center my-auto">
-        <canvas id="chart2"></canvas>
-    </div>
-    <div class="col-5 text-center p-4 my-auto">
-      <canvas id="chart1"></canvas>
-    </div>
 
   </div>
 </div>
@@ -122,10 +131,9 @@ const ctx = document.getElementById('chart1').getContext('2d');
 const barChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ['Average points obtained ' + '(' + canvasClassStats['Points average'] + ')',
-                'Average grade % ' + '(' + canvasClassStats['Score average'] + ')'],
+        labels: ['Average points obtained ' + '(' + canvasClassStats['Points average'] + ')'],
         datasets: [{
-            data: [canvasClassStats['Points average'], canvasClassStats['Score average']],
+            data: [canvasClassStats['Points average']],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -152,7 +160,51 @@ const barChart = new Chart(ctx, {
       scales: {
           y: {
             beginAtZero: true,
-            max: Math.round(canvasClassStats['Points average'])
+            max: Math.round(canvasClassStats['Points average']) + 30
+          },
+          x: {
+            ticks: {
+              minRotation: 0
+            }
+          }
+      }
+    }
+});
+</script>
+
+<script>
+const ctx3 = document.getElementById('chart3').getContext('2d');
+const barChart2 = new Chart(ctx3, {
+    type: 'bar',
+    data: {
+        labels: ['Average grade ' + '(' + canvasClassStats['Score average'] + '%)'],
+        datasets: [{
+            data: [canvasClassStats['Score average']],
+            backgroundColor: [
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+            ],
+            borderColor: [
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+      plugins: {
+        legend: {
+          display: false,
+        },
+        title: {
+          display: true,
+          text: 'Average grade (%)'
+        }
+      },
+      scales: {
+          y: {
+            beginAtZero: true,
+            max: 100
           },
           x: {
             ticks: {
