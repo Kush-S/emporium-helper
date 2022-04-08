@@ -32,10 +32,10 @@
         <span class="text-decoration-underline">Current risk:</span>
         <span class="{{ $studentData['risk'] > 30 ? 'text-danger' : 'text-success' }}">{{$studentData['risk']}}%</span>
       </div>
-      <div class="text-center h4">
+      {{-- <div class="text-center h4">
         <span class="text-decoration-underline">Notified:</span>
         <span class="">No</span>
-      </div>
+      </div> --}}
     </div>
     <div class="col m-auto">
       <div class="pt-2 text-center">

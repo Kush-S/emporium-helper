@@ -43,7 +43,8 @@
               </form>
             </div>
             <div class="col-md-6 d-flex justify-content-center text-center m-auto">
-              <img src="{{ asset('images/lecture_hall.jpg') }}" style="width:80%;">
+              @php $randImg = 'images/lecture_hall' . rand(1,3) . '.jpg'; @endphp
+              <img src="{{ asset($randImg) }}" style="width:70%;">
             </div>
           </div>
         </div>

@@ -8,9 +8,6 @@
         <a href="{{ route('index_footer_credits') }}" class="text-white d-flex justify-content-end text-decoration-none">
           Credits
         </a>
-        <a href="{{ route('index_footer_tutorial') }}" class="text-white d-flex justify-content-end text-decoration-none">
-          Tutorial
-        </a>
       </div>
     </div>
     <div class="col m-auto">
