@@ -84,7 +84,7 @@ class SettingsController extends Controller
 
   public function resetEmailTemplate(Request $request)
   {
-    $this->classroom->email_template = "Dear student\n\n\tThis email is to notify you that your performance in this class is at risk. Please work with your instructor or TA to improve your standing in this class.\n\nzyCat App";
+    $this->classroom->email_template = "Hello {student},\n\n\tThis email is to notify you that your performance in {class} is at risk. Please contact your instructor or TA to improve your standing in this class.\n\nThis message was sent using the zyCat App.";
     $this->classroom->save();
 
     return redirect()->route('settings_index', $request->id)
