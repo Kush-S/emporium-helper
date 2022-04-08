@@ -17,9 +17,6 @@
         <x-headers/>
       </div>
     </div>
-    {{-- <div class="col">
-
-    </div> --}}
   </div>
 </div>
 
@@ -41,19 +38,6 @@
   </div>
 </div>
 
-{{-- <div class="container d-flex justify-content-center">
-  <div class="row">
-    <div class="pt-1 h4 pb-2 text-white bg-info rounded-pill">
-      {{ $classroom->number }}
-      @if ($classroom->term == 'Spring')Sp'
-      @elseif ($classroom->term == 'Fall')Fa'
-      @elseif ($classroom->term == 'Summer')Su'
-      @endif
-      {{ substr($classroom->year, -2) }}
-    </div>
-  </div>
-</div> --}}
-
 <div class="container bg-white border rounded mb-5">
   <div class="row justify-content-center p-2">
     <div class="col-3 text-center border-bottom">
@@ -64,6 +48,8 @@
     <div class="col-md-5">
       <div><h3>Email template for student notifications</h3></div>
       <div>This email template is used when sending a student a notification from this app. This template is specific to this classroom.</div>
+      <div><span class="fw-bold">{student}</span> will be replaced by the student's name</div>
+      <div><span class="fw-bold">{class}</span> will be replaced by the class number (eg. CS 2010)</div>
     </div>
       <div class="col-md-7">
         <div class="card">
