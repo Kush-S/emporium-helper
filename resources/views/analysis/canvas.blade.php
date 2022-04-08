@@ -74,7 +74,7 @@
               </select>
             </div>
             <div class="">
-              <button type="submit" class="btn btn-primary float-end">Load files</button>
+              <button type="submit" class="btn btn-primary float-end">Analyze</button>
             </div>
           </form>
         </div>
@@ -117,7 +117,7 @@
         </div>
       </div>
     </div>
-    
+
   </div>
 </div>
 <x-footer/>
