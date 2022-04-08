@@ -1,21 +1,26 @@
 import pandas as pd
 import sys
-import json
 
-dfc = pd.read_csv(str(sys.argv[1]), skiprows=[1])
-dfc = dfc[['Name', 'SIS User ID', 'SIS Login ID', 'Final Points', 'Final Score']]
-
-dfz = pd.read_csv(str(sys.argv[2]))
+df = pd.read_csv(str(sys.argv[1]), skiprows=[1])
 
 df2 = pd.DataFrame()
-df2["Participation total"] = dfz.loc[:, dfz.columns.str.match("(Participation total)(?!.time)(.+)")]
-df2["Challenge total"] = dfz.loc[:, dfz.columns.str.match("(Challenge total)(?!.time)(.+)")]
-df2["Lab total"] = dfz.loc[:, dfz.columns.str.match("(Lab total)(?!.time)(.+)")]
+df2["Student name"] = df["Student"]
+df2["ID"] = df["ID"]
+df2["SIS User ID"] = df["SIS User ID"]
+df2["SIS Login ID"] = df["SIS Login ID"]
+df2["Final Points"] = df["Final Points"]
+df2["Final Score"] = df["Final Score"]
 
-df2 = df2[['First name', 'Last name', 'Email', 'Student ID', 'Participation total', 'Challenge total', 'Lab total']]
+# Create max_points variable which gets the max points currently from list of students
+max_points = round(float(df2["Final Points"].max()), 2)
 
-df3 = dfc.join(df2)
+# Calculate the risk from max_points
+df2["Risk"] = (float(sys.argv[3]) - (df2["Final Points"] / max_points) * 100).round(2)
 
-df3['Risk'] = (((float(sys.argv[3])*df2['Participation total'] + float(sys.argv[4])) / float(sys.argv[5])) + ((float(sys.argv[6])*df2['Challenge total'] + float(sys.argv[7])) /float(sys.argv[8])) + ((float(sys.argv[9])*df2['Lab total']+float(sys.argv[10])) /float(sys.argv[11]))).round(2)
+# Sort students by max risk
+df2 = df2.sort_values(by=['Risk'], ascending=False)
 
-print(df3)
+# Convert and print data frame as JSON
+df2 = df2.to_json(orient='index')
+
+print(df2)

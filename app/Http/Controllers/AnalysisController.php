@@ -75,11 +75,14 @@ class AnalysisController extends Controller
       $this->classroom->files_selected = $selected_files;
       $this->classroom->save();
 
+      $mixStudentData = $this->getMixData('parseMix.py', $selected_canvas_file, $selected_zybooks_file);
+      $mixStudentData = json_decode($mixStudentData, true);
+
       $mixClassStats = $this->getMixData('parseMixStats.py', $selected_canvas_file, $selected_zybooks_file);
       $mixClassStats = json_decode($mixClassStats, true);
 
       // if the file is not a canvas file
-      if($mixClassStats == false)
+      if($mixStudentData == false || $mixClassStats == false)
         {
           return redirect()->route('analysis_index', $this->classroom->id)
                             ->with("error", "Unable to parse data, are those files from the correct source (zybooks csv from zybooks, and canvas csv from canvas)?");
@@ -95,6 +98,7 @@ class AnalysisController extends Controller
             ->with('canvas_files', $canvas_files)
             ->with('selected_zybooks_file', $selected_zybooks_file)
             ->with('selected_canvas_file', $selected_canvas_file)
+            ->with('mixStudentData', $mixStudentData)
             ->with('mixClassStats', $mixClassStats);
     }
 
@@ -232,7 +236,7 @@ class AnalysisController extends Controller
     }
     return $process->getOutput();
 
-    // // For windows
+    // For windows development, comment out the return code and if statement above
     $file = escapeshellarg($file);
     $shell_command = 'python python_scripts/' . $script .' ../storage/app/' . $this->classroom->id . '/zybooks/' . $file . ' ' .
                     $this->classroom->risk_variables["zybooks"]["participation_m"] . ' ' .
@@ -269,7 +273,7 @@ class AnalysisController extends Controller
     }
     return $process->getOutput();
 
-    // For windows
+    // For windows development, comment out the return code and if statement above
     $file = escapeshellarg($file);
     $shell_command = 'python python_scripts/' . $script .' ../storage/app/' . $this->classroom->id . '/canvas/' . $file . ' ' .
                     $this->classroom->risk_variables["canvas"]["risk_weight"];
@@ -332,7 +336,7 @@ class AnalysisController extends Controller
     }
     return $process->getOutput();
 
-    // For windows
+    // For windows development, comment out the return code and if statement above
     $file1 = escapeshellarg($file1);
     $file2 = escapeshellarg($file2);
     $shell_command = 'python python_scripts/' . $script .
@@ -344,8 +348,21 @@ class AnalysisController extends Controller
     return $output_json;
   }
 
+  public function student_list_mix(Request $request)
+  {
+    $mixClassStats = json_decode($request->mixClassStats, true);
+    $mixStudentData = json_decode($request->mixStudentData, true);
+
+    return view('analysis.mix_student_list')
+          ->with('mixStudentData', $mixStudentData)
+          ->with('mixClassStats', $mixClassStats)
+          ->with('classroom', $this->classroom)
+          ->with('selected_zybooks_file', $request->selected_zybooks_file)
+          ->with('selected_canvas_file', $request->selected_canvas_file);
+  }
+
   public function sendEmailToStudent(Request $request)
   {
-    Mail::to('ksaxena@bgsu.edu')->send(new StudentNotification);
+    Mail::to('')->send(new StudentNotification);
   }
 }

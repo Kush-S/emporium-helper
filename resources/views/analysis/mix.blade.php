@@ -92,11 +92,12 @@
             Students at risk: <span class="{{ $mixClassStats['At risk'] > 0 ? 'text-danger' : '' }}">{{$mixClassStats['At risk']}}</span>
           </div>
         </div>
-        <form method="POST" class="row p-2" action="{{ route('analysis_zybooks_students_list', Request()->id) }}">
+        <form method="POST" class="row p-2" action="{{ route('analysis_mix_students_list', Request()->id) }}">
           @csrf
-          <input type="hidden" name="selected_zybooks_file" value="">
-          <input type="hidden" id="custId" name="zybooksStudentData" value="">
-          <input type="hidden" id="custId" name="zybooksClassStats" value="">
+          <input type="hidden" name="selected_zybooks_file" value="{{$selected_zybooks_file}}">
+          <input type="hidden" name="selected_canvas_file" value="{{$selected_canvas_file}}">
+          <input type="hidden" name="mixStudentData" value="{{ json_encode($mixStudentData, true) }}">
+          <input type="hidden" name="mixClassStats" value="{{ json_encode($mixClassStats, true) }}">
           <button type="submit" class="btn btn-primary d-flex justify-content-center p-3 col-4 mx-auto">Student list</button>
         </form>
       </div>
