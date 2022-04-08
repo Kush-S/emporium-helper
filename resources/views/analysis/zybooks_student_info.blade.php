@@ -3,6 +3,24 @@
 @section('content')
 <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
 
+{{-- Status and error messages --}}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      @if (session('status'))
+        <div class="alert alert-success">
+          {{ session('status') }}
+        </div>
+      @endif
+      @if (session('error'))
+        <div class="alert alert-danger">
+          {{ session('error') }}
+        </div>
+      @endif
+    </div>
+  </div>
+</div>
+
 <div class="container bg-light border rounded mt-4 mb-5" style="min-height: 550px;">
   <div class="row">
     <div class="col">
@@ -43,7 +61,13 @@
           Send {{$studentData['first_name']}} an email notification
         </div>
         <div class="mb-1">
-          <a href="{{ route('analysis_zybooks_students_list', Request()->id) }}" class="btn btn-danger">Notify</a>
+          <form method="POST" enctype="multipart/form-data" action="{{ route('analysis_email_student', Request()->id) }}">
+            @csrf
+            <input type="hidden" name="studentName" value="{{$studentData['first_name']}}">
+            <input type="hidden" name="classNumber" value="{{$classroom->number}}">
+            <input type="hidden" name="studentEmail" value="{{$studentData['primary_email']}}">
+            <button type="submit" class="btn btn-danger">Notify</button>
+          </form>
         </div>
         <label for="exampleInputEmail1" class="form-label">*email template can be set in settings</label>
       </div>

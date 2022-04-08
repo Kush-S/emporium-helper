@@ -10,6 +10,7 @@ use App\Models\Risk;
 use Symfony\Component\Process\Process;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\StudentNotification;
+use Illuminate\Support\Facades\Redirect;
 
 class AnalysisController extends Controller
 {
@@ -205,6 +206,7 @@ class AnalysisController extends Controller
           ->with('zybooksClassStats', $zybooksClassStats)
           ->with('selected_zybooks_file', $request->selected_zybooks_file)
           ->with('classroom', $this->classroom)
+          // ->with('students_notified', $this->classroom->students_notified)
           ->with('studentData', $studentData);
   }
 
@@ -383,6 +385,28 @@ class AnalysisController extends Controller
 
   public function sendEmailToStudent(Request $request)
   {
-    Mail::to('')->send(new StudentNotification);
+    $emailToSend = "";
+
+    // create email address if only username was sent
+    if($request->has('studentEmail')){
+      $emailToSend = $request->studentEmail;
+    }
+    else{
+      $emailToSend = $request->studentEmailName . "@bgsu.edu";
+    }
+
+    // create email body using the one saved in this classroom's settings
+    $emailBody = $this->classroom->email_template;
+    $emailBody = str_replace("{student}", $request->studentName, $emailBody);
+    $emailBody = str_replace("{class}", $request->classNumber, $emailBody);
+
+    // send email
+    Mail::to($emailToSend)->send(new StudentNotification($emailBody));
+
+    // $students_notified[""] = $students_notified;
+    // $this->classroom->students_notified = $students_notified;
+    // $this->classroom->save();
+
+    return view('analysis.sentEmail');
   }
 }

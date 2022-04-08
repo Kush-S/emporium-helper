@@ -50,6 +50,7 @@ Route::middleware(['auth', 'whitelisted'])->prefix('classroom')->group(function 
         Route::post('/studentInfoCanvas', [AnalysisController::class, 'student_info_canvas'])->name('analysis_canvas_student_info');
         Route::post('/studentListMix', [AnalysisController::class, 'student_list_mix'])->name('analysis_mix_students_list');
         Route::post('/studentInfoMix', [AnalysisController::class, 'student_info_mix'])->name('analysis_mix_student_info');
+        Route::post('/emailStudent', [AnalysisController::class, 'sendEmailToStudent'])->name('analysis_email_student');
       });
       Route::group(['prefix' => '/files'], function(){
         Route::get('/', [ZybooksFileController::class, 'index'])->name('files_index');

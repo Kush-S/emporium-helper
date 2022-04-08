@@ -16,9 +16,10 @@ class StudentNotification extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public $emailBody;
+    public function __construct($emailBody)
     {
-        //
+        $this->emailBody = $emailBody;
     }
 
     /**

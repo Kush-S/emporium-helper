@@ -43,7 +43,13 @@
           Send {{$studentData['student_name']}} an email notification
         </div>
         <div class="mb-1">
-          <a href="{{ route('analysis_zybooks_students_list', Request()->id) }}" class="btn btn-danger">Notify</a>
+          <form method="POST" enctype="multipart/form-data" action="{{ route('analysis_email_student', Request()->id) }}">
+            @csrf
+            <input type="hidden" name="studentName" value="{{$studentData['student_name']}}">
+            <input type="hidden" name="classNumber" value="{{$classroom->number}}">
+            <input type="hidden" name="studentEmailName" value="{{$studentData['student_id']}}">
+            <button class="btn btn-danger">Notify</button>
+          </form>
         </div>
         <label for="exampleInputEmail1" class="form-label">*email template can be set in settings</label>
       </div>
