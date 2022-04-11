@@ -41,13 +41,13 @@ class ClassroomController extends Controller
 
     // zybooks calculation variables JSON object
     $variablesZybooks["participation_m"] = -1.06285;
-    $variablesZybooks["participation_b"] = 124.03443;
+    $variablesZybooks["participation_b"] = 106.53443;
     $variablesZybooks["participation_weight"] = 20;
     $variablesZybooks["challenge_m"] = -0.94222;
-    $variablesZybooks["challenge_b"] = 108.15462;
+    $variablesZybooks["challenge_b"] = 94.35462;
     $variablesZybooks["challenge_weight"] = 20;
     $variablesZybooks["lab_m"] = -0.92121;
-    $variablesZybooks["lab_b"] = 104.09236;
+    $variablesZybooks["lab_b"] = 92.29236;
     $variablesZybooks["lab_weight"] = 1.19;
     $jsonArray["zybooks"] = $variablesZybooks;
 
