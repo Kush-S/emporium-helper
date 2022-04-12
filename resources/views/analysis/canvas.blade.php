@@ -190,7 +190,7 @@ const barChart = new Chart(ctx, {
         },
         title: {
           display: true,
-          text: 'Current points'
+          text: 'Current class points'
         }
       },
       scales: {
@@ -271,7 +271,7 @@ const barChart2 = new Chart(ctx3, {
         },
         title: {
           display: true,
-          text: 'Average grade (%)'
+          text: 'Current class score (%)'
         }
       },
       scales: {

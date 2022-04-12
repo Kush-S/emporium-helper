@@ -299,6 +299,8 @@ class AnalysisController extends Controller
   public function student_info_canvas(Request $request)
   {
     $canvasClassStats = json_decode($request->canvasClassStats, true);
+    $canvasStudentData = json_decode($request->canvasStudentData, true);
+
     $studentData = array(
       'student_name' => $request->student_name,
       'risk' => $request->risk,
@@ -313,7 +315,8 @@ class AnalysisController extends Controller
           ->with('canvasClassStats', $canvasClassStats)
           ->with('selected_canvas_file', $request->selected_canvas_file)
           ->with('classroom', $this->classroom)
-          ->with('studentData', $studentData);
+          ->with('studentData', $studentData)
+          ->with('canvasStudentData', $canvasStudentData);
   }
 
   public function getMixData($script, $file1, $file2)
