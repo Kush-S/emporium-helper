@@ -143,8 +143,11 @@ const studentBarChart = new Chart(ctx, {
       scales: {
           y: {
               beginAtZero: true,
-              min: 0,
-              max: canvasClassStats["Student Count"]
+              max: canvasClassStats["Student count"],
+              title: {
+                display: true,
+                text: 'Students'
+              }
           },
           x: {
             ticks: {
@@ -224,9 +227,12 @@ const classBarChart = new Chart(ctx2, {
       },
       scales: {
           y: {
-              beginAtZero: true,
-              min: 0,
-              max: 100
+            beginAtZero: true,
+            max: canvasClassStats["Student count"],
+              title: {
+                display: true,
+                text: 'Students'
+              }
           },
           x: {
             ticks: {
