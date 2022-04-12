@@ -369,13 +369,15 @@ class AnalysisController extends Controller
   public function student_info_mix(Request $request)
   {
     $mixClassStats = json_decode($request->mixClassStats, true);
+    $mixStudentData = json_decode($request->mixStudentData, true);
+
     $studentData = array(
       'student_name' => $request->student_name,
       'risk' => $request->risk,
       'student_id' => $request->student_id,
       'final_points' => $request->final_points,
       'challenge_total' => $request->challenge_total,
-      'final_score' => $request->final_score,
+      'current_score' => $request->current_score,
     );
 
     return view('analysis.mix_student_info')
@@ -383,7 +385,8 @@ class AnalysisController extends Controller
           ->with('selected_zybooks_file', $request->selected_zybooks_file)
           ->with('selected_canvas_file', $request->selected_canvas_file)
           ->with('classroom', $this->classroom)
-          ->with('studentData', $studentData);
+          ->with('studentData', $studentData)
+          ->with('mixStudentData', $mixStudentData);
   }
 
   public function sendEmailToStudent(Request $request)

@@ -30,9 +30,9 @@
           <tr>
             <th scope="col">Name</th>
             <th scope="col">SIS Login ID</th>
-            <th scope="col">Current risk</th>
-            <th scope="col">Final points</th>
-            <th scope="col">Final score</th>
+            {{-- <th scope="col">Current risk</th> --}}
+            <th scope="col">Current points</th>
+            <th scope="col">Current score (%)</th>
           </tr>
         </thead>
         <tbody>
@@ -48,14 +48,15 @@
                   <input type="hidden" name="student_id" value="{{$student['SIS Login ID']}}">
                   <input type="hidden" name="risk" value="{{$student['Risk']}}">
                   <input type="hidden" name="final_points" value="{{$student['Final Points']}}">
-                  <input type="hidden" name="final_score" value="{{$student['Final Score']}}">
+                  <input type="hidden" name="current_score" value="{{$student['Current Score']}}">
                   <input type="hidden" name="mixClassStats" value="{{ json_encode($mixClassStats, true) }}">
+                  <input type="hidden" name="mixStudentData" value="{{ json_encode($mixStudentData, true) }}">
                   <td><button type="submit" class="btn btn-link" formtarget="_blank">{{ $student['Student name']}}</button></td>
                 </form>
                 <td>{{ $student['SIS Login ID']}}</td>
-                <td class="{{ $student['Risk'] > 30 ? 'text-danger h5' : '' }}">{{ $student['Risk']}}%</td>
+                {{-- <td class="{{ $student['Risk'] > 30 ? 'text-danger h5' : '' }}">{{ $student['Risk']}}%</td> --}}
                 <td>{{ $student['Final Points']}}</td>
-                <td>{{ $student['Final Score']}}</td>
+                <td>{{ $student['Current Score']}}%</td>
               </div>
             </tr>
           @endforeach
