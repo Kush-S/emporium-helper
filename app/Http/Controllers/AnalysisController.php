@@ -306,7 +306,7 @@ class AnalysisController extends Controller
       'risk' => $request->risk,
       'final_points' => $request->final_points,
       'challenge_total' => $request->challenge_total,
-      'final_score' => $request->final_score,
+      'current_score' => $request->current_score
     );
 
     return view('analysis.canvas_student_info')

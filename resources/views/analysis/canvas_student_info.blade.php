@@ -29,13 +29,13 @@
         <span class="">{{$selected_canvas_file}}</span>
       </div>
       <div class="text-center h4">
-        <span class="text-decoration-underline">Current risk:</span>
-        <span class="{{ $studentData['risk'] > 30 ? 'text-danger' : 'text-success' }}">{{$studentData['risk']}}%</span>
+        <span class="text-decoration-underline">Final points: </span>
+        <span class="">{{$studentData['final_points']}}</span>
       </div>
-      {{-- <div class="text-center h4">
-        <span class="text-decoration-underline">Notified:</span>
-        <span class="">No</span>
-      </div> --}}
+      <div class="text-center h4">
+        <span class="text-decoration-underline">Current score:</span>
+        <span class="{{ $studentData['current_score'] < 70 ? 'text-danger' : '' }}">{{ $studentData['current_score']}}%</span>
+      </div>
     </div>
     <div class="col m-auto">
       <div class="pt-2 text-center">
@@ -74,10 +74,9 @@ const ctx = document.getElementById('studentBarChart').getContext('2d');
 const studentBarChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ['Current points obtained ' + '(' + '{{$studentData['final_points']}}' + ')',
-                'Current grade ' + '(' + '{{$studentData['final_score']}}' + '%)'],
+        labels: [],
         datasets: [{
-            data: ['{{$studentData['final_points']}}', '{{$studentData['final_score']}}'],
+            data: [],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
