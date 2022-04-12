@@ -54,9 +54,9 @@
                 </form>
                 <td>{{ $student['Primary email']}}</td>
                 <td class="{{ $student['Risk'] > 30 ? 'text-danger h5' : '' }}">{{ $student['Risk']}}%</td>
-                <td>{{ $student['Participation total']}}</td>
-                <td>{{ $student['Challenge total']}}</td>
-                <td>{{ $student['Lab total']}}</td>
+                <td>{{ $student['Participation total']}}%</td>
+                <td>{{ $student['Challenge total']}}%</td>
+                <td>{{ $student['Lab total']}}%</td>
               </div>
             </tr>
           @endforeach
