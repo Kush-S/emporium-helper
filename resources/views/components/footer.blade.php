@@ -12,7 +12,7 @@
     </div>
     <div class="col m-auto">
       <div class="col-md-6">
-        <img src="{{ asset('images/app_logo.png') }}" style="max-height: 70px;">
+        <a href="{{ url('/') }}"><img src="{{ asset('images/app_logo.png') }}" style="max-height: 70px;"></a>
       </div>
     </div>
   </div>
