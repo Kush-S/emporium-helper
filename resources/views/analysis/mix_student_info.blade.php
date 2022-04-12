@@ -144,9 +144,11 @@ const classPointsChart = new Chart(ctx, {
       },
       scales: {
           y: {
-              beginAtZero: true,
-              min: 0,
-              max: mixClassStats["Student Count"]
+            max: mixClassStats["Student count"],
+            title: {
+              display: true,
+              text: 'Students'
+            }
           },
           x: {
             ticks: {
@@ -226,9 +228,11 @@ const classScoresChart = new Chart(ctx2, {
       },
       scales: {
           y: {
-              beginAtZero: true,
-              min: 0,
-              max: 100
+            max: mixClassStats["Student count"],
+            title: {
+              display: true,
+              text: 'Students'
+            }
           },
           x: {
             ticks: {

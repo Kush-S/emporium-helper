@@ -201,7 +201,11 @@ const barChart = new Chart(ctx, {
       scales: {
           y: {
             beginAtZero: true,
-            max: mixClassStats["Student Count"]
+            max: mixClassStats["Student count"],
+            title: {
+              display: true,
+              text: 'Students'
+            }
           },
           x: {
             ticks: {
@@ -281,8 +285,11 @@ const barChart2 = new Chart(ctx3, {
       },
       scales: {
           y: {
-            beginAtZero: true,
-            max: 100
+            max: mixClassStats["Student count"],
+            title: {
+              display: true,
+              text: 'Students'
+            }
           },
           x: {
             ticks: {
