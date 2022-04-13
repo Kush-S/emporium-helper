@@ -147,13 +147,6 @@ var increment4 = increment5 - subtract
 var increment3 = increment4 - subtract
 var increment2 = increment3 - subtract
 var increment1 = increment2 - subtract
-console.log(subtract)
-console.log(increment6)
-console.log(increment5)
-console.log(increment4)
-console.log(increment3)
-console.log(increment2)
-console.log(increment1)
 
 for (i = 0; i < Object.keys(studentStats).length; i++) {
   if(studentStats[i]["Final Points"] <= increment1){bar1 += 1}
