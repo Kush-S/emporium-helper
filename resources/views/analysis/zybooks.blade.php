@@ -147,7 +147,7 @@ const barChart = new Chart(ctx, {
         },
         title: {
           display: true,
-          text: 'Average scores (%)'
+          text: 'zyBooks activities (%)'
         }
       },
       scales: {
