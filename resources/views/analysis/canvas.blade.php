@@ -135,18 +135,14 @@ var bar4 = 0
 var bar5 = 0
 var bar6 = 0
 
-var increment1 = canvasClassStats["max_points"] / 6
-increment1 = Math.round(increment1 * 100) / 100
-var increment2 = increment1 + canvasClassStats["max_points"] / 6
-increment2 = Math.round(increment2 * 100) / 100
-var increment3 = increment2 + canvasClassStats["max_points"] / 6
-increment3 = Math.round(increment3 * 100) / 100
-var increment4 = increment3 + canvasClassStats["max_points"] / 6
-increment4 = Math.round(increment4 * 100) / 100
-var increment5 = increment4 + canvasClassStats["max_points"] / 6
-increment5 = Math.round(increment5 * 100) / 100
-var increment6 = increment5 + canvasClassStats["max_points"] / 6
-increment6 = Math.round(increment6 * 100) / 100
+var subtract = Math.round((canvasClassStats["max_points"]/6)/10)*10
+
+var increment6 = Math.round(canvasClassStats["max_points"] / 50)*50
+var increment5 = increment6 - subtract
+var increment4 = increment5 - subtract
+var increment3 = increment4 - subtract
+var increment2 = increment3 - subtract
+var increment1 = increment2 - subtract
 
 for (i = 0; i < Object.keys(studentStats).length; i++) {
   if(studentStats[i]["Final Points"] <= increment1){bar1 += 1}
@@ -161,7 +157,12 @@ const ctx = document.getElementById('chart1').getContext('2d');
 const barChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ['<=' + increment1,'<=' + increment2,'<=' + increment3,'<=' + increment4,'<=' + increment5,'<=' + canvasClassStats["max_points"]],
+        labels: ['0-'+ (increment1 - 1),
+                  increment1 + '-' + (increment2 - 1),
+                  increment2 + '-' + (increment3 - 1),
+                  increment3 + '-' + (increment4 - 1),
+                  increment4 + '-' + (increment5 - 1),
+                  increment5 + '-' + increment6],
         datasets: [{
             data: [bar1, bar2, bar3,bar4,bar5,bar6],
             backgroundColor: [
@@ -199,7 +200,7 @@ const barChart = new Chart(ctx, {
             max: canvasClassStats["Student count"],
             title: {
               display: true,
-              text: 'Students'
+              text: '# of students'
             }
           },
           xAxes: {
@@ -218,20 +219,12 @@ var bar2 = 0
 var bar3 = 0
 var bar4 = 0
 var bar5 = 0
-var bar6 = 0
 
-var increment1 = 100 / 6
-increment1 = Math.round(increment1 * 100) / 100
-var increment2 = increment1 + 100 / 6
-increment2 = Math.round(increment2 * 100) / 100
-var increment3 = increment2 + 100 / 6
-increment3 = Math.round(increment3 * 100) / 100
-var increment4 = increment3 + 100 / 6
-increment4 = Math.round(increment4 * 100) / 100
-var increment5 = increment4 + 100 / 6
-increment5 = Math.round(increment5 * 100) / 100
-var increment6 = increment5 + 100 / 6
-increment6 = Math.round(increment6 * 100) / 100
+var increment1 = 59.9
+var increment2 = 69.9
+var increment3 = 79.9
+var increment4 = 89.9
+var increment5 = 100
 
 for (i = 0; i < Object.keys(studentStats).length; i++) {
   if(studentStats[i]["Current Score"] <= increment1){bar1 += 1}
@@ -239,16 +232,16 @@ for (i = 0; i < Object.keys(studentStats).length; i++) {
   else if(studentStats[i]["Current Score"] <= increment3){bar3 += 1}
   else if(studentStats[i]["Current Score"] <= increment4){bar4 += 1}
   else if(studentStats[i]["Current Score"] <= increment5){bar5 += 1}
-  else {bar6 += 1}
+  else {bar5 += 1}
 }
 
 const ctx3 = document.getElementById('chart3').getContext('2d');
 const barChart2 = new Chart(ctx3, {
     type: 'bar',
     data: {
-        labels: ['<=' + increment1,'<=' + increment2,'<=' + increment3,'<=' + increment4,'<=' + increment5,'<=' + 100],
+        labels: ['0-59.9%', '60-69.9%', '70-79.9%', '80-89.9%', '90-100%'],
         datasets: [{
-            data: [bar1, bar2, bar3,bar4,bar5,bar6],
+            data: [bar1, bar2, bar3,bar4,bar5],
             backgroundColor: [
               'rgba(255, 99, 132, 0.2)',
               'rgba(54, 162, 235, 0.2)',
@@ -275,7 +268,7 @@ const barChart2 = new Chart(ctx3, {
         },
         title: {
           display: true,
-          text: 'Current class score (%)'
+          text: 'Current percentage'
         }
       },
       scales: {
@@ -284,7 +277,7 @@ const barChart2 = new Chart(ctx3, {
             max: canvasClassStats["Student count"],
             title: {
               display: true,
-              text: 'Students'
+              text: '# of students'
             }
           },
           x: {
